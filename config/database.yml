@@ -9,11 +9,11 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: varavig_development
+  database: varavig_dev
   pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: varavig
+  password: varavig11
+  socket: /var/lib/mysql/mysql.sock 
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,16 +24,16 @@ test:
   reconnect: false
   database: varavig_test
   pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: varavig
+  password: varavig11
+  socket: /var/lib/mysql/mysql.sock
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: varavig_production
+  database: varavig_pro
   pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: varavig 
+  password: varavig11
+  socket: /var/lib/mysql/mysql.sock
