@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>Varavig</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <%= include_stylesheets :app, :media => 'all' %>
+  <%= include_javascripts :app %>
   <%= csrf_meta_tag %>
 </head>
 <body>
