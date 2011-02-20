@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(:version => 20110209193957) do
 
-  create_table "todos", :force => true do |t|
+  create_table "stories", :force => true do |t|
     t.text     "content"
     t.integer  "order"
     t.boolean  "done"
+    t.string   "title"
+    t.integer  "estimate"
+    t.integer  "insprint"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

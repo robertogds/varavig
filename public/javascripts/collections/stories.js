@@ -1,16 +1,16 @@
-// Todo Collection
+// User Stories Collection
   // ---------------
-  window.TodoList = Backbone.Collection.extend({
+  Sprint.Collections.Stories = Backbone.Collection.extend({
 
     // Reference to this collection's model.
-    model: Todo,
+    model: Story,
 
     // Save all of the todo items under the `"todos"` namespace.
     //localStorage: new Store("todos"),
 
     // Filter down the list of all todo items that are finished.
     done: function() {
-      return this.filter(function(todo){ return todo.get('done'); });
+      return this.filter(function(story){ return story.get('done'); });
     },
 
     // Filter down the list to only todo items that are still not finished.
@@ -25,11 +25,11 @@
       return this.last().get('order') + 1;
     },
 
-	url :'/todos',
+	url :'/story',
 
     // Todos are sorted by their original insertion order.
-    comparator: function(todo) {
-      return todo.get('order');
+    comparator: function(story) {
+      return story.get('order');
     }
 
   });

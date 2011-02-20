@@ -3,10 +3,10 @@
 // ----------
 
 // Our basic **Todo** model has `content`, `order`, and `done` attributes.
-window.Todo = Backbone.Model.extend({
+var Story = Backbone.Model.extend({
 
   // If you don't provide a todo, one will be provided for you.
-  EMPTY: "empty todo...",
+  EMPTY: "empty story...",
 
   // Ensure that each todo created has `content`.
   initialize: function() {
@@ -22,7 +22,7 @@ window.Todo = Backbone.Model.extend({
 
 	url : function() {
 		// to know where to send its REST call.
-		return this.id ? '/todos/' + this.id : '/todos';
+		return this.id ? '/story/' + this.id : '/story';
 	},
 
   // Remove this Todo from *localStorage* and delete its view.
