@@ -1,0 +1,11 @@
+<% if(collection.models.length > 0) { %>
+	<div id ="newstory"><h3><a href='#new'>Create New</a></h3></div>
+    <ul id="user_stories">
+    <% collection.each(function(story) { %>
+        <li><%= story.escape('title') %></a>
+	</li>
+    <% }); %>
+    </ul>
+<% } else { %>
+    <div id ="newstory"><h3>No user stories! <a href='#new'>Create one</a></h3></div>
+<% } %>
