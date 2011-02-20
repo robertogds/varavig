@@ -3,10 +3,15 @@ var Sprint = {
 	Controllers: {},
 	Collections: {},
 	init: function() {	  
+	 // Create our global collection of **user Stories**.
+	  Sprint.Stories = new Sprint.Collections.Stories(); 
 	  new Sprint.Controllers.BacklogCtrl();
       Backbone.history.start();
 	}
 };
+
+
+
 // Jquery code only must be in views but we'll refactor soon
 // Esto no debe estar aqui sino en las vistas pero luego lo quito
 $('#collapseBacklog.expanded').live('click',function(){
