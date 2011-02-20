@@ -9,7 +9,7 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: varavig_development
+  database: varavig_dev
   pool: 5
   username: cscarioni
   password: monika72$
@@ -32,7 +32,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: varavig_production
+  database: varavig_pro
   pool: 5
   username: cscarioni
   password: monika72$

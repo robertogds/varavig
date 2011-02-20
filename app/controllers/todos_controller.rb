@@ -17,4 +17,11 @@ class TodosController < ApplicationController
      todo.update_attributes! params
      render :json => todo
    end
+  
+   def destroy
+    todo = Todo.find(params[:id])
+    todo.destroy
+    render :json => todo
+  end
+
 end
