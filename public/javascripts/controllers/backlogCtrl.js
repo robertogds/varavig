@@ -18,18 +18,22 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
             }
         });
     },
-    index: function() {
-	        var backlogItems = new Sprint.Collections.Stories();
-	        backlogItems.fetch({
+      index: function() {
+	        Sprint.Stories.fetch({
 	            success: function() {
-	                new Sprint.Views.BacklogView({ collection: backlogItems });
+	                new Sprint.Views.BacklogView({ collection: Sprint.Stories });
 	            },
 	            error: function() {
 	                new Error({ message: "Error loading documents." });
 	            }
 	        });
 	    },
+
+		
 		newStory: function() {
-	        new Sprint.Views.EditStory({ model: new Story() });
+			var story = new Story();
+			story.order = Sprint.Stories.nextOrder();
+			story.done = 0;
+	        new Sprint.Views.EditStory({ model: story, collection: Sprint.Stories });
 	    }
 });
