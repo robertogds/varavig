@@ -14,6 +14,9 @@ var Sprint = {
 
 // Jquery code only must be in views but we'll refactor soon
 // Esto no debe estar aqui sino en las vistas pero luego lo quito
+
+
+
 $('#collapseBacklog.expanded').live('click',function(){
 	$('.container #not_started, .container #started, .container #finished').animate({
 		width: '33%'

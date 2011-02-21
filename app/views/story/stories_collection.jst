@@ -1,9 +1,10 @@
 <% if(collection.models.length > 0) { %>
 	<div id ="newstory"><h3><a href='#new'>Create New</a></h3></div>
-    <ul id="user_stories">
+    <ul id="sortable">
     <% collection.each(function(story) { %>
-        <li><%= story.escape('title') %></a>
-	</li>
+        
+<li class="ui-state-default" id="<%=story.id%>"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><%= story.escape('title') %></li>
+
     <% }); %>
     </ul>
 <% } else { %>
