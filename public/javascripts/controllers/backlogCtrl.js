@@ -21,7 +21,10 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
       index: function() {
 	        Sprint.Stories.fetch({
 	            success: function() {
-	                new Sprint.Views.BacklogView({ collection: Sprint.Stories });
+
+
+                    new Sprint.Views.NotStartedView({ collection: Sprint.Stories });
+                    new Sprint.Views.BacklogView({ collection: Sprint.Stories });
 	            },
 	            error: function() {
 	                new Error({ message: "Error loading documents." });
@@ -35,5 +38,6 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
 			story.order = Sprint.Stories.nextOrder();
 			story.done = 0;
 	        new Sprint.Views.EditStory({ model: story, collection: Sprint.Stories });
+
 	    }
 });
