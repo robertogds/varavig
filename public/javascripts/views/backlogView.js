@@ -47,11 +47,13 @@ Sprint.Views.BacklogView = Backbone.View.extend({
 
     sortstop: function() {
 	  var orden = 1;
-      alert ("entra en sortstop");
-	  var result = $('#sortable').sortable('toArray');
+      //alert ("entra en sortstop");
+	  var result = $('#stories').sortable('toArray');
+	  //alert (result.length);
 	  var story = new Story();
 	  _.each(result, function(num){ 
 		story = Sprint.Stories.get(num);
+	//	alert("leyendo historia " + story.get("title"));
 	    var order = story.get("order");
 		if (order != orden) {
 			story.set({"order": orden});

@@ -1,9 +1,8 @@
 <% if(collection.models.length > 0) { %>
 	<div id ="newstory"><h3><a href='#new'>Create New</a></h3></div>
-    <div class="stories">
+    <div id="stories" class="stories">
     <% collection.each(function(story) { %>
-
-    <div class="portlet">
+    <div class="portlet" id="<%=story.id%>">
 		<div class="portlet-header"><%= story.escape('title') %></div>
 		<div class="portlet-content"><%= story.escape('content') %></div>
 	</div>
