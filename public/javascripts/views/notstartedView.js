@@ -20,6 +20,7 @@ Sprint.Views.NotStartedView = Backbone.View.extend({
 			connectWith: ".nostart"
 		});
         $( ".nostart" ).disableSelection();
+
         return this;
     },
 
