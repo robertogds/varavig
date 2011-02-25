@@ -23,8 +23,8 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
 	            success: function() {
                     //alert(JSON.stringify(Sprint.Stories.done()));
                     //alert("dones = " + dones.length());
-                    new Sprint.Views.NotStartedView({ collection: Sprint.Stories });
-                    new Sprint.Views.BacklogView({ collection: Sprint.Stories });
+                    new Sprint.Views.NotStartedView;
+                    new Sprint.Views.BacklogView;
 	            },
 	            error: function() {
 	                new Error({ message: "Error loading documents." });

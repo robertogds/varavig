@@ -1,10 +1,16 @@
-<div class="nostart">
-      <div class="portlet">
-		<div class="portlet-header">uno B</div>
-		<div class="portlet-content">uno b</div>
+<!-- Not Start Column-->
+<div id="nostart" class="nostart">
+&nbsp;<br />
+<% if(collection.models.length > 0) { %>
+    <% collection.each(function(story) { %>
+	<% if (story.get("insprint") > 0)  { %>
+    <div class="portlet" id="<%=story.id%>">
+		<div class="portlet-header"><%= story.escape('title') %></div>
+		<div class="portlet-content"><%= story.escape('content') %></div>
 	</div>
-      <div class="portlet">
-		<div class="portlet-header">dos b</div>
-		<div class="portlet-content">dos b desc</div>
-	</div>
-</div>
+    <% }
+}); %>
+    </div>
+<% } else { %>
+    <div id ="newstory"><h3>No task in sprint</h3></div>
+<% } %>
