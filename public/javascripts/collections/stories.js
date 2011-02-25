@@ -5,12 +5,17 @@
     // Reference to this collection's model.
     model: Story,
 
-    // Save all of the todo items under the `"todos"` namespace.
-    //localStorage: new Store("todos"),
-
     // Filter down the list of all todo items that are finished.
     done: function() {
       return this.filter(function(story){ return story.get('done'); });
+    },
+
+    insprint: function(){
+      return this.filter(function(story){ return story.get('insprint') > 0 });
+    },
+
+    nosprint: function() {
+      return this.filter(function(story) { return story.get('insprint') === 0 });  
     },
 
     // Filter down the list to only todo items that are still not finished.
@@ -23,6 +28,12 @@
     nextOrder: function() {
       if (!this.length) return 1;
       return this.last().get('order') + 1;
+    },
+    parse: function(response) {
+        //_.each(response, function(item) {
+        //  item.title = "PARSE ITEM" + item.title;
+        //})
+    return response;
     },
 
 	url :'/story',
