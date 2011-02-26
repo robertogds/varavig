@@ -10,7 +10,7 @@ Sprint.Views.NotStartedView = Backbone.View.extend({
     },
 
     render: function() {
-        $(this.el).html(JST.nostart_collection);
+	    $(this.el).html(JST.nostart_collection({ collection: Sprint.Stories }));
         $('#items_nostart').html(this.el);
         $( ".nostart" ).sortable({
 			connectWith: ".stories"
@@ -20,14 +20,18 @@ Sprint.Views.NotStartedView = Backbone.View.extend({
 			connectWith: ".nostart"
 		});
         $( ".nostart" ).disableSelection();
+
         return this;
     },
 
-    receive: function() {
-        alert("entra en receive de not started");
+    receive: function(event,ui) {
+	    var story = new Story();
+	    story = Sprint.Stories.get(ui.item.context);
+	    story.set({"insprint": 1});
+	    story.save();
     },
 
     sortstop: function() {
-      alert ("entra en sortstop de notstarted");
+	   // I think is better dont mantain the order in this column
     }
 });

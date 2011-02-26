@@ -10,7 +10,7 @@ Sprint.Views.BacklogView = Backbone.View.extend({
     },
     
     render: function() {
-        $(this.el).html(JST.stories_collection({ collection: this.collection }));
+        $(this.el).html(JST.stories_collection({ collection: Sprint.Stories}));
 	    $('#items').html(this.el);
 
         $( ".stories" ).sortable({
@@ -37,8 +37,11 @@ Sprint.Views.BacklogView = Backbone.View.extend({
 
     },
 
-    receive: function() {
-        alert("entra en receive");
+    receive: function(event,ui) {
+       	var story = new Story();
+	    story = Sprint.Stories.get(ui.item.context);
+	    story.set({"insprint": 0});
+	    story.save();
     },
 
     noass: function() {
@@ -47,17 +50,15 @@ Sprint.Views.BacklogView = Backbone.View.extend({
 
     sortstop: function() {
 	  var orden = 1;
-      alert ("entra en sortstop");
-	  var result = $('#sortable').sortable('toArray');
+	  var result = $('#stories').sortable('toArray');
 	  var story = new Story();
 	  _.each(result, function(num){ 
 		story = Sprint.Stories.get(num);
-	    var order = story.get("order");
-		if (order != orden) {
+		if (story.get("order") != orden) {
 			story.set({"order": orden});
 			story.save();
 		}
 		 orden++;
-	  })
+	   })
     }
 });

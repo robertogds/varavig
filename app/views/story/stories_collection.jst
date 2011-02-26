@@ -1,14 +1,15 @@
+<!-- Stories Column-->
 <% if(collection.models.length > 0) { %>
 	<div id ="newstory"><h3><a href='#new'>Create New</a></h3></div>
-    <div class="stories">
+    <div id="stories" class="stories">
     <% collection.each(function(story) { %>
-
-    <div class="portlet">
+	<% if (!story.get("insprint") > 0)  { %>
+    <div class="portlet" id="<%=story.id%>">
 		<div class="portlet-header"><%= story.escape('title') %></div>
 		<div class="portlet-content"><%= story.escape('content') %></div>
 	</div>
-
-    <% }); %>
+    <% }
+}); %>
     </div>
 <% } else { %>
     <div id ="newstory"><h3>No user stories! <a href='#new'>Create one</a></h3></div>
