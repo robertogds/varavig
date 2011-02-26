@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(:version => 20110209193957) do
 
-  create_table "stories", :force => true do |t|
+  create_table "story", :force => true do |t|
     t.text     "content"
     t.integer  "order"
     t.boolean  "done"
