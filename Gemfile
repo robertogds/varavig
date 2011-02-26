@@ -29,3 +29,5 @@ gem 'jammit'
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem 'jasmine'
+
