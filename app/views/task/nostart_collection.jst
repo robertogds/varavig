@@ -1,0 +1,16 @@
+<!-- Not Start Column-->
+<div id="nostart" class="nostart">
+&nbsp;<br />
+<% if(collection.models.length > 0) { %>
+    <% collection.each(function(task) { %>
+	<% if (task.get("insprint") > 0)  { %>
+    <div class="portlet" id="<%=task.id%>">
+		<div class="portlet-header"><%= task.escape('title') %></div>
+		<div class="portlet-content"><%= task.escape('content') %></div>
+	</div>
+    <% }
+}); %>
+    </div>
+<% } else { %>
+    <div id ="newtask"><h3>No task in sprint</h3></div>
+<% } %>
