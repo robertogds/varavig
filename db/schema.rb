@@ -10,15 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110209193957) do
+ActiveRecord::Schema.define(:version => 20110227193957) do
 
-  create_table "stories", :force => true do |t|
+  create_table "tasks", :force => true do |t|
     t.text     "content"
-    t.integer  "order"
-    t.boolean  "done"
+    t.integer  "position"
+    t.boolean  "done",       :default => false
     t.string   "title"
-    t.integer  "estimate"
-    t.integer  "insprint"
+    t.integer  "estimate",   :default => 0
+    t.integer  "insprint",   :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,7 +1,7 @@
 // This is the view for the backlog column
 Sprint.Views.BacklogView = Backbone.View.extend({
 	events: {
-    "sortstop .stories":  "sortstop",
+    "sortstop .tasks":  "sortstop",
     "sortreceive": "receive"
   },
 
@@ -10,14 +10,14 @@ Sprint.Views.BacklogView = Backbone.View.extend({
     },
     
     render: function() {
-        $(this.el).html(JST.stories_collection({ collection: Sprint.Stories}));
+        $(this.el).html(JST.tasks_collection({ collection: Sprint.Tasks}));
 	    $('#items').html(this.el);
 
-        $( ".stories" ).sortable({
+        $( ".tasks" ).sortable({
 			connectWith: ".nostart"
 		});
         $( ".nostart" ).sortable({
-			connectWith: ".stories"
+			connectWith: ".tasks"
 		});
 
         $( ".portlet" ).addClass( "ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" )
@@ -31,17 +31,17 @@ Sprint.Views.BacklogView = Backbone.View.extend({
 			$( this ).toggleClass( "ui-icon-minusthick" ).toggleClass( "ui-icon-plusthick" );
 			$( this ).parents( ".portlet:first" ).find( ".portlet-content" ).toggle();
 		});
-        $( ".stories" ).disableSelection();
+        $( ".tasks" ).disableSelection();
         return this;
 
 
     },
 
     receive: function(event,ui) {
-       	var story = new Story();
-	    story = Sprint.Stories.get(ui.item.context);
-	    story.set({"insprint": 0});
-	    story.save();
+       	var task = new Task();
+	    task = Sprint.Tasks.get(ui.item.context);
+	    task.set({"insprint": 0});
+	    task.save();
     },
 
     noass: function() {
@@ -50,13 +50,13 @@ Sprint.Views.BacklogView = Backbone.View.extend({
 
     sortstop: function() {
 	  var orden = 1;
-	  var result = $('#stories').sortable('toArray');
-	  var story = new Story();
+	  var result = $('#tasks').sortable('toArray');
+	  var task = new Task();
 	  _.each(result, function(num){ 
-		story = Sprint.Stories.get(num);
-		if (story.get("order") != orden) {
-			story.set({"order": orden});
-			story.save();
+		task = Sprint.Tasks.get(num);
+		if (task.get("order") != orden) {
+			task.set({"order": orden});
+			task.save();
 		}
 		 orden++;
 	   })

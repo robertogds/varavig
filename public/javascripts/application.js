@@ -3,8 +3,8 @@ var Sprint = {
 	Controllers: {},
 	Collections: {},
 	init: function() {	  
-	 // Create our global collection of **user Stories**.
-	  Sprint.Stories = new Sprint.Collections.Stories(); 
+	 // Create our global collection of **Tasks**.
+	  Sprint.Tasks = new Sprint.Collections.Tasks(); 
 	  new Sprint.Controllers.BacklogCtrl();
       Backbone.history.start();
 	}

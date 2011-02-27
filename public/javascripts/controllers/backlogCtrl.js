@@ -2,15 +2,15 @@
 Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
     routes: {
         "":              "index",
-        "story/:id":     "edit",
-		"new":           "newStory"
+        "task/:id":      "edit",
+		"new":           "newTask"
     },
     
 	edit: function(id) {
-        var story = new Story({ id: id });
-        story.fetch({
+        var task = new Task({ id: id });
+        task.fetch({
             success: function(model, resp) {
-                new Sprint.Views.EditStory({ model: story });
+                new Sprint.Views.EditTask({ model: task });
             },
             error: function() {
                 new Error({ message: 'Could not find that document.' });
@@ -19,10 +19,8 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
         });
     },
       index: function() {
-	        Sprint.Stories.fetch({
+	        Sprint.Tasks.fetch({
 	            success: function() {
-                    //alert(JSON.stringify(Sprint.Stories.done()));
-                    //alert("dones = " + dones.length());
                     new Sprint.Views.NotStartedView;
                     new Sprint.Views.BacklogView;
 	            },
@@ -33,11 +31,11 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
 	    },
 
 		
-		newStory: function() {
-			var story = new Story();
-			story.order = Sprint.Stories.nextOrder();
-			story.done = 0;
-	        new Sprint.Views.EditStory({ model: story, collection: Sprint.Stories });
+		newTask: function() {
+			var task = new Task();
+			task.order = Sprint.Tasks.nextOrder();
+			task.done = 0;
+	        new Sprint.Views.EditTask({ model: task, collection: Sprint.Tasks });
 
 	    }
 });

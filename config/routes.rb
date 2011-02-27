@@ -1,5 +1,5 @@
 Varavig::Application.routes.draw do
-  resources :story
+  resources :task
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
