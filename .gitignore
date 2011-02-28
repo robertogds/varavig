@@ -1,2 +1,4 @@
 log
 .idea
+db/schema.rb
+config/database.yml
