@@ -4,7 +4,7 @@
 
 // Our basic **Todo** model has `content`, `order`, and `done` attributes.
 var Story = Backbone.Model.extend({
-
+     tasks: new Backbone.Collection,
   // If you don't provide a todo, one will be provided for you.
   EMPTY: "empty story...",
 
@@ -29,7 +29,12 @@ var Story = Backbone.Model.extend({
   clear: function() {
     this.destroy();
     this.view.remove();
-  }
+  },
+
+    addTask: function(task){
+        this.tasks.add(task);
+        task.set({story:this});
+    }
 
 });
 

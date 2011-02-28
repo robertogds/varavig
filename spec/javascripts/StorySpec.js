@@ -14,8 +14,10 @@ describe("Story",function(){
 
     it("Should have an operation to add a new task",function(){
         var task = new Task;
-        story.tasks.add(task);
-        expect(story.tasks.length).toEqual(1);
+        story.addTask(task);
+        var numberOfTasks = story.tasks.length;
+        expect(numberOfTasks).toEqual(1);
+        expect(task.story.id).toEqual(story.id);
     });
 });
 
