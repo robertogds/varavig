@@ -1,21 +1,21 @@
 // User Stories Collection
   // ---------------
-  Sprint.Collections.Stories = Backbone.Collection.extend({
+  Sprint.Collections.Tasks = Backbone.Collection.extend({
 
     // Reference to this collection's model.
-    model: Story,
+    model: Task,
 
     // Filter down the list of all todo items that are finished.
     done: function() {
-      return this.filter(function(story){ return story.get('done'); });
+      return this.filter(function(task){ return task.get('done'); });
     },
 
     insprint: function(){
-      return this.filter(function(story){ return story.get('insprint') > 0 });
+      return this.filter(function(task){ return task.get('insprint') > 0 });
     },
 
     nosprint: function() {
-      return this.filter(function(story) { return story.get('insprint') === 0 });  
+      return this.filter(function(task) { return task.get('insprint') === 0 });  
     },
 
     // Filter down the list to only todo items that are still not finished.
@@ -36,11 +36,11 @@
     return response;
     },
 
-	url :'/story',
+	url :'/task',
 
     // Todos are sorted by their original insertion order.
-    comparator: function(story) {
-      return story.get('order');
+    comparator: function(task) {
+      return task.get('position');
     }
 
   });

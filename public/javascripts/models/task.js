@@ -1,18 +1,27 @@
-/**
- * Created by .
- * User: cscarioni
- * Date: 24-Feb-2011
- * Time: 22:40:42
- * To change this template use File | Settings | File Templates.
- */
-
 var Task = Backbone.Model.extend({
-    story: Backbone.Model,
-    url : function() {
-		// to know where to send its REST call.
+
+  EMPTY: "empty task...",
+  story: Backbone.Model,
+  initialize: function() {
+    if (!this.get("content")) {
+      this.set({"content": this.EMPTY});
+    }
+  },
+
+  toggle: function() {
+    this.save({done: !this.get("done")});
+  },
+
+	url : function() {
 		return this.id ? '/task/' + this.id : '/task';
 	},
-    /**
+
+  clear: function() {
+    this.destroy();
+    this.view.remove();
+  },
+
+   /**
      * Calling validation of all attributes on save
      * @param options
      */

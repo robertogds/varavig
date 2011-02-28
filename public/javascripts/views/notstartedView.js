@@ -10,13 +10,13 @@ Sprint.Views.NotStartedView = Backbone.View.extend({
     },
 
     render: function() {
-	    $(this.el).html(JST.nostart_collection({ collection: Sprint.Stories }));
+	    $(this.el).html(JST.nostart_collection({ collection: Sprint.Tasks }));
         $('#items_nostart').html(this.el);
         $( ".nostart" ).sortable({
-			connectWith: ".stories"
+			connectWith: ".tasks"
 		});
 
-        $( ".stories" ).sortable({
+        $( ".tasks" ).sortable({
 			connectWith: ".nostart"
 		});
         $( ".nostart" ).disableSelection();
@@ -25,10 +25,10 @@ Sprint.Views.NotStartedView = Backbone.View.extend({
     },
 
     receive: function(event,ui) {
-	    var story = new Story();
-	    story = Sprint.Stories.get(ui.item.context);
-	    story.set({"insprint": 1});
-	    story.save();
+	    var task = new Task();
+	    task = Sprint.Tasks.get(ui.item.context);
+	    task.set({"insprint": 1});
+	    task.save();
     },
 
     sortstop: function() {
