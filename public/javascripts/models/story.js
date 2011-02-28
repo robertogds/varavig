@@ -1,25 +1,7 @@
-
-// Todo Model
-// ----------
-
-// Our basic **Todo** model has `content`, `order`, and `done` attributes.
 var Story = Backbone.Model.extend({
-     tasks: new Backbone.Collection,
-  // If you don't provide a todo, one will be provided for you.
-  EMPTY: "empty story...",
-
-  // Ensure that each todo created has `content`.
-  initialize: function() {
-    if (!this.get("content")) {
-      this.set({"content": this.EMPTY});
-    }
-  },
-
-  // Toggle the `done` state of this todo item.
-  toggle: function() {
-    this.save({done: !this.get("done")});
-  },
-
+    initialize: function() {
+       this.set({tasks:new Sprint.Collections.Tasks},{silent:true});
+    },
 	url : function() {
 		// to know where to send its REST call.
 		return this.id ? '/story/' + this.id : '/story';
@@ -32,8 +14,24 @@ var Story = Backbone.Model.extend({
   },
 
     addTask: function(task){
-        this.tasks.add(task);
+        this.get("tasks").add(task);
         task.set({story:this});
+    },
+
+    /**
+     * Calling validation of all attributes on save
+     * @param options
+     */
+    save:function(attrs, options){
+        options || (options = {});
+        if(!this._performValidation(this.attributes, options)) return false;
+        Backbone.Model.prototype.save.call(this, attrs, options);
+    },
+
+    validate:function(attrs){
+        if(!attrs.title){
+            return "Title is mandatory for stories";
+        }
     }
 
 });
