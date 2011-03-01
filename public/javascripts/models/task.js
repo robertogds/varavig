@@ -19,12 +19,12 @@ var Task = Backbone.Model.extend({
   clear: function() {
     this.destroy();
     this.view.remove();
-  },
+  }
 
    /**
      * Calling validation of all attributes on save
      * @param options
-     */
+
     save:function(attrs, options){
         options || (options = {});
         if(!this._performValidation(this.attributes, options)) return false;
@@ -36,5 +36,5 @@ var Task = Backbone.Model.extend({
         }else if(!attrs.title){
             return "Task must have a title";
         }
-    }
+    }*/
 });
