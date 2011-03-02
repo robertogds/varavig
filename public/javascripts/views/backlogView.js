@@ -54,8 +54,8 @@ Sprint.Views.BacklogView = Backbone.View.extend({
 	  var task = new Task();
 	  _.each(result, function(num){ 
 		task = Sprint.Tasks.get(num);
-		if (task.get("order") != orden) {
-			task.set({"order": orden});
+		if (task.get("position") != orden) {
+			task.set({"position": orden});
 			task.save();
 		}
 		 orden++;
