@@ -8,6 +8,12 @@ var Task = Backbone.Model.extend({
     }
   },
 
+  validateAttributes: function() {
+    return {
+        title: this.get("title")
+    }
+  },
+
   toggle: function() {
     this.save({done: !this.get("done")});
   },
@@ -22,6 +28,7 @@ var Task = Backbone.Model.extend({
   },
 
     validate:function(attrs){
+        alert("Entra en validate");
         if(!attrs.title && !this.get("title")){
             return "Task must have a title";
         }
