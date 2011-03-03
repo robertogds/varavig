@@ -2,7 +2,7 @@ var Sprint = {
 	Views: {},
 	Controllers: {},
 	Collections: {},
-	init: function() {	  
+	init: function() {
 	 // Create our global collection of **Tasks**.
 	  Sprint.Tasks = new Sprint.Collections.Tasks(); 
 	  new Sprint.Controllers.BacklogCtrl();
@@ -10,11 +10,8 @@ var Sprint = {
 	}
 };
 
-
-
 // Jquery code only must be in views but we'll refactor soon
 // Esto no debe estar aqui sino en las vistas pero luego lo quito
-
 
 
 $('#collapseBacklog.expanded').live('click',function(){

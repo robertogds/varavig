@@ -1,10 +1,10 @@
 var Task = Backbone.Model.extend({
 
-  EMPTY: "empty task...",
-  story: Backbone.Model,
+  EMPTY: "You need define this task",
+  //story: Backbone.Model, (I think you don't need to declare this, don't you?)
   initialize: function() {
     if (!this.get("content")) {
-      this.set({"content": this.EMPTY});
+      //this.set({"content": this.EMPTY});
     }
   },
 
@@ -19,22 +19,11 @@ var Task = Backbone.Model.extend({
   clear: function() {
     this.destroy();
     this.view.remove();
-  }
+  },
 
-   /**
-     * Calling validation of all attributes on save
-     * @param options
-
-    save:function(attrs, options){
-        options || (options = {});
-        if(!this._performValidation(this.attributes, options)) return false;
-        Backbone.Model.prototype.save.call(this, attrs, options);
-    },
     validate:function(attrs){
-        if(!attrs.story){
-            return "Task must belong to a Story";
-        }else if(!attrs.title){
+        if(!attrs.title && !this.get("title")){
             return "Task must have a title";
         }
-    }*/
+    }
 });

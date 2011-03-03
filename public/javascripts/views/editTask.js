@@ -15,7 +15,7 @@ Sprint.Views.EditTask = Backbone.View.extend({
 	    return {
 		  title: this.$('[name=title]').val(),
 		  content: this.$('[name=content]').val(),
-	      order:   this.collection.nextOrder(),
+	      position:   this.collection.nextOrder(),
 	      done:    false
 	    };
 	},
@@ -24,13 +24,12 @@ Sprint.Views.EditTask = Backbone.View.extend({
         var self = this;
         var msg = this.model.isNew() ? 'Successfully created!' : "Saved!";
         this.model.save(this.newAttributes(), {
-    
            success: function(model, resp) {
 				window.location.hash = '#';
             },
 
-            error: function() {
-				alert("Error saving user task");
+            error: function(model,e) {
+				alert(e);
             //    new App.Views.Error();
             }
         });

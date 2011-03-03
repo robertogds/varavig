@@ -32,9 +32,10 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
 
 		
 		newTask: function() {
-			var task = new Task();
-			task.order = Sprint.Tasks.nextOrder();
+			var task = new Task({title : "TITULO"});
+			task.position = Sprint.Tasks.nextOrder();
 			task.done = 0;
+            alert(task.title);
 	        new Sprint.Views.EditTask({ model: task, collection: Sprint.Tasks });
 
 	    }

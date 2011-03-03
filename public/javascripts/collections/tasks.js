@@ -27,7 +27,7 @@
     // GUID in the database. This generates the next order number for new items.
     nextOrder: function() {
       if (!this.length) return 1;
-      return this.last().get('order') + 1;
+      return this.last().get('position') + 1;
     },
     parse: function(response) {
         //_.each(response, function(item) {

@@ -10,6 +10,7 @@ describe("Task",function(){
 
    beforeEach(function() {
      task = new Task;
+     $.ajax=function(params){}
   });
 
     it("When saving a task it must fail if doesn't have a title or a Story",function(){
@@ -21,5 +22,7 @@ describe("Task",function(){
         task.save();
         expect(errorChecked).toBeTruthy();
     });
+
+
 });
 
