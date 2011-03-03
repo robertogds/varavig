@@ -16,9 +16,6 @@ Sprint.Views.BacklogView = Backbone.View.extend({
         $( ".tasks" ).sortable({
 			connectWith: ".nostart"
 		});
-        $( ".nostart" ).sortable({
-			connectWith: ".tasks"
-		});
 
         $( ".portlet" ).addClass( "ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" )
 			.find( ".portlet-header" )

@@ -13,12 +13,9 @@ Sprint.Views.StartedView = Backbone.View.extend({
 	    $(this.el).html(JST.started_collection({ collection: Sprint.Tasks }));
         $('#items_started').html(this.el);
         $( ".started" ).sortable({
-			connectWith: ".notstart"
+			connectWith: ".nostart"
 		});
 
-        $( ".notstart" ).sortable({
-			connectWith: ".started"
-		});
         $( ".started" ).disableSelection();
 
         return this;
