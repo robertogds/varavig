@@ -10,37 +10,37 @@ var Sprint = {
 	}
 };
 
-// Jquery code only must be in views but we'll refactor soon
-// Esto no debe estar aqui sino en las vistas pero luego lo quito
+// Hide backlog. We must  remove it from here.
+	$('#collapseBacklog.expanded').live('click',function(){
+		$('.container #not_started, .container #started, .container #finished').animate({
+			width: '33%'
+		  }, 1000, function() {
+			// Animation complete.
+		  });
+
+		$('.container #backlog').animate({
+			width: '0'
+		  }, 1000, function() {
+			// Animation complete.
+			$(this).hide();
+		  });
+		$(this).addClass('collapsed').removeClass('expanded');
+	});
+
+	$('#collapseBacklog.collapsed').live('click',function(){
+		$('.container #backlog ').show();
+
+		$('.container .column').animate({
+			width: '25%'
+		  }, 1000, function() {
+			// Animation complete.
+		  });
+
+		$(this).addClass('expanded').removeClass('collapsed');
+	})
 
 
-$('#collapseBacklog.expanded').live('click',function(){
-	$('.container #not_started, .container #started, .container #finished').animate({
-		width: '33%'
-	  }, 1000, function() {
-		// Animation complete.
-	  });
-	
-	$('.container #backlog').animate({
-		width: '0'
-	  }, 1000, function() {
-		// Animation complete.
-		$(this).hide();
-	  });
-	$(this).addClass('collapsed').removeClass('expanded');
-});
 
-$('#collapseBacklog.collapsed').live('click',function(){
-	$('.container #backlog ').show();
-	
-	$('.container .column').animate({
-		width: '25%'
-	  }, 1000, function() {
-		// Animation complete.
-	  });
-
-	$(this).addClass('expanded').removeClass('collapsed');
-})
 
 
 

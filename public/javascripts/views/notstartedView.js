@@ -12,10 +12,10 @@ Sprint.Views.NotStartedView = Backbone.View.extend({
     render: function() {
 	    $(this.el).html(JST.nostart_collection({ collection: Sprint.Tasks }));
         $('#items_nostart').html(this.el);
-	        $( ".nostart" ).sortable({
-				connectWith: ".started"
+	        $( "#nostarti" ).sortable({
+				connectWith: ".subcolumn"
 			});
-        $( ".nostart" ).disableSelection();
+        $( "#nostarti" ).disableSelection();
 
         return this;
     },

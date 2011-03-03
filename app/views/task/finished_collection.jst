@@ -1,9 +1,9 @@
-<!-- Started Column-->
-<div id="startedi" class="subcolumn">
+<!-- Finished Column-->
+<div id="finishedi" class="subcolumn">
 &nbsp;<br />
 <% if(collection.models.length > 0) { %>
     <% collection.each(function(task) { %>
-	<% if (task.get("started") > 0)  { %>
+	<% if (task.get("finished") > 0)  { %>
     <div class="portlet" id="<%=task.id%>">
 		<div class="portlet-header"><%= task.escape('title') %></div>
 		<div class="portlet-content"><%= task.escape('content') %></div>
@@ -12,4 +12,3 @@
 }); %>
     </div>
 <% }  %>
-    

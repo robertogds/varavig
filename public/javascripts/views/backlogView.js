@@ -29,6 +29,7 @@ Sprint.Views.BacklogView = Backbone.View.extend({
 			$( this ).parents( ".portlet:first" ).find( ".portlet-content" ).toggle();
 		});
         $( ".tasks" ).disableSelection();
+
         return this;
 
 
@@ -57,5 +58,5 @@ Sprint.Views.BacklogView = Backbone.View.extend({
 		}
 		 orden++;
 	   })
-    }
+    },
 });

@@ -1,7 +1,7 @@
-// This is the view for the started column
-Sprint.Views.StartedView = Backbone.View.extend({
+// This is the view for the finished column
+Sprint.Views.FinishedView = Backbone.View.extend({
 	events: {
-    "sortstop .started":  "sortstop",
+    "sortstop .finished":  "sortstop",
     "sortreceive": "receive"
   },
 
@@ -10,13 +10,13 @@ Sprint.Views.StartedView = Backbone.View.extend({
     },
 
     render: function() {
-	    $(this.el).html(JST.started_collection({ collection: Sprint.Tasks }));
-        $('#items_started').html(this.el);
-        $( "#startedi" ).sortable({
+	    $(this.el).html(JST.finished_collection({ collection: Sprint.Tasks }));
+        $('#items_finished').html(this.el);
+        $( "#finishedi" ).sortable({
 			connectWith: ".subcolumn"
 		});
 
-        $( ".startedi" ).disableSelection();
+        $( ".finishedi" ).disableSelection();
 
         return this;
     },
@@ -24,7 +24,7 @@ Sprint.Views.StartedView = Backbone.View.extend({
     receive: function(event,ui) {
 	    var task = new Task();
 	    task = Sprint.Tasks.get(ui.item.context);
-	    task.set({"started": 1});
+	    task.set({"finished": 1});
 	    task.save();
     },
 
