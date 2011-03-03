@@ -23,6 +23,7 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
 	            success: function() {
                     new Sprint.Views.NotStartedView;
                     new Sprint.Views.BacklogView;
+                    new Sprint.Views.StartedView;
 	            },
 	            error: function() {
 	                new Error({ message: "Error loading documents." });
@@ -32,10 +33,9 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
 
 		
 		newTask: function() {
-			var task = new Task({title : "TITULO"});
+			var task = new Task();
 			task.position = Sprint.Tasks.nextOrder();
 			task.done = 0;
-            alert(task.title);
 	        new Sprint.Views.EditTask({ model: task, collection: Sprint.Tasks });
 
 	    }

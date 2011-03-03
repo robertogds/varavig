@@ -3,9 +3,7 @@ var Task = Backbone.Model.extend({
   EMPTY: "You need define this task",
   //story: Backbone.Model, (I think you don't need to declare this, don't you?)
   initialize: function() {
-    if (!this.get("content")) {
-      //this.set({"content": this.EMPTY});
-    }
+
   },
 
   validateAttributes: function() {

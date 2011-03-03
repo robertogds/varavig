@@ -1,0 +1,15 @@
+<!-- Not Start Column-->
+<div id="started" class="started">
+&nbsp;<br />
+<% if(collection.models.length > 0) { %>
+    <% collection.each(function(task) { %>
+	<% if (task.get("started") > 0)  { %>
+    <div class="portlet" id="<%=task.id%>">
+		<div class="portlet-header"><%= task.escape('title') %></div>
+		<div class="portlet-content"><%= task.escape('content') %></div>
+	</div>
+    <% }
+}); %>
+    </div>
+<% }  %>
+    
