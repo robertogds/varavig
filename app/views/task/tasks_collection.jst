@@ -1,7 +1,7 @@
 <!-- Backlog Column-->
 <div id ="newtask"><h3><a href='#new'>Create New</a></h3></div>
 <% if(collection.models.length > 0) { %>		
-    <div id="tasks" class="tasks">
+    <div id="tasks" class="subcolumn">
 	&nbsp;
     <% collection.each(function(task) { %>
 	<% if (!task.get("insprint") > 0)  { %>

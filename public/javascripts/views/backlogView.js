@@ -13,8 +13,8 @@ Sprint.Views.BacklogView = Backbone.View.extend({
         $(this.el).html(JST.tasks_collection({ collection: Sprint.Tasks}));
 	    $('#items').html(this.el);
 
-        $( ".tasks" ).sortable({
-			connectWith: ".nostart"
+        $( "#tasks" ).sortable({
+			connectWith: ".subcolumn"
 		});
 
         $( ".portlet" ).addClass( "ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" )
