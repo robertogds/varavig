@@ -7,6 +7,7 @@ class CreateTasks < ActiveRecord::Migration
       t.string   :title
       t.integer  :estimate, :default => 0
       t.integer  :insprint, :default => 0
+      t.integer  :incolumn, :default => 0
 
       t.timestamps
     end

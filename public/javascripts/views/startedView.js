@@ -24,7 +24,7 @@ Sprint.Views.StartedView = Backbone.View.extend({
     receive: function(event,ui) {
 	    var task = new Task();
 	    task = Sprint.Tasks.get(ui.item.context);
-	    task.set({"started": 1});
+        task.set({"insprint": 1},{"incolumn": 2});
 	    task.save();
     },
 

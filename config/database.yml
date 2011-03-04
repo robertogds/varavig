@@ -9,10 +9,10 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: varavig_development
+  database: varavig_dev
   pool: 5
-  username: cscarioni
-  password: monika72$
+  username: varavig 
+  password: varavig11 
   socket: /var/run/mysqld/mysqld.sock
 
 
@@ -25,8 +25,8 @@ test:
   reconnect: false
   database: varavig_test
   pool: 5
-  username: cscarioni
-  password: monika72$
+  username: varavig
+  password: varavig11
   socket: /var/run/mysqld/mysqld.sock
 
 
@@ -36,6 +36,6 @@ production:
   reconnect: false
   database: varavig_pro
   pool: 5
-  username: cscarioni
-  password: monika72$
+  username: varavig
+  password: varavig11
   socket: /var/run/mysqld/mysqld.sock

@@ -4,7 +4,7 @@
     <div id="tasks" class="subcolumn">
 	&nbsp;
     <% collection.each(function(task) { %>
-	<% if (!task.get("insprint") > 0)  { %>
+	<% if (task.get("incolumn") === 0)  { %>
     <div class="portlet" id="<%=task.id%>">
 		<div class="portlet-header"><%= task.escape('title') %></div>
 		<div class="portlet-content"><%= task.escape('content') %></div>

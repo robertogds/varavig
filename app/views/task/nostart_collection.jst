@@ -1,9 +1,9 @@
 <!-- Not Start Column -->
-<div id="nostarti" class="subcolumn">
+<div id="notstarted_list" class="subcolumn">
 &nbsp;<br />
 <% if(collection.models.length > 0) { %>
     <% collection.each(function(task) { %>
-	<% if (task.get("insprint") > 0)  { %>
+	<% if (task.get("incolumn") === 1)  { %>
     <div class="portlet" id="<%=task.id%>">
 		<div class="portlet-header"><%= task.escape('title') %></div>
 		<div class="portlet-content"><%= task.escape('content') %></div>

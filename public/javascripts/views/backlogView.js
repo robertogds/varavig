@@ -1,7 +1,7 @@
 // This is the view for the backlog column
 Sprint.Views.BacklogView = Backbone.View.extend({
 	events: {
-    "sortstop .tasks":  "sortstop",
+    "sortstop #tasks":  "sortstop",
     "sortreceive": "receive"
   },
 
@@ -12,7 +12,12 @@ Sprint.Views.BacklogView = Backbone.View.extend({
     render: function() {
         $(this.el).html(JST.tasks_collection({ collection: Sprint.Tasks}));
 	    $('#items').html(this.el);
+        this.jquery_task();
+        return this;
 
+
+    },
+    jquery_task: function() {
         $( "#tasks" ).sortable({
 			connectWith: ".subcolumn"
 		});
@@ -29,21 +34,22 @@ Sprint.Views.BacklogView = Backbone.View.extend({
 			$( this ).parents( ".portlet:first" ).find( ".portlet-content" ).toggle();
 		});
         $( ".tasks" ).disableSelection();
-
-        return this;
-
-
     },
 
     receive: function(event,ui) {
        	var task = new Task();
 	    task = Sprint.Tasks.get(ui.item.context);
 	    task.set({"insprint": 0});
+        task.set({"incolumn": 0});
 	    task.save();
     },
 
     noass: function() {
         alert("stop en noassig");
+    },
+
+    putinbacklog: function(task) {
+
     },
 
     sortstop: function() {
@@ -58,5 +64,5 @@ Sprint.Views.BacklogView = Backbone.View.extend({
 		}
 		 orden++;
 	   })
-    },
+    }
 });
