@@ -15,15 +15,28 @@ Sprint.Views.EditTask = Backbone.View.extend({
 	    return {
 		  title: this.$('[name=title]').val(),
 		  content: this.$('[name=content]').val(),
+          estimate: this.$('[name=estimate]').val(),
 	      position:   this.collection.nextOrder(),
 	      done:    false
+	    };
+	},
+
+    editAttributes: function() {
+	    return {
+		  title: this.$('[name=title]').val(),
+		  content: this.$('[name=content]').val(),
+          estimate: this.$('[name=estimate]').val()
 	    };
 	},
     
     save: function() {
         var self = this;
+
         var msg = this.model.isNew() ? 'Successfully created!' : "Saved!";
-        this.model.save(this.newAttributes(), {
+        var attributes = this.editAttributes();
+        if (this.model.isNew()) { attributes = this.newAttributes(); }
+
+        this.model.save(attributes, {
            success: function(model, resp) {
 				window.location.hash = '#';
             },
@@ -39,9 +52,11 @@ Sprint.Views.EditTask = Backbone.View.extend({
     
     render: function() {
 	        $(this.el).html(JST.task({ model: this.model }));
+            //this.$( "#dialog" ).dialog();
 	        $('#newtask').html(this.el);
 	        // use val to fill in title, for security reasons
 	        this.$('[name=title]').val(this.model.get('title'));
+
 	        this.delegateEvents();
     }
 });

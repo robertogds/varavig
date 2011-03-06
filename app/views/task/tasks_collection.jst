@@ -7,9 +7,16 @@
 	<% if (task.get("incolumn") === 0)  { %>
     <div class="portlet" id="<%=task.id%>">
 		<div class="portlet-header"><%= task.escape('title') %></div>
-		<div class="portlet-content"><%= task.escape('content') %></div>
+		<div class="portlet-content">
+		  <%= task.escape('content') %>
+		  <div class="estimated"><%= task.get('estimate') %></div>
+		  <div class="toolbar">
+		    <button class="delete_task" id="<%=task.id%>">delete</button>&nbsp;
+		    <button class="edit_task" id="<%=task.id%>">edit</button>
+		   </div>
+
+		</div>
 	</div>
-	
     <% }
 }); %>
     </div>

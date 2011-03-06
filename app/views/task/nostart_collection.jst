@@ -7,9 +7,9 @@
     <div class="portlet" id="<%=task.id%>">
 		<div class="portlet-header"><%= task.escape('title') %></div>
 		<div class="portlet-content"><%= task.escape('content') %></div>
+		<div class="estimated"><%= task.get('estimate') %></div>
 	</div>
     <% }
 }); %>
     </div>
 <% }  %>
-    

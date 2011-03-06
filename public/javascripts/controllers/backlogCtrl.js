@@ -3,6 +3,7 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
     routes: {
         "":              "index",
         "task/:id":      "edit",
+        "savetask":      "saveTask",
 		"new":           "newTask"
     },
     
@@ -33,6 +34,10 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
 	        });
 	    },
 
+        saveTask: function() {
+          //alert("salvando tarea");
+            this.index();
+        },
 		
 		newTask: function() {
 			var task = new Task();

@@ -12,12 +12,28 @@ Sprint.Views.NotStartedView = Backbone.View.extend({
     render: function() {
         $(this.el).html(JST.nostart_collection({ collection: Sprint.Tasks }));
         $('#items_nostart').html(this.el);
+        this.jquery_task();
+        this.delegateEvents();
+        return this;
+    },
+
+    jquery_task: function() {
         $("#notstarted_list").sortable({
             connectWith: ".subcolumn"
         });
-        $("#notstarted_list").disableSelection();
 
-        return this;
+        this.$(".portlet").addClass("ui-widget ui-widget-content ui-helper-clearfix ui-corner-all")
+                .find(".portlet-header")
+                .addClass("ui-widget-header ui-corner-all")
+                .prepend("<span class='ui-icon ui-icon-minusthick'></span>")
+                .end()
+                .find(".portlet-content");
+
+        this.$(".portlet-header .ui-icon").click(function() {
+            $(this).toggleClass("ui-icon-minusthick").toggleClass("ui-icon-plusthick");
+            $(this).parents(".portlet:first").find(".portlet-content").toggle();
+        });
+         $("#notstarted_list").disableSelection();
     },
 
     receive: function(event, ui) {
@@ -26,9 +42,10 @@ Sprint.Views.NotStartedView = Backbone.View.extend({
         task.set({"insprint":1});
         task.set({"incolumn":1});
         task.save();
+        //this.render();
     },
 
     sortstop: function() {
-        // I think is better dont mantain the order in this column
+        // I think is better don't keep the order here
     }
 });

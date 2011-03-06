@@ -1,5 +1,5 @@
 <!-- Started Column-->
-<div id="startedi" class="subcolumn">
+<div id="started_list" class="subcolumn">
 &nbsp;<br />
 <% if(collection.models.length > 0) { %>
     <% collection.each(function(task) { %>
@@ -7,6 +7,7 @@
     <div class="portlet" id="<%=task.id%>">
 		<div class="portlet-header"><%= task.escape('title') %></div>
 		<div class="portlet-content"><%= task.escape('content') %></div>
+		<div class="estimated"><%= task.get('estimate') %></div>
 	</div>
     <% }
 }); %>
