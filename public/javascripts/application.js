@@ -10,6 +10,7 @@ var Sprint = {
         Sprint.NotStartedColumn = 1;
         Sprint.StartedColumn = 2;
         Sprint.FinishedColumn = 3;
+        Sprint.User = "rgil";
         new Sprint.Controllers.BacklogCtrl();
         Backbone.history.start();
     }
