@@ -47,6 +47,7 @@ Sprint.Views.BacklogView = Backbone.View.extend({
             $(this).toggleClass("ui-icon-minusthick").toggleClass("ui-icon-plusthick");
             $(this).parents(".portlet:first").find(".portlet-content").toggle();
         });
+        this.$(".portlet-header .ui-icon").click();
         $("#tasks").disableSelection();
     },
 
