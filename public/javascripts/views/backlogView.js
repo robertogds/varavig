@@ -49,8 +49,10 @@ Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
     },
 
     sort_stop: function() {
+        alert("Entra en sortstop");
         var orden = 1;
-        var result = $('.sortable_tasks').sortable('toArray');
+        var pp = this.$('.sortable_tasks').sortable();
+        var result = this.$('.sortable_tasks').sortable('toArray');
         var task = new Task();
         _.each(result, function(num) {
             task = Sprint.Tasks.get(num);
