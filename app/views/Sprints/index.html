@@ -70,7 +70,7 @@
 
 <script type="text/template" id="tasks_collection">
 <!-- Backlog Column-->
-
+	<div class="total">TOTAL:<%= total %></div>
 <% if(collection.models.length > 0) { %>		
     <div class="subcolumn sortable_tasks">
 	&nbsp;
@@ -90,8 +90,8 @@
 
 		</div>
 	</div>
-    <% }
-}); %>
+	    <% }
+	}); %>
     </div>
 <% } %>
 </script>

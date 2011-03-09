@@ -6,7 +6,7 @@ Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
         "click .delete_task": "delete_task",
         "click .edit_task": "edit_task"
     },
-    
+    	
     initialize: function() {
         this.render();
     },
@@ -14,7 +14,8 @@ Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({ 
         	collection: Sprint.Tasks ,
-        	column: Sprint.BacklogColumn
+        	column: Sprint.BacklogColumn,
+			total: this.total_points_left(Sprint.BacklogColumn)
         	}));
         $('#items').html(this.el);
         this.jquery_task();
@@ -40,7 +41,7 @@ Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
         task.set({"insprint": 0});
         task.set({"incolumn": Sprint.BacklogColumn});
         task.save();
-        //this.render();
+        this.render();
     },
 
     noass: function() {

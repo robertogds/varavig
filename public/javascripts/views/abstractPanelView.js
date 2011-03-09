@@ -18,6 +18,17 @@ Sprint.Views.AbstractPanelView = Backbone.View.extend({
             $(this).parents(".portlet:first").find(".portlet-content").toggle();
         });
         $(".sortable_tasks").disableSelection();
-    }
+    },
+
+    total_points_left: function(column){
+		var total = 0;
+		var tasks = Sprint.Tasks.filter(function(task) {
+		  return task.get("incolumn") === column;
+		});
+       for (i = 0, l = tasks.length; i < l; i++){
+			total += tasks[i].get("left");
+        };
+		return total;
+	} 
     
 });
