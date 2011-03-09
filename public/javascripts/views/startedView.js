@@ -10,8 +10,8 @@ Sprint.Views.StartedView = Backbone.View.extend({
     },
 
     render: function() {
-	    $(this.el).html(JST.started_collection({ collection: Sprint.Tasks }));
-        $('#items_started').html(this.el);
+        $(this.el).html(_.template($('#started_collection').html())({ collection: Sprint.Tasks }));
+	    $('#items_started').html(this.el);
         this.jquery_task();
         return this;
     },
@@ -40,7 +40,9 @@ Sprint.Views.StartedView = Backbone.View.extend({
 	    task = Sprint.Tasks.get(ui.item.context);
         task.set({"insprint": 1});
         task.set({"incolumn": 2});
+        task.set({"user": Sprint.User.get("email")});
 	    task.save();
+	    this.render();
     },
 
     sortstop: function() {

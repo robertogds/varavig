@@ -10,7 +10,7 @@ Sprint.Views.FinishedView = Backbone.View.extend({
     },
 
     render: function() {
-	    $(this.el).html(JST.finished_collection({ collection: Sprint.Tasks }));
+		$(this.el).html(_.template($('#finished_collection').html())({ collection: Sprint.Tasks }));
         $('#items_finished').html(this.el);
         this.jquery_task();
         return this;

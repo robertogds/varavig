@@ -12,7 +12,8 @@ Sprint.Views.BacklogView = Backbone.View.extend({
     },
 
     render: function() {
-        $(this.el).html(JST.tasks_collection({ collection: Sprint.Tasks}));
+    	
+        $(this.el).html(_.template($('#tasks_collection').html())({ collection: Sprint.Tasks }));
         $('#items').html(this.el);
         this.jquery_task();
         this.delegateEvents();
@@ -28,7 +29,7 @@ Sprint.Views.BacklogView = Backbone.View.extend({
     },
 
     edit_task: function(event){
-        window.location="/#task/"+ event.currentTarget.id;
+        window.location="#task/"+ event.currentTarget.id;
     },
 
     jquery_task: function() {
@@ -47,7 +48,6 @@ Sprint.Views.BacklogView = Backbone.View.extend({
             $(this).toggleClass("ui-icon-minusthick").toggleClass("ui-icon-plusthick");
             $(this).parents(".portlet:first").find(".portlet-content").toggle();
         });
-        this.$(".portlet-header .ui-icon").click();
         $("#tasks").disableSelection();
     },
 
@@ -63,6 +63,7 @@ Sprint.Views.BacklogView = Backbone.View.extend({
     noass: function() {
         alert("stop en noassig");
     },
+    
 
 
     sortstop: function() {

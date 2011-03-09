@@ -45,5 +45,6 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
 			task.done = 0;
 	        new Sprint.Views.EditTask({ model: task, collection: Sprint.Tasks });
 
-	    }
+	    },
+	   
 });

@@ -10,7 +10,7 @@ Sprint.Views.NotStartedView = Backbone.View.extend({
     },
 
     render: function() {
-        $(this.el).html(JST.nostart_collection({ collection: Sprint.Tasks }));
+        $(this.el).html(_.template($('#nostart_collection').html())({ collection: Sprint.Tasks }));
         $('#items_nostart').html(this.el);
         this.jquery_task();
         this.delegateEvents();
@@ -49,3 +49,4 @@ Sprint.Views.NotStartedView = Backbone.View.extend({
         // I think is better don't keep the order here
     }
 });
+   
