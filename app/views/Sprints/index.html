@@ -61,7 +61,8 @@
 <!-- Backlog Column-->
 
 <% if(collection.models.length > 0) { %>		
-    <div class="subcolumn sortable_tasks">
+    
+        <div class="subcolumn sortable_tasks">
 	&nbsp;
     <% collection.each(function(task) { %>
 	<% if (task.get("incolumn") === column)  { %>

@@ -2,7 +2,7 @@
 Sprint.Views.AbstractPanelView = Backbone.View.extend({
 
     jquery_task: function() {
-        $(".sortable_tasks").sortable({
+        this.$(".sortable_tasks").sortable({
             connectWith: ".subcolumn"
         });
 
@@ -17,7 +17,7 @@ Sprint.Views.AbstractPanelView = Backbone.View.extend({
             $(this).toggleClass("ui-icon-minusthick").toggleClass("ui-icon-plusthick");
             $(this).parents(".portlet:first").find(".portlet-content").toggle();
         });
-        $(".sortable_tasks").disableSelection();
+        this.$(".sortable_tasks").disableSelection();
     }
     
 });
