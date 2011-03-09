@@ -1,2 +1,10 @@
 Varavig, the simplest way to organize Agile Projects, is based on Rails and backbone.js
 Varavig is a product of IIPIR developed by Roberto Gil and Pablo Pazos.
+
+how to run dev server:
+ $ play run varavig
+
+how to deploy to gae:
+outside the projet root folder execute:
+ $ play war varavig -o varavig-war
+ $ /appengine-java-sdk-1.4.2/bin/appcfg.sh update varavig-war
