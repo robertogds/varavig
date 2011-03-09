@@ -1,0 +1,14 @@
+04 mar 2011 13:28:49,480 INFO  ~ Starting /home/ro/workspace-portae/Varavig
+04 mar 2011 13:28:49,484 INFO  ~ Module siena is available (/home/ro/opt/play-1.1.1/modules/siena-1.5)
+04 mar 2011 13:28:49,484 INFO  ~ Module gae is available (/home/ro/opt/play-1.1.1/modules/gae-1.4)
+04 mar 2011 13:28:50,187 WARN  ~ 
+04 mar 2011 13:28:50,187 WARN  ~ Google App Engine module
+04 mar 2011 13:28:50,187 WARN  ~ ~~~~~~~~~~~~~~~~~~~~~~~
+04 mar 2011 13:28:50,187 WARN  ~ No Google App Engine environment found. Setting up a development environement
+04 mar 2011 13:28:50,198 WARN  ~ 
+04 mar 2011 13:28:50,198 WARN  ~ You're running Play! in DEV mode
+04 mar 2011 13:28:50,311 INFO  ~ Listening for HTTP on port 3000 (Waiting a first request to start) ...
+04 mar 2011 13:29:02,473 INFO  ~ Connected to jdbc:hsqldb:mem:playembed
+04 mar 2011 13:29:02,477 INFO  ~ Application 'Play lists running in GAE' is now started !
+04 mar 2011 13:29:03,251 INFO  ~ The backing store, /home/ro/workspace-portae/Varavig/tmp/datastore, does not exist. It will be created.
+04 mar 2011 13:29:33,302 INFO  ~ Time to persist datastore: 39 ms

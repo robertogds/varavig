@@ -1,0 +1,23 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                       Application.index
+GET     /task                                   Tasks.index(format:'json')  
+POST    /task                                   Tasks.create(format:'json')
+GET     /task/{<\d+>id}                         Tasks.show(format:'json')
+DELETE  /task/{<\d+>id}                         Tasks.destroy(format:'json')
+PUT     /task/{<\d+>id}                         Tasks.update(format:'json')
+GET     /sprint                                 Sprints.index
+GET     /user                                   Users.show(format:'json')
+
+
+GET     /login                                  Application.login
+GET     /logout                                 Application.logout                   
+
+# Map static resources from the /app/public folder to the /public path
+GET     /assets/                                staticDir:public
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}

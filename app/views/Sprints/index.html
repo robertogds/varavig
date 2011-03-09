@@ -1,0 +1,144 @@
+#{extends 'main.html' /}
+#{set title:'Your Sprint Panel' /}
+
+   	<a id="collapseBacklog" class="expanded fr" href="javascript:void(0)">collapseBacklog</a>
+	<div class="container fix">
+		<div id="not_started" class="column">
+			<div class="wrap">
+				NOT STARTED ITEMS
+            <div id="items_nostart" class="scrollable"></div>
+			</div>
+
+		</div>
+		<div id="started" class="column">
+			<div class="wrap">
+				STARTED ITEMS
+                <div id="items_started" class="scrollable"></div>
+			</div>
+		</div>
+		<div id="finished" class="column">
+			<div class="wrap">
+				FINISHED ITEMS
+				<div id="items_finished" class="scrollable"></div>
+			</div>
+		</div>
+
+		<div id="backlog" class="column">
+			<div class="wrap">
+			USER STORIES 
+				<div id ="items" class="scrollable"></div>
+			</div>
+		</div>
+	</div>
+	<div class="push"></div>
+
+		  
+	<script type="text/template" id="task">
+<div id="dialog" title="new task">
+<form>
+    <label for='title'>Title</label>
+    <input name='title' type='text' /> 
+    <label for='content'> Content</label>
+    <textarea name='content'><%= model.get('content') %></textarea>
+    <laber for='estimate'>Estimate</laber>
+     <select name='estimate'>
+        <option value="1">1</option>
+        <option value="3">3</option>
+        <option value="5">5</option>
+        <option value="8">8</option>
+        <option value="16">16</option>
+     </select>
+    <button><%= model.isNew() ? 'Create' : 'Save' %></button>
+</form>
+</div>
+	</script>
+
+<script type="text/template" id="nostart_collection">	
+<!-- Not Start Column -->
+<div id="notstarted_list" class="subcolumn">
+&nbsp;<br />
+<% if(collection.models.length > 0) { %>
+    <% collection.each(function(task) { %>
+	<% if (task.get("incolumn") === 1)  { %>
+    <div class="portlet" id="<%=task.id%>">
+		<div class="portlet-header"><%= task.escape('title') %></div>
+		<div class="portlet-content"><%= task.escape('content') %></div>
+		<div class="estimated"><%= task.get('estimate') %></div>
+        <button class="delete_task" id="<%=task.id%>">delete</button>&nbsp;
+		<button class="edit_task" id="<%=task.id%>">edit</button>
+	</div>
+    <% }
+}); %>
+    </div>
+<% }  %>
+</script>
+
+<script type="text/template" id="finished_collection">
+<!-- Finished Column-->
+<div id="finished_list" class="subcolumn">
+&nbsp;<br />
+<% if(collection.models.length > 0) { %>
+    <% collection.each(function(task) { %>
+	<% if (task.get("incolumn") === 3)  { %>
+    <div class="portlet" id="<%=task.id%>">
+		<div class="portlet-header"><%= task.escape('title') %></div>
+		<div class="portlet-content"><%= task.escape('content') %></div>
+		<div class="estimated"><%= task.get('estimate') %></div>
+        <button class="delete_task" id="<%=task.id%>">delete</button>&nbsp;
+		<button class="edit_task" id="<%=task.id%>">edit</button>
+	</div>
+    <% }
+}); %>
+    </div>
+<% }  %>
+</script>
+<script type="text/template" id="started_collection">
+<!-- Started Column-->
+<div id="started_list" class="subcolumn">
+&nbsp;<br />
+<% if(collection.models.length > 0) { %>
+    <% collection.each(function(task) { %>
+	<% if (task.get("incolumn") === 2)  { %>
+    <div class="portlet" id="<%=task.id%>">
+		<div class="portlet-header"><%= task.escape('title') %></div>
+		<div class="portlet-content"><%= task.escape('content') %></div>
+ 		<div class="assigned"><%= task.get('user') %></div>
+		<div class="estimated"><%= task.get('estimate') %></div>
+        <button class="delete_task" id="<%=task.id%>">delete</button>&nbsp;
+		<button class="edit_task" id="<%=task.id%>">edit</button>
+	</div>
+    <% }
+}); %>
+    </div>
+<% }  %>
+</script>
+<script type="text/template" id="tasks_collection">
+<!-- Backlog Column-->
+<div id ="newtask"><h3><a href='#new'>Create New</a></h3></div>
+<% if(collection.models.length > 0) { %>		
+    <div id="tasks" class="subcolumn">
+	&nbsp;
+    <% collection.each(function(task) { %>
+	<% if (task.get("incolumn") === 0)  { %>
+    <div class="portlet" id="<%=task.id%>">
+		<div class="portlet-header"><%= task.escape('title') %></div>
+		<div class="portlet-content">
+		  <%= task.escape('content') %>
+		  <div class="estimated"><%= task.get('estimate') %></div>
+		  <div class="toolbar">
+		    <button class="delete_task" id="<%=task.id%>">delete</button>&nbsp;
+		    <button class="edit_task" id="<%=task.id%>">edit</button>
+		   </div>
+
+		</div>
+	</div>
+    <% }
+}); %>
+    </div>
+<% } %>
+</script>
+<script type="text/javascript">
+	$(function() {
+	Sprint.init();
+	});
+</script>
