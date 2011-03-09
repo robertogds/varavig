@@ -13,15 +13,10 @@ public class Task extends Model {
     public boolean done;
     public int insprint;
     public int estimate;
+    public int left;
     public int position;
     public int incolumn;
         
-
-    public Task(String title) {
-        this.title = title;
-        this.done = false;
-        this.position = 0;
-    }
 
     
     public static Query<Task> all() {
