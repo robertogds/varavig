@@ -52,6 +52,17 @@
         <option value="8">8</option>
         <option value="16">16</option>
      </select>
+<% if(!model.isNew()) { %>
+	<laber for='left'>Left</laber>
+     <select name='left'>
+		<option value="">select</option>
+        <option value="1">1</option>
+        <option value="3">3</option>
+        <option value="5">5</option>
+        <option value="8">8</option>
+        <option value="16">16</option>
+     </select>
+<% }; %>	
     <button><%= model.isNew() ? 'Create' : 'Save' %></button>
 </form>
 </div>
@@ -70,7 +81,8 @@
 		<div class="portlet-header"><%= task.escape('title') %></div>
 		<div class="portlet-content">
 		  <%= task.escape('content') %>
-		  <div class="estimated"><%= task.get('estimate') %></div>
+		  <div class="estimated">Estimated: <%= task.get('estimate') %></div>
+		  <div class="left">Left: <%= task.get('left') %></div>
 		  <div class="assigned"><%= task.get('user') %></div>
 		  <div class="toolbar">
 		    <button class="delete_task" id="<%=task.id%>">delete</button>&nbsp;
