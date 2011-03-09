@@ -36,10 +36,10 @@ var Sprint = {
            }
         });
         
-   }
-    
+     },
     
 };
+
 
 // Hide backlog. We must  remove it from here.
 $('#collapseBacklog.expanded').live('click', function() {

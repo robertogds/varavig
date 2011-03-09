@@ -1,8 +1,8 @@
 // This is the view for the backlog column
-Sprint.Views.NotStartedView = Backbone.View.extend({
+Sprint.Views.NotStartedView = Sprint.Views.AbstractPanelView.extend({
     events: {
-        "sortstop #notstarted_list":  "sortstop",
-        "sortreceive": "receive"
+        "sortstop .sortable_tasks":  "sort_stop",
+        "sortreceive": "sort_receive"
     },
 
     initialize: function() {
@@ -10,42 +10,26 @@ Sprint.Views.NotStartedView = Backbone.View.extend({
     },
 
     render: function() {
-        $(this.el).html(_.template($('#nostart_collection').html())({ collection: Sprint.Tasks }));
+        $(this.el).html(_.template($('#tasks_collection').html())({ 
+        	collection: Sprint.Tasks ,
+        	column: Sprint.NotStartedColumn
+        	}));
         $('#items_nostart').html(this.el);
         this.jquery_task();
         this.delegateEvents();
         return this;
     },
 
-    jquery_task: function() {
-        $("#notstarted_list").sortable({
-            connectWith: ".subcolumn"
-        });
-
-        this.$(".portlet").addClass("ui-widget ui-widget-content ui-helper-clearfix ui-corner-all")
-                .find(".portlet-header")
-                .addClass("ui-widget-header ui-corner-all")
-                .prepend("<span class='ui-icon ui-icon-minusthick'></span>")
-                .end()
-                .find(".portlet-content");
-
-        this.$(".portlet-header .ui-icon").click(function() {
-            $(this).toggleClass("ui-icon-minusthick").toggleClass("ui-icon-plusthick");
-            $(this).parents(".portlet:first").find(".portlet-content").toggle();
-        });
-         $("#notstarted_list").disableSelection();
-    },
-
-    receive: function(event, ui) {
+    sort_receive: function(event, ui) {
         var task = new Task();
         task = Sprint.Tasks.get(ui.item.context);
         task.set({"insprint":1});
-        task.set({"incolumn":1});
+        task.set({"incolumn": Sprint.NotStartedColumn});
         task.save();
         //this.render();
     },
 
-    sortstop: function() {
+    sort_stop: function() {
         // I think is better don't keep the order here
     }
 });

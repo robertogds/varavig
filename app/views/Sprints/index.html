@@ -25,8 +25,11 @@
 
 		<div id="backlog" class="column">
 			<div class="wrap">
-			USER STORIES 
-				<div id ="items" class="scrollable"></div>
+			Product Backlog
+				<div id ="newtask"><h3><a href='#new'>Create New</a></h3></div>
+								
+				<div id ="items" class="scrollable">
+				</div>
 			</div>
 		</div>
 	</div>
@@ -42,6 +45,7 @@
     <textarea name='content'><%= model.get('content') %></textarea>
     <laber for='estimate'>Estimate</laber>
      <select name='estimate'>
+		<option value="">select</option>
         <option value="1">1</option>
         <option value="3">3</option>
         <option value="5">5</option>
@@ -53,78 +57,20 @@
 </div>
 	</script>
 
-<script type="text/template" id="nostart_collection">	
-<!-- Not Start Column -->
-<div id="notstarted_list" class="subcolumn">
-&nbsp;<br />
-<% if(collection.models.length > 0) { %>
-    <% collection.each(function(task) { %>
-	<% if (task.get("incolumn") === 1)  { %>
-    <div class="portlet" id="<%=task.id%>">
-		<div class="portlet-header"><%= task.escape('title') %></div>
-		<div class="portlet-content"><%= task.escape('content') %></div>
-		<div class="estimated"><%= task.get('estimate') %></div>
-        <button class="delete_task" id="<%=task.id%>">delete</button>&nbsp;
-		<button class="edit_task" id="<%=task.id%>">edit</button>
-	</div>
-    <% }
-}); %>
-    </div>
-<% }  %>
-</script>
-
-<script type="text/template" id="finished_collection">
-<!-- Finished Column-->
-<div id="finished_list" class="subcolumn">
-&nbsp;<br />
-<% if(collection.models.length > 0) { %>
-    <% collection.each(function(task) { %>
-	<% if (task.get("incolumn") === 3)  { %>
-    <div class="portlet" id="<%=task.id%>">
-		<div class="portlet-header"><%= task.escape('title') %></div>
-		<div class="portlet-content"><%= task.escape('content') %></div>
-		<div class="estimated"><%= task.get('estimate') %></div>
-        <button class="delete_task" id="<%=task.id%>">delete</button>&nbsp;
-		<button class="edit_task" id="<%=task.id%>">edit</button>
-	</div>
-    <% }
-}); %>
-    </div>
-<% }  %>
-</script>
-<script type="text/template" id="started_collection">
-<!-- Started Column-->
-<div id="started_list" class="subcolumn">
-&nbsp;<br />
-<% if(collection.models.length > 0) { %>
-    <% collection.each(function(task) { %>
-	<% if (task.get("incolumn") === 2)  { %>
-    <div class="portlet" id="<%=task.id%>">
-		<div class="portlet-header"><%= task.escape('title') %></div>
-		<div class="portlet-content"><%= task.escape('content') %></div>
- 		<div class="assigned"><%= task.get('user') %></div>
-		<div class="estimated"><%= task.get('estimate') %></div>
-        <button class="delete_task" id="<%=task.id%>">delete</button>&nbsp;
-		<button class="edit_task" id="<%=task.id%>">edit</button>
-	</div>
-    <% }
-}); %>
-    </div>
-<% }  %>
-</script>
 <script type="text/template" id="tasks_collection">
 <!-- Backlog Column-->
-<div id ="newtask"><h3><a href='#new'>Create New</a></h3></div>
+
 <% if(collection.models.length > 0) { %>		
-    <div id="tasks" class="subcolumn">
+    <div class="subcolumn sortable_tasks">
 	&nbsp;
     <% collection.each(function(task) { %>
-	<% if (task.get("incolumn") === 0)  { %>
+	<% if (task.get("incolumn") === column)  { %>
     <div class="portlet" id="<%=task.id%>">
 		<div class="portlet-header"><%= task.escape('title') %></div>
 		<div class="portlet-content">
 		  <%= task.escape('content') %>
 		  <div class="estimated"><%= task.get('estimate') %></div>
+		  <div class="assigned"><%= task.get('user') %></div>
 		  <div class="toolbar">
 		    <button class="delete_task" id="<%=task.id%>">delete</button>&nbsp;
 		    <button class="edit_task" id="<%=task.id%>">edit</button>
@@ -139,6 +85,6 @@
 </script>
 <script type="text/javascript">
 	$(function() {
-	Sprint.init();
+		Sprint.init();
 	});
 </script>
