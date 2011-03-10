@@ -1,40 +1,27 @@
 var Sprint = {
+    // CONSTANTS
+    BACKLOG_COLUMN: 0,
+    NOTSTARTED_COLUMN :1,
+    STARTED_COLUMN:2,
+    FINISHED_COLUMN: 3,
+
     Views: {},
     Controllers: {},
     Collections: {},
+
     init: function() {
-		this.set_globals();
+          // User
+        Sprint.User = new User();
+        this.get_user();
+        // Create our global collection of **Tasks**.
+        Sprint.Tasks = new Sprint.Collections.Tasks();
     	// call the controller
-		this.get_tasks();
-		Sprint.Controller = new Sprint.Controllers.BacklogCtrl();
+		//Sprint.Controller = new Sprint.Controllers.BacklogCtrl();
+        new Sprint.Controllers.BacklogCtrl();
 		Backbone.history.start();
     },
     
-    set_globals: function() {
-    	// Initialize global variables
-    	// Create our global collection of **Tasks**.
-        Sprint.Tasks = new Sprint.Collections.Tasks;
-        
-        // Column ids
-        Sprint.BacklogColumn = 0;
-        Sprint.NotStartedColumn = 1;
-        Sprint.StartedColumn = 2;
-        Sprint.FinishedColumn = 3;
-        // User
-        Sprint.User = new User();
-        this.get_user();
-    },
-    
-    get_tasks: function(){
-    	Sprint.Tasks.fetch({
-            error: function() {
-                new Error({ message: "Error loading tasks." });
-            }
-        });
-    },
-    
     get_user: function() {
-    	
    	 Sprint.Users = new Sprint.Collections.Users;
         Sprint.Users.fetch({
            success: function() {

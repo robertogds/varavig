@@ -27,7 +27,7 @@
 		<div id="backlog" class="column">
 			<div class="wrap">
 			Product Backlog
-                <div><h3><a href='#new'>Create New</a></h3></div>
+                <div id="newlink"><h3><a href='#new'>Create New</a></h3></div>
 				<div id ="newtask"></div>
 								
 				<div id ="items" class="scrollable">
@@ -74,7 +74,6 @@
 <!-- Backlog Column-->
 	<div class="total">TOTAL:<%= total %></div>
 <% if(collection.models.length > 0) { %>		
-    
         <div class="subcolumn sortable_tasks">
 	&nbsp;
     <% collection.each(function(task) { %>
@@ -90,7 +89,6 @@
 		    <button class="delete_task" id="<%=task.id%>">delete</button>&nbsp;
 		    <button class="edit_task" id="<%=task.id%>">edit</button>
 		   </div>
-
 		</div>
 	</div>
 	    <% }

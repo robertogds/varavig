@@ -1,5 +1,11 @@
 // This is the view for the backlog column
 Sprint.Views.AbstractPanelView = Backbone.View.extend({
+        events: {
+        "sortstop .sortable_tasks":  "sort_stop",
+        "sortreceive": "sort_receive",
+        "click .delete_task": "delete_task",
+        "click .edit_task": "edit_task"
+    },
 
     jquery_task: function() {
         this.$(".sortable_tasks").sortable({
@@ -18,6 +24,19 @@ Sprint.Views.AbstractPanelView = Backbone.View.extend({
             $(this).parents(".portlet:first").find(".portlet-content").toggle();
         });
         this.$(".sortable_tasks").disableSelection();
+    },
+
+    delete_task: function(event){
+        var task = new Task();
+        task = Sprint.Tasks.get(event.currentTarget.id);
+        Sprint.Tasks.remove(task);
+        task.destroy();
+        this.render();
+    },
+
+    edit_task: function(event){
+    	//Sprint.Controller.edit_task(event.currentTarget.id);
+        window.location="#task/"+ event.currentTarget.id;
     },
 
     total_points_left: function(column){

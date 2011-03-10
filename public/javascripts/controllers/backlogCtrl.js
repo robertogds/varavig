@@ -3,14 +3,22 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
     routes: {
         "":              "index",
         "task/:id":      "edit_task",
-		"new":           "new_task"
+        "new":           "new_task"
     },
-    
+
     index: function() {
-		new Sprint.Views.FinishedView;
-		new Sprint.Views.StartedView;
-        new Sprint.Views.NotStartedView;
-        new Sprint.Views.BacklogView;
+        Sprint.Tasks.fetch({
+            success: function() {
+                new Sprint.Views.FinishedView;
+                new Sprint.Views.StartedView;
+                new Sprint.Views.NotStartedView;
+                new Sprint.Views.BacklogView;
+
+            },
+            error: function() {
+                new Error({ message: "Error loading documents." });
+            }
+        });
     },
 
     edit_task: function(id) {
@@ -25,13 +33,13 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
             }
         });
     },
-    
+
     new_task: function() {
-		var task = new Task();
-		task.position = Sprint.Tasks.nextOrder();
-		task.done = 0;
+        var task = new Task();
+        task.position = Sprint.Tasks.nextOrder();
+        task.done = 0;
         new Sprint.Views.EditTask({ model: task, collection: Sprint.Tasks });
 
     }
-	   
+
 });

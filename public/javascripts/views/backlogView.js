@@ -1,11 +1,5 @@
 // This is the view for the backlog column
 Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
-    events: {
-        "sortstop .sortable_tasks":  "sort_stop",
-        "sortreceive": "sort_receive",
-        "click .delete_task": "delete_task",
-        "click .edit_task": "edit_task"
-    },
     	
     initialize: function() {
         this.render();
@@ -14,8 +8,8 @@ Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({
         	collection: Sprint.Tasks ,
-        	column: Sprint.BacklogColumn,
-			total: this.total_points_left(Sprint.BacklogColumn)
+        	column: Sprint.BACKLOG_COLUMN,
+			total: this.total_points_left(Sprint.BACKLOG_COLUMN)
         	}));
         $('#items').html(this.el);
         this.jquery_task();
@@ -23,24 +17,11 @@ Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
         return this;
     },
 
-    delete_task: function(event){
-        var task = new Task();
-        task = Sprint.Tasks.get(event.currentTarget.id);
-        Sprint.Tasks.remove(task);
-        task.destroy();
-        this.render();
-    },
-
-    edit_task: function(event){
-    	Sprint.Controller.edit_task(event.currentTarget.id);
-        //window.location="#task/"+ event.currentTarget.id;
-    },
-
     sort_receive: function(event, ui) {
         var task = new Task();
         task = Sprint.Tasks.get(ui.item.context);
         task.set({"insprint": 0});
-        task.set({"incolumn": Sprint.BacklogColumn});
+        task.set({"incolumn": Sprint.BACKLOG_COLUMN});
         task.save();
         this.render();
     },

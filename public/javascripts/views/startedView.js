@@ -1,9 +1,5 @@
 // This is the view for the started column
 Sprint.Views.StartedView = Sprint.Views.AbstractPanelView.extend({
-	events: {
-    "sortstop .sortable_tasks":  "sort_stop",
-    "sortreceive": "sort_receive"
-  },
 
     initialize: function() {
         this.render();
@@ -12,11 +8,12 @@ Sprint.Views.StartedView = Sprint.Views.AbstractPanelView.extend({
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({ 
         	collection: Sprint.Tasks ,
-        	column: Sprint.StartedColumn,
-			total: this.total_points_left(Sprint.StartedColumn)
+        	column: Sprint.STARTED_COLUMN,
+			total: this.total_points_left(Sprint.STARTED_COLUMN)
 			}));
 	    $('#items_started').html(this.el);
         this.jquery_task();
+        this.delegateEvents();
         return this;
     },
 
@@ -25,7 +22,7 @@ Sprint.Views.StartedView = Sprint.Views.AbstractPanelView.extend({
 	    var task = new Task();
 	    task = Sprint.Tasks.get(ui.item.context);
         task.set({"insprint": 1});
-        task.set({"incolumn": Sprint.StartedColumn});
+        task.set({"incolumn": Sprint.STARTED_COLUMN});
         task.set({"user": Sprint.User.get("email")});
 	    task.save();
 	    this.render();

@@ -1,9 +1,5 @@
 // This is the view for the backlog column
 Sprint.Views.NotStartedView = Sprint.Views.AbstractPanelView.extend({
-    events: {
-        "sortstop .sortable_tasks":  "sort_stop",
-        "sortreceive": "sort_receive"
-    },
 
     initialize: function() {
         this.render();
@@ -12,8 +8,8 @@ Sprint.Views.NotStartedView = Sprint.Views.AbstractPanelView.extend({
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({ 
         	collection: Sprint.Tasks ,
-        	column: Sprint.NotStartedColumn,
-			total: this.total_points_left(Sprint.NotStartedColumn)
+        	column: Sprint.NOTSTARTED_COLUMN,
+			total: this.total_points_left(Sprint.NOTSTARTED_COLUMN)
         	}));
         $('#items_nostart').html(this.el);
         this.jquery_task();
@@ -25,7 +21,7 @@ Sprint.Views.NotStartedView = Sprint.Views.AbstractPanelView.extend({
         var task = new Task();
         task = Sprint.Tasks.get(ui.item.context);
         task.set({"insprint":1});
-        task.set({"incolumn": Sprint.NotStartedColumn});
+        task.set({"incolumn": Sprint.NOTSTARTED_COLUMN});
         task.save();
         this.render();
     },
