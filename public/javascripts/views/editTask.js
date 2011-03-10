@@ -8,6 +8,10 @@ Sprint.Views.EditTask = Backbone.View.extend({
 		//this.model.bind('change', this.render);
 		this.render();
     },
+    
+    clean_task: function() {
+        $('#newtask').html("");
+    },
 	
 	// Generate the attributes for a new Task item.
 	newAttributes: function() {
@@ -29,14 +33,13 @@ Sprint.Views.EditTask = Backbone.View.extend({
 	},
     
     save: function() {
-        var self = this;
-
+		alert("entra en save");
+		this.clean_task();
         var msg = this.model.isNew() ? 'Successfully created!' : "Saved!";
         var attributes = this.editAttributes();
         if (this.model.isNew()) { attributes = this.newAttributes(); }
         this.model.save(attributes, {
            success: function(model, resp) {
-                this.cleant();
 				window.location.hash = '#';
             },
 
@@ -49,10 +52,6 @@ Sprint.Views.EditTask = Backbone.View.extend({
         return false;
     },
 
-    cleant: function() {
-     $('#newtask').html("");;
-},
-    
     render: function() {
     		$(this.el).html(_.template($('#task').html())({ model: this.model }));
     		//this.$( "#dialog" ).dialog();

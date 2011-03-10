@@ -4,10 +4,10 @@
 
     // Reference to this collection's model.
     model: Task,
-
+    
     // Filter down the list of all todo items that are finished.
-    done: function() {
-      return this.filter(function(task){ return task.get('done'); });
+    finished: function() {
+      return this.filter(function(task){ return task.get('left') === 0; });
     },
 
     insprint: function(){

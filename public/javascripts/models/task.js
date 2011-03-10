@@ -1,9 +1,11 @@
 var Task = Backbone.Model.extend({
 
-  EMPTY: "You need define this task",
+  ESTIMATION: 0,
   //story: Backbone.Model, (I think you don't need to declare this, don't you?)
   initialize: function() {
-
+	if (!this.get("estimate")) {
+        this.set({"estimate": this.ESTIMATION});
+      }
   },
 
   validateAttributes: function() {

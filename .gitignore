@@ -2,3 +2,4 @@ log
 .idea
 db/schema.rb
 config/database.yml
+war/WEB-INF/appengine-generated/datastore-indexes-auto.xml

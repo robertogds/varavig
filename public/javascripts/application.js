@@ -12,7 +12,8 @@ var Sprint = {
     set_globals: function() {
     	// Initialize global variables
     	// Create our global collection of **Tasks**.
-        Sprint.Tasks = new Sprint.Collections.Tasks();
+        Sprint.Tasks = new Sprint.Collections.Tasks;
+        
         // Column ids
         Sprint.BacklogColumn = 0;
         Sprint.NotStartedColumn = 1;
@@ -25,7 +26,7 @@ var Sprint = {
     
     get_user: function() {
     	
-   	 Sprint.Users = new Sprint.Collections.Users();
+   	 Sprint.Users = new Sprint.Collections.Users;
         Sprint.Users.fetch({
            success: function() {
        	 		Sprint.User = Sprint.Users.at(0);
@@ -36,7 +37,7 @@ var Sprint = {
            }
         });
         
-     },
+     }
     
 };
 

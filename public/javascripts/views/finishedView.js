@@ -9,9 +9,13 @@ Sprint.Views.FinishedView = Sprint.Views.AbstractPanelView.extend({
         this.render();
     },
     
+    
     render: function() {
+    	alert("finished in view:"+ Sprint.Tasks.finished().length);
 		$(this.el).html(_.template($('#tasks_collection').html())({ 
-			collection: Sprint.Tasks ,
+			//TODO ver pq si pones esto peta
+			//collection: Sprint.Tasks.finished(),
+			collection: Sprint.Tasks,
         	column: Sprint.FinishedColumn,
 			total: this.total_points_left(Sprint.FinishedColumn)
 			}));
