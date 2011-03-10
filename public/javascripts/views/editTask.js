@@ -40,7 +40,8 @@ Sprint.Views.EditTask = Backbone.View.extend({
         if (this.model.isNew()) { attributes = this.newAttributes(); }
         this.model.save(attributes, {
            success: function(model, resp) {
-				window.location.hash = '#';
+				//window.location.hash = '#';
+        		Sprint.Controller.index();
             },
 
             error: function(model,e) {

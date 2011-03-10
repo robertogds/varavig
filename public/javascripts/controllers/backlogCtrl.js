@@ -2,12 +2,18 @@
 Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
     routes: {
         "":              "index",
-        "task/:id":      "edit",
-        "savetask":      "saveTask",
-		"new":           "newTask"
+        "task/:id":      "edit_task",
+		"new":           "new_task"
     },
     
-	edit: function(id) {
+    index: function() {
+		new Sprint.Views.FinishedView;
+		new Sprint.Views.StartedView;
+        new Sprint.Views.NotStartedView;
+        new Sprint.Views.BacklogView;
+    },
+
+    edit_task: function(id) {
         var task = new Task({ id: id });
         task.fetch({
             success: function(model, resp) {
@@ -19,31 +25,13 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
             }
         });
     },
-      index: function() {
-	        Sprint.Tasks.fetch({
-	            success: function() {
-					new Sprint.Views.FinishedView;
-					new Sprint.Views.StartedView;
-                    new Sprint.Views.NotStartedView;
-                    new Sprint.Views.BacklogView;
-                    
-	            },
-	            error: function() {
-	                new Error({ message: "Error loading documents." });
-	            }
-	        });
-	    },
+    
+    new_task: function() {
+		var task = new Task();
+		task.position = Sprint.Tasks.nextOrder();
+		task.done = 0;
+        new Sprint.Views.EditTask({ model: task, collection: Sprint.Tasks });
 
-        saveTask: function() {
-            this.index();
-        },
-		
-		newTask: function() {
-			var task = new Task();
-			task.position = Sprint.Tasks.nextOrder();
-			task.done = 0;
-	        new Sprint.Views.EditTask({ model: task, collection: Sprint.Tasks });
-
-	    }
+    }
 	   
 });

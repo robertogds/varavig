@@ -32,7 +32,8 @@ Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
     },
 
     edit_task: function(event){
-        window.location="#task/"+ event.currentTarget.id;
+    	Sprint.Controller.edit_task(event.currentTarget.id);
+        //window.location="#task/"+ event.currentTarget.id;
     },
 
     sort_receive: function(event, ui) {

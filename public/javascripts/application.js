@@ -3,10 +3,11 @@ var Sprint = {
     Controllers: {},
     Collections: {},
     init: function() {
-    	this.set_globals();
-        // call the controller
-        new Sprint.Controllers.BacklogCtrl();
-        Backbone.history.start();
+		this.set_globals();
+    	// call the controller
+		this.get_tasks();
+		Sprint.Controller = new Sprint.Controllers.BacklogCtrl();
+		Backbone.history.start();
     },
     
     set_globals: function() {
@@ -22,6 +23,14 @@ var Sprint = {
         // User
         Sprint.User = new User();
         this.get_user();
+    },
+    
+    get_tasks: function(){
+    	Sprint.Tasks.fetch({
+            error: function() {
+                new Error({ message: "Error loading tasks." });
+            }
+        });
     },
     
     get_user: function() {
