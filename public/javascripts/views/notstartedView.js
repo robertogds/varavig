@@ -12,7 +12,8 @@ Sprint.Views.NotStartedView = Sprint.Views.AbstractPanelView.extend({
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({ 
         	collection: Sprint.Tasks ,
-        	column: Sprint.NotStartedColumn
+        	column: Sprint.NotStartedColumn,
+			total: this.total_points_left(Sprint.NotStartedColumn)
         	}));
         $('#items_nostart').html(this.el);
         this.jquery_task();
@@ -26,7 +27,7 @@ Sprint.Views.NotStartedView = Sprint.Views.AbstractPanelView.extend({
         task.set({"insprint":1});
         task.set({"incolumn": Sprint.NotStartedColumn});
         task.save();
-        //this.render();
+        this.render();
     },
 
     sort_stop: function() {

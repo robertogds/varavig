@@ -6,15 +6,16 @@ Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
         "click .delete_task": "delete_task",
         "click .edit_task": "edit_task"
     },
-    
+    	
     initialize: function() {
         this.render();
     },
 
     render: function() {
-        $(this.el).html(_.template($('#tasks_collection').html())({ 
+        $(this.el).html(_.template($('#tasks_collection').html())({
         	collection: Sprint.Tasks ,
-        	column: Sprint.BacklogColumn
+        	column: Sprint.BacklogColumn,
+			total: this.total_points_left(Sprint.BacklogColumn)
         	}));
         $('#items').html(this.el);
         this.jquery_task();
@@ -40,22 +41,16 @@ Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
         task.set({"insprint": 0});
         task.set({"incolumn": Sprint.BacklogColumn});
         task.save();
-        //this.render();
-    },
-
-    noass: function() {
-        alert("stop en noassig");
+        this.render();
     },
 
     sort_stop: function() {
         var orden = 1;
-        var result = $('.sortable_tasks').sortable('toArray');
+        var result = this.$('.sortable_tasks').sortable('toArray');
         var task = new Task();
         _.each(result, function(num) {
             task = Sprint.Tasks.get(num);
-            alert("task" + task.get("position") +"orden"+orden);
             if (task.get("position") != orden) {
-            	alert("entramos" + orden);
                 task.set({"position": orden});
                 task.save();
             }

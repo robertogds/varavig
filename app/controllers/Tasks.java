@@ -33,6 +33,7 @@ public class Tasks extends Application {
 		String json = params.get("body");
 		System.out.println("##" + json );
 		Task task = new Gson().fromJson(json, Task.class);
+		task.left = task.estimate;
 		task.insert();
 		//tenemos que mandarle a show para que 
 		//persista antes del render :(

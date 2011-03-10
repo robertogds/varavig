@@ -12,7 +12,9 @@ Sprint.Views.StartedView = Sprint.Views.AbstractPanelView.extend({
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({ 
         	collection: Sprint.Tasks ,
-        	column: Sprint.StartedColumn}));
+        	column: Sprint.StartedColumn,
+			total: this.total_points_left(Sprint.StartedColumn)
+			}));
 	    $('#items_started').html(this.el);
         this.jquery_task();
         return this;

@@ -2,7 +2,7 @@
 Sprint.Views.AbstractPanelView = Backbone.View.extend({
 
     jquery_task: function() {
-        $(".sortable_tasks").sortable({
+        this.$(".sortable_tasks").sortable({
             connectWith: ".subcolumn"
         });
 
@@ -17,7 +17,18 @@ Sprint.Views.AbstractPanelView = Backbone.View.extend({
             $(this).toggleClass("ui-icon-minusthick").toggleClass("ui-icon-plusthick");
             $(this).parents(".portlet:first").find(".portlet-content").toggle();
         });
-        $(".sortable_tasks").disableSelection();
-    }
+        this.$(".sortable_tasks").disableSelection();
+    },
+
+    total_points_left: function(column){
+		var total = 0;
+		var tasks = Sprint.Tasks.filter(function(task) {
+		  return task.get("incolumn") === column;
+		});
+       for (i = 0, l = tasks.length; i < l; i++){
+			total += tasks[i].get("left");
+        };
+		return total;
+	} 
     
 });

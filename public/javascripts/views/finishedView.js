@@ -12,7 +12,9 @@ Sprint.Views.FinishedView = Sprint.Views.AbstractPanelView.extend({
     render: function() {
 		$(this.el).html(_.template($('#tasks_collection').html())({ 
 			collection: Sprint.Tasks ,
-        	column: Sprint.FinishedColumn}));
+        	column: Sprint.FinishedColumn,
+			total: this.total_points_left(Sprint.FinishedColumn)
+			}));
         $('#items_finished').html(this.el);
         this.jquery_task();
         return this;
@@ -25,6 +27,7 @@ Sprint.Views.FinishedView = Sprint.Views.AbstractPanelView.extend({
         task.set({"insprint": 1});
         task.set({"incolumn": Sprint.FinishedColumn});
 	    task.save();
+		this.render();
     },
 
     sort_stop: function() {
