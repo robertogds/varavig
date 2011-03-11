@@ -26,6 +26,7 @@ var Sprint = {
         Sprint.Users.fetch({
            success: function() {
        	 		Sprint.User = Sprint.Users.at(0);
+       	 		$('#gravatar').gravatarImg(Sprint.User.get("email"),'?s=80&d=mm');
            },
            error: function() {
                new Error({ message: "Error loading users." });

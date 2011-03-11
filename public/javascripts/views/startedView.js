@@ -7,13 +7,13 @@ Sprint.Views.StartedView = Sprint.Views.AbstractPanelView.extend({
 
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({ 
-        	collection: Sprint.Tasks ,
-        	column: Sprint.STARTED_COLUMN,
+        	collection: Sprint.Tasks.started() ,
 			total: this.total_points_left(Sprint.STARTED_COLUMN)
 			}));
 	    $('#items_started').html(this.el);
         this.jquery_task();
         this.delegateEvents();
+        
         return this;
     },
 
@@ -24,6 +24,8 @@ Sprint.Views.StartedView = Sprint.Views.AbstractPanelView.extend({
         task.set({"insprint": 1});
         task.set({"incolumn": Sprint.STARTED_COLUMN});
         task.set({"user": Sprint.User.get("email")});
+        var gravatar = $.gravatarSrc(Sprint.User.get("email"),'?s=40&d=mm');
+        task.set({"gravatar": gravatar});
 	    task.save();
 	    this.render();
     },

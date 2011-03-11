@@ -6,8 +6,31 @@
     model: Task,
     
     // Filter down the list of all todo items that are finished.
+    //finished: function() {
+    //  var tasks_array = this.filter(function(task){ return task.get('left') === 0; });
+	//  return new Sprint.Collections.Tasks(tasks_array);
+    //},
+    
     finished: function() {
-      return this.filter(function(task){ return task.get('left') === 0; });
+  	  return this.tasks_in_column(Sprint.FINISHED_COLUMN);
+    },
+      
+    started: function() {
+  	  return this.tasks_in_column(Sprint.STARTED_COLUMN);
+    },
+    
+    not_started: function() {
+    	  return this.tasks_in_column(Sprint.NOTSTARTED_COLUMN);
+    },
+    
+    backlog: function() {
+    	  return this.tasks_in_column(Sprint.BACKLOG_COLUMN);
+    },
+    
+    // Filter down the list of all todo items that are in the given column.
+    tasks_in_column: function(column) {
+      var tasks_array = this.filter(function(task){ return task.get('incolumn') === column; });
+	  return new Sprint.Collections.Tasks(tasks_array);
     },
 
     insprint: function(){

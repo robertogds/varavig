@@ -28,6 +28,7 @@ Sprint.Views.EditTask = Backbone.View.extend({
 	    return {
 		  title: this.$('[name=title]').val(),
 		  content: this.$('[name=content]').val(),
+		  left: this.$('[name=left]').val(),
           estimate: this.$('[name=estimate]').val()
 	    };
 	},

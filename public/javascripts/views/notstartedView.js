@@ -7,8 +7,7 @@ Sprint.Views.NotStartedView = Sprint.Views.AbstractPanelView.extend({
 
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({ 
-        	collection: Sprint.Tasks ,
-        	column: Sprint.NOTSTARTED_COLUMN,
+        	collection: Sprint.Tasks.not_started(),
 			total: this.total_points_left(Sprint.NOTSTARTED_COLUMN)
         	}));
         $('#items_nostart').html(this.el);

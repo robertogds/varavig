@@ -10,6 +10,7 @@ public class Task extends Model {
     public String title;
     public String content;
     public String user;
+    public String gravatar;
     public boolean done;
     public int insprint;
     public int estimate;

@@ -10,8 +10,9 @@
 		    <script src="@{'/public/javascripts/pack/json2.js'}"></script>
 		    <script src="@{'/public/javascripts/pack/jquery-1.4.4.min.js'}"></script>
 		    <script src="@{'/public/javascripts/pack/jquery-ui-1.8.9.custom.min.js'}"></script>
+		    <script src="@{'/public/javascripts/pack/jquery-gravatar.js'}"></script>
+		    <script src="@{'/public/javascripts/pack/jquery-md5.js'}"></script>
 		    <script src="@{'/public/javascripts/pack/underscore-1.1.4.js'}"></script>
-		
 		    <script src="@{'/public/javascripts/pack/backbone.js'}"></script>
 		    <script src="@{'/public/javascripts/application.js'}"></script>
 		    <script src="@{'/public/javascripts/models/story.js'}"></script>
@@ -34,10 +35,8 @@
         
         #{if user}
             <div id="user">
-                You're logged as ${user}, <a href="@{Application.logout()}">Logout</a>
+                You're logged as  <img id="gravatar"></img> ${user}, <a href="@{Application.logout()}">Logout</a>
             </div>
-            
-            
         #{/if}
         
         #{if flash.error}

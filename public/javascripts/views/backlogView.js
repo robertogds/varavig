@@ -7,8 +7,7 @@ Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
 
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({
-        	collection: Sprint.Tasks ,
-        	column: Sprint.BACKLOG_COLUMN,
+        	collection: Sprint.Tasks.backlog() ,
 			total: this.total_points_left(Sprint.BACKLOG_COLUMN)
         	}));
         $('#items').html(this.el);
