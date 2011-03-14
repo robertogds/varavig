@@ -81,12 +81,15 @@
     <% collection.each(function(task) { %>
       <div class="portlet" id="<%=task.id%>">
 		
-		<div class="portlet-header"><%= task.escape('title') %></div>
+		<div class="portlet-header">
+			<img class="gravatar" src="<%= task.get('gravatar') %>"></img>
+			<%= task.escape('title') %>
+		</div>
 		<div class="portlet-content">
 		  <%= task.escape('content') %>
 		  <div class="estimated">Estimated: <%= task.get('estimate') %></div>
 		  <div class="left">Left: <%= task.get('left') %></div>
-		  <div class="assigned"><img class="gravatar" src="<%= task.get('gravatar') %>"></img><%= task.get('user') %></div>
+		  <div class="assigned"><%= task.get('user') %></div>
 		  <div class="toolbar">
 		    <button class="delete_task" id="<%=task.id%>">delete</button>&nbsp;
 		    <button class="edit_task" id="<%=task.id%>">edit</button>

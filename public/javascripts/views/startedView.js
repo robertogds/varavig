@@ -24,7 +24,7 @@ Sprint.Views.StartedView = Sprint.Views.AbstractPanelView.extend({
         task.set({"insprint": 1});
         task.set({"incolumn": Sprint.STARTED_COLUMN});
         task.set({"user": Sprint.User.get("email")});
-        var gravatar = $.gravatarSrc(Sprint.User.get("email"),'?s=40&d=mm');
+        var gravatar = $.gravatarSrc(Sprint.User.get("email"),'?s=23&d=mm');
         task.set({"gravatar": gravatar});
 	    task.save();
 	    this.render();
