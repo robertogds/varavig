@@ -2,37 +2,5 @@
 #{set title:'Home' /}
 
 <div id="welcome">
-    <a href="@{Application.login()}">Login using your google account to edit your own lists</a>
+    <a href="@{Application.login()}">Login using your google account</a>
 </div>
-
-<a id="collapseBacklog" class="expanded fr" href="javascript:void(0)">collapseBacklog</a>
-	<div class="container fix">
-		<div id="not_started" class="column">
-			<div class="wrap">
-				NOT STARTED ITEMS
-			</div>
-		</div>
-		<div id="started" class="column">
-			<div class="wrap">
-				STARTED ITEMS
-			</div>
-		</div>
-		<div id="finished" class="column">
-			<div class="wrap">
-				FINISHED ITEMS
-			</div>
-		</div>
-
-		<div id="backlog" class="column">
-			<div class="wrap">
-				USER STORIES
-				<div id ="items"></div>
-			</div>
-		</div>
-	</div>
-	<div class="push"></div>
-	<script type="text/javascript">
-	    $(function() {
-	        Sprint.init();
-	    });
-	</script>

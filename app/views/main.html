@@ -32,12 +32,49 @@
 
     </head>
     <body>
-        
-        #{if user}
-            <div id="user">
-                You're logged as  <img id="gravatar"></img> ${user}, <a href="@{Application.logout()}">Logout</a>
-            </div>
-        #{/if}
+  
+  <div class="clearfix" id="header">
+  <h1><a href="/">Varavig</a></h1>
+   #{if user}
+  <div class="navigation_area clearfix">
+  
+  <div style="float:left;">
+  <div class="welcome_message">
+    Welcome,  ${user} 
+  </div>
+  <ul class="nav_links">
+    <li class="dropdown">
+      
+        <a href="#" class="tab" id="projects_button">Projects</a>
+        <div style="display: none;" class="knockout"></div>
+        <div style="display: none;" class="nav_dropdown" id="projects_dropdown">
+          <ul>
+            <li>
+              <div class="inner">
+                <a href="/projects" class="view_all"><span>View All Projects</span></a>
+              </div>
+            </li>
+              <li>
+                <div class="inner">
+                  <a href="/projects/89360"><span>proyecto 1</span></a>
+                </div>
+              </li>
+          </ul>
+        </div>
+      
+    </li>
+    <li class="dashboard"><a href="/dashboard">Dashboard</a></li>
+    <li><a href="/reports/progress">Reports</a></li>
+    <li><a href="@{Application.logout()}">Logout</a></li>
+  </ul>
+  </div>
+   <div style="float:right;"><img id="gravatar"></img> </div>
+</div>
+	
+	#{/if}
+
+
+</div>
         
         #{if flash.error}
             <p class="error">${flash.error}</p>
@@ -47,7 +84,7 @@
         #{/if}
         
         <div id="main">
-            	#{doLayout /} 
+        			#{doLayout /} 
         </div>
         
        

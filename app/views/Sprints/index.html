@@ -1,11 +1,25 @@
 #{extends 'main.html' /}
 #{set title:'Your Sprint Panel' /}
 
-   	<a id="collapseBacklog" class="expanded fr" href="javascript:void(0)">collapseBacklog</a>
-
+   	
+		<a id="collapseBacklog"  class="collapsed fr"   href="javascript:void(0)">
+			<span id="sidebar"></span>
+		</a>
 	<div class="container fix">
+	
+		<div id="backlog" class="column" style="display:none;">
+			<div class="wrap first">
+			Product Backlog
+                <div id="newlink"><h3><a href='#new'>Create New</a></h3></div>
+				<div id ="newtask"></div>
+								
+				<div id ="items" class="scrollable">
+				</div>
+			</div>
+		</div>
+		
 		<div id="not_started" class="column">
-			<div class="wrap">
+			<div class="wrap first">
 				NOT STARTED ITEMS
             <div id="items_nostart" class="scrollable"></div>
 			</div>
@@ -21,17 +35,6 @@
 			<div class="wrap">
 				FINISHED ITEMS
 				<div id="items_finished" class="scrollable"></div>
-			</div>
-		</div>
-
-		<div id="backlog" class="column">
-			<div class="wrap">
-			Product Backlog
-                <div id="newlink"><h3><a href='#new'>Create New</a></h3></div>
-				<div id ="newtask"></div>
-								
-				<div id ="items" class="scrollable">
-				</div>
 			</div>
 		</div>
 	</div>
@@ -77,6 +80,7 @@
 		&nbsp;
     <% collection.each(function(task) { %>
       <div class="portlet" id="<%=task.id%>">
+		
 		<div class="portlet-header"><%= task.escape('title') %></div>
 		<div class="portlet-content">
 		  <%= task.escape('content') %>

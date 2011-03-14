@@ -26,7 +26,7 @@ var Sprint = {
         Sprint.Users.fetch({
            success: function() {
        	 		Sprint.User = Sprint.Users.at(0);
-       	 		$('#gravatar').gravatarImg(Sprint.User.get("email"),'?s=80&d=mm');
+       	 		$('#gravatar').gravatarImg(Sprint.User.get("email"),'?s=37&d=mm');
            },
            error: function() {
                new Error({ message: "Error loading users." });
@@ -39,34 +39,23 @@ var Sprint = {
 };
 
 
-// Hide backlog. We must  remove it from here.
+//Hide backlog. We must  remove it from here.
 $('#collapseBacklog.expanded').live('click', function() {
-    $('.container #not_started, .container #started, .container #finished').animate({
-        width: '33%'
-    }, 1000, function() {
-        // Animation complete.
-    });
+    $('.container .column').removeClass('four-columns').addClass('three-columns');
 
-    $('.container #backlog').animate({
-        width: '0'
-    }, 1000, function() {
-        // Animation complete.
-        $(this).hide();
-    });
+    $('.container #backlog').hide();
+    $("#not_started .wrap").addClass('first');
     $(this).addClass('collapsed').removeClass('expanded');
 });
 
 $('#collapseBacklog.collapsed').live('click', function() {
     $('.container #backlog ').show();
 
-    $('.container .column').animate({
-        width: '25%'
-    }, 1000, function() {
-        // Animation complete.
-    });
+    $('.container .column').removeClass('three-columns').addClass('four-columns');
 
     $(this).addClass('expanded').removeClass('collapsed');
-})
+    $("#not_started .wrap").removeClass('first');
+});
 
 
 
