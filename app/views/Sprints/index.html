@@ -44,6 +44,7 @@
 	<script type="text/template" id="task">
 <div id="dialog" title="new task">
 <form>
+	
     <label for='title'>Title</label>
     <input name='title' type='text' /> 
     <label for='content'> Content</label>
@@ -83,16 +84,15 @@
 		
 		<div class="portlet-header">
 			<img class="gravatar" src="<%= task.get('gravatar') %>"></img>
-			<%= task.escape('title') %>
+			<label id="title"><%= task.escape('title') %></label>
 		</div>
 		<div class="portlet-content">
-		  <%= task.escape('content') %>
-		  <div class="estimated">Estimated: <%= task.get('estimate') %></div>
-		  <div class="left">Left: <%= task.get('left') %></div>
-		  <div class="assigned"><%= task.get('user') %></div>
+		  <p id="content"><%= task.escape('content') %></p>
+		  <div class="estimated">Estimated: <label id="estimate"><%= task.get('estimate') %></label></div>
+		  <div class="left">Left:  <label id="left"><%= task.get('left') %></label></div>
+		  <div class="assigned" id="user"><%= task.get('user') %></div>
 		  <div class="toolbar">
 		    <button class="delete_task" id="<%=task.id%>">delete</button>&nbsp;
-		    <button class="edit_task" id="<%=task.id%>">edit</button>
 		   </div>
 		</div>
 	  </div>

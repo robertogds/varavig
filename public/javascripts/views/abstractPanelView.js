@@ -24,7 +24,69 @@ Sprint.Views.AbstractPanelView = Backbone.View.extend({
             $(this).parents(".portlet:first").find(".portlet-content").toggle();
         });
         this.$(".sortable_tasks").disableSelection();
+        
+        this.$("#content").editable(this.submit_edit, { 
+            indicator : "Saving...",
+            tooltip   : "Click to edit...",
+            name : "content",
+            id   : this.$(".portlet").attr("id"),
+            type : "text"
+        });
+        this.$("#title").editable(this.submit_edit, { 
+            indicator : "Saving...",
+            tooltip   : "Click to edit...",
+            name : "title",
+            id   : this.$(".portlet").attr("id"),
+            type : "text"
+        });
+        this.$("#estimate").editable(this.submit_edit, { 
+            indicator : "Saving...",
+            tooltip   : "Click to edit...",
+            name : "estimate",
+            id   : this.$(".portlet").attr("id"),
+            type : "text"
+        });
+        this.$("#left").editable(this.submit_edit, { 
+            indicator : "Saving...",
+            tooltip   : "Click to edit...",
+            name : "left",
+            id   : this.$(".portlet").attr("id"),
+            type : "text"
+        });
+
     },
+    
+
+    submit_edit : function (value, settings){ 
+    	var task = new Task();
+        task = Sprint.Tasks.get(settings.id);
+        if (settings.name == 'content'){
+        	
+        }
+        switch (settings.name) {
+	        case 'content':
+	        	task.set({"content" : value });
+	           break;
+	        case 'title':
+	        	task.set({"title" : value });
+	           break;
+	        case 'estimate':
+	        	task.set({"estimate" : value });
+	           break;
+	        case 'left':
+	        	task.set({"left" : value });
+	           break;
+        } 
+		var textbox = this;
+		var result = value;
+		var returned = $.ajax({
+	       url: "/task/"+settings.id, 
+	       type: "PUT",
+	       data : JSON.stringify(task),
+	       dataType : "json"
+	       });
+		return(result);
+	},
 
     delete_task: function(event){
         var task = new Task();

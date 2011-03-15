@@ -57,11 +57,3 @@ $('#collapseBacklog.collapsed').live('click', function() {
     $("#not_started .wrap").removeClass('first');
 });
 
-
-
-
-
-
-
-
-
