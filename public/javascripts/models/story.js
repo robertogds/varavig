@@ -1,6 +1,6 @@
 var Story = Backbone.Model.extend({
     initialize: function() {
-       this.set({tasks:new Sprint.Collections.Tasks},{silent:true});
+       this.set({tasks:new Varavig.Collections.Tasks},{silent:true});
     },
 	url : function() {
 		// to know where to send its REST call.

@@ -1,13 +1,50 @@
 // This is the view for the backlog column
-Sprint.Views.AbstractPanelView = Backbone.View.extend({
-        events: {
+Varavig.Views.AbstractPanelView = Backbone.View.extend({
+    events: {
         "sortstop .sortable_tasks":  "sort_stop",
         "sortreceive": "sort_receive",
         "click .delete_task": "delete_task",
-        "click .edit_task": "edit_task"
+        "click .edit_task": "edit_task",
+		"click .block_task": "block_task"
     },
 
-    jquery_task: function() {
+	block_task: function(event){
+        var task = new Task();
+        task = Varavig.Tasks.get(event.currentTarget.id);
+		if (task.get("blocked")){
+			task.save({"blocked": false});
+		}
+		else{
+			task.save({"blocked": true});
+		}
+        this.render();
+    },
+
+    delete_task: function(event){
+        var task = new Task();
+        task = Varavig.Tasks.get(event.currentTarget.id);
+        Sprint.Tasks.remove(task);
+        task.destroy();
+        this.render();
+    },
+
+    edit_task: function(event){
+    	//Sprint.Controller.edit_task(event.currentTarget.id);
+        window.location="#task/"+ event.currentTarget.id;
+    },
+
+    total_points_left: function(column){
+		var total = 0;
+		var tasks = Varavig.Tasks.filter(function(task) {
+		  return task.get("incolumn") === column;
+		});
+       for (i = 0, l = tasks.length; i < l; i++){
+			total += tasks[i].get("left");
+        };
+		return total;
+	} ,
+	
+	jquery_task: function() {
         this.$(".sortable_tasks").sortable({
             connectWith: ".subcolumn"
         });
@@ -59,57 +96,22 @@ Sprint.Views.AbstractPanelView = Backbone.View.extend({
 
     submit_edit : function (value, settings){ 
     	var task = new Task();
-        task = Sprint.Tasks.get(settings.id);
-        if (settings.name == 'content'){
-        	
-        }
+        task = Varavig.Tasks.get(settings.id);
         switch (settings.name) {
 	        case 'content':
-	        	task.set({"content" : value });
+	        	task.save({"content" : value });
 	           break;
 	        case 'title':
-	        	task.set({"title" : value });
+	        	task.save({"title" : value });
 	           break;
 	        case 'estimate':
-	        	task.set({"estimate" : value });
+	        	task.save({"estimate" : value });
 	           break;
 	        case 'left':
-	        	task.set({"left" : value });
+	        	task.save({"left" : value });
 	           break;
         } 
-		var textbox = this;
-		var result = value;
-		var returned = $.ajax({
-	       url: "/task/"+settings.id, 
-	       type: "PUT",
-	       data : JSON.stringify(task),
-	       dataType : "json"
-	       });
-		return(result);
-	},
-
-    delete_task: function(event){
-        var task = new Task();
-        task = Sprint.Tasks.get(event.currentTarget.id);
-        Sprint.Tasks.remove(task);
-        task.destroy();
-        this.render();
-    },
-
-    edit_task: function(event){
-    	//Sprint.Controller.edit_task(event.currentTarget.id);
-        window.location="#task/"+ event.currentTarget.id;
-    },
-
-    total_points_left: function(column){
-		var total = 0;
-		var tasks = Sprint.Tasks.filter(function(task) {
-		  return task.get("incolumn") === column;
-		});
-       for (i = 0, l = tasks.length; i < l; i++){
-			total += tasks[i].get("left");
-        };
-		return total;
-	} 
+		return(value);
+	}
     
 });

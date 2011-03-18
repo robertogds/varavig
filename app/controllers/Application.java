@@ -9,7 +9,7 @@ public class Application extends Controller {
 
     public static void index() {
         if(GAE.isLoggedIn()) {
-            Sprints.index();
+            Projects.index();
         }
         render();
     }

@@ -31,6 +31,7 @@ public class Tasks extends Application {
 	    
 	public static void create() {
 		String json = params.get("body");
+		//TODO: debug instead of println!!
 		System.out.println("##" + json );
 		Task task = new Gson().fromJson(json, Task.class);
 		task.left = task.estimate;
@@ -48,6 +49,8 @@ public class Tasks extends Application {
 	    
     public static void update() {
     	String json = params.get("body");
+		//TODO: debug instead of println!!
+		System.out.println("##" + json );
     	Task item = new Gson().fromJson(json, Task.class);
     	item.update();
     	renderJSON("{}");

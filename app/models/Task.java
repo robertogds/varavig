@@ -12,14 +12,15 @@ public class Task extends Model {
     public String user;
     public String gravatar;
     public boolean done;
-    public int insprint;
     public int estimate;
     public int left;
     public int position;
     public int incolumn;
-        
+    public boolean blocked;
 
-    
+	@Index("sprint_index")
+	public Sprint sprint;
+         
     public static Query<Task> all() {
         return Model.all(Task.class);
     }

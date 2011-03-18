@@ -1,5 +1,5 @@
 // This is the view for the backlog column
-Sprint.Views.NotStartedView = Sprint.Views.AbstractPanelView.extend({
+Varavig.Views.NotStartedView = Varavig.Views.AbstractPanelView.extend({
 
     initialize: function() {
         this.render();
@@ -7,8 +7,8 @@ Sprint.Views.NotStartedView = Sprint.Views.AbstractPanelView.extend({
 
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({ 
-        	collection: Sprint.Tasks.not_started(),
-			total: this.total_points_left(Sprint.NOTSTARTED_COLUMN)
+        	collection: Varavig.Tasks.not_started(),
+			total: this.total_points_left(Varavig.NOTSTARTED_COLUMN)
         	}));
         $('#items_nostart').html(this.el);
         this.jquery_task();
@@ -18,9 +18,9 @@ Sprint.Views.NotStartedView = Sprint.Views.AbstractPanelView.extend({
 
     sort_receive: function(event, ui) {
         var task = new Task();
-        task = Sprint.Tasks.get(ui.item.context);
+        task = Varavig.Tasks.get(ui.item.context);
         task.set({"insprint":1});
-        task.set({"incolumn": Sprint.NOTSTARTED_COLUMN});
+        task.set({"incolumn": Varavig.NOTSTARTED_COLUMN});
         task.save();
         this.render();
     },

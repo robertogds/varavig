@@ -5,9 +5,12 @@ import notifiers.*;
 import play.*;
 import play.mvc.*;
 import java.util.Collection;
+import com.google.gson.Gson;
 
 import play.data.validation.*;
 import play.modules.gae.*;
+import siena.*;
+
 
 public class Sprints extends Application {
     
@@ -21,17 +24,19 @@ public class Sprints extends Application {
     }
     
     // ~~~~~
-
-    public static void index() {
-        render();
-    }
+		// 
+		//     public static void listByProject(Long id) {
+		// System.out.println("#Project sprints#" + id );
+		//         Collection<Sprint> sprints = Sprint.findByProject(id);
+		//         renderJSON(sprints);
+		//     }
     
     public static void show(Long id) {
-        Sprint list = Sprint.findById(id);
-        notFoundIfNull(list);
-        checkOwner(list);
-        Collection<Task> items = list.items();
-        renderJSON(items);
+        Sprint sprint = Sprint.findById(id);
+        notFoundIfNull(sprint);
+		Query<Task> tasks = Task.all().filter("sprint", sprint);
+		sprint.tasks = tasks.fetch();
+        renderJSON(sprint);
     }
     
     public static void blank() {
@@ -40,26 +45,29 @@ public class Sprints extends Application {
     
     public static void create(@Required String name) {
         if(validation.hasErrors()) {
-            flash.error("Oops, please give a name to your new list");
+            flash.error("Oops, please give a name to your new sprint");
             blank();
         }
-        new Sprint(getUser(), name).insert();
-        index();
+        String json = params.get("body");
+		//TODO: debug instead of println!!
+		System.out.println("##" + json );
+		Sprint sprint = new Gson().fromJson(json, Sprint.class);
+		sprint.insert();
+		//tenemos que mandarle a show para que 
+		//persista antes del render :(
+		show(sprint.id);
     }
     
-    public static void delete(Long id) {
+    public static void destroy(Long id) {
         Sprint list = Sprint.findById(id);
         notFoundIfNull(list);
-        checkOwner(list);
         list.delete();
-        flash.success("The list %s has been deleted", list  );
-        index();
+        renderJSON("{}");
     }
     
     public static void edit(Long id) {
         Sprint list = Sprint.findById(id);
         notFoundIfNull(list);
-        checkOwner(list);
         renderJSON(list);
     }
     
@@ -71,82 +79,12 @@ public class Sprints extends Application {
         }
         Sprint list = Sprint.findById(id);
         notFoundIfNull(list);
-        checkOwner(list);
-        list.name = name;
+        list.title = name;
         list.notes = notes;
         list.update();
         show(list.id);
     }
-    
-//    public static void addItem(Long id, String label) {
-//        List list = List.findById(id);
-//        notFoundIfNull(list);
-//        checkOwner(list);
-//        new Item(list, label).insert();
-//        list.update(); // to keep last position up to date
-//        show(id);
-//    }
-    
-//    public static void changeItemState(Long id, Long itemId, boolean done) {
-//        Item item = Item.findById(itemId);
-//        notFoundIfNull(item);
-//        checkOwner(item);
-//        item.done = done;
-//        item.position = item.list.nextPosition++;
-//        item.update();
-//        item.list.update();
-//        ok();
-//    }
-    
-//    public static void deleteItem(Long id, Long itemId) {
-//        Item item = Item.findById(itemId);
-//        notFoundIfNull(item);
-//        checkOwner(item);
-//        item.delete();
-//        ok();
-//    }
-    
-//    public static void reorderItems(Long id, String newOrder) {
-//        List list = List.findById(id);
-//        notFoundIfNull(list);
-//        checkOwner(list);
-//        list.nextPosition = 0;
-//        for(String p : newOrder.split(",")) {
-//            Item item = Item.findById(Long.parseLong(p));
-//            if(item.list.id.equals(id)) {
-//                item.position = list.nextPosition++;
-//                item.update();
-//            }
-//        }
-//        list.update();
-//        ok();
-//    }
-    
-    public static void email(Long id) {
-        Sprint list = Sprint.findById(id);
-        notFoundIfNull(list);
-        checkOwner(list);
-        Notifier.emailList(list);
-        flash.success("This list has been emailed to %s", list.user);
-        show(id);
-    }
-    
-    // ~~~~~~ utils
-    
-    static String getUser() {
-        return renderArgs.get("user", String.class);
-    }
-    
-    static void checkOwner(Sprint list) {
-        if(!getUser().equals(list.user)) {
-            forbidden();
-        }
-    }
-    
-//    static void checkOwner(Item item) {
-//        item.list.get();
-//        checkOwner(item.list);
-//    }
+
     
 }
 

@@ -4,14 +4,26 @@
 
 # Home page
 GET     /                                       Application.index
+GET     /dashboard                              Projects.index
+
+DELETE  /sprint/{<[0-9]+>id}                   Sprints.destroy(format:'json')
+GET     /sprint/{<[0-9]+>id}                   Sprints.show(format:'json') 
+
+GET     /project                                Projects.list(format:'json')  
+GET     /project/{<[0-9]+>id}                   Projects.show(format:'json') 
+POST    /project                                Projects.create(format:'json')
+DELETE  /project/{<[0-9]+>id}                     Projects.destroy(format:'json')
+PUT     /project/{<[0-9]+>id}                      Projects.update(format:'json')
+
+
+
 GET     /task                                   Tasks.index(format:'json')  
 POST    /task                                   Tasks.create(format:'json')
-GET     /task/{<\d+>id}                         Tasks.show(format:'json')
-DELETE  /task/{<\d+>id}                         Tasks.destroy(format:'json')
-PUT     /task/{<\d+>id}                         Tasks.update(format:'json')
-GET     /sprint                                 Sprints.index
-GET     /user                                   Users.show(format:'json')
+GET     /task/{<[0-9]+>id}                         Tasks.show(format:'json')
+DELETE  /task/{<[0-9]+>id}                         Tasks.destroy(format:'json')
+PUT     /task/{<[0-9]+>id}                         Tasks.update(format:'json')
 
+GET     /user                                   Users.show(format:'json')
 
 GET     /login                                  Application.login
 GET     /logout                                 Application.logout                   

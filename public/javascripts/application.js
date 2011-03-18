@@ -1,4 +1,4 @@
-var Sprint = {
+var Varavig = {
     // CONSTANTS
     BACKLOG_COLUMN: 0,
     NOTSTARTED_COLUMN :1,
@@ -11,22 +11,30 @@ var Sprint = {
 
     init: function() {
           // User
-        Sprint.User = new User();
+        Varavig.User = new User();
         this.get_user();
+
+        // Create our global collection of **Projects**.
+        Varavig.Projects = new Varavig.Collections.Projects();
+
+		// Create our  collection of **Sprints**.
+        Varavig.Sprints = null;
+
         // Create our global collection of **Tasks**.
-        Sprint.Tasks = new Sprint.Collections.Tasks();
+        Varavig.Tasks = null;
+    
     	// call the controller
-		//Sprint.Controller = new Sprint.Controllers.BacklogCtrl();
-        new Sprint.Controllers.BacklogCtrl();
+        //new Sprint.Controllers.BacklogCtrl();
+		new Varavig.Controllers.ProjectCtrl();
 		Backbone.history.start();
     },
     
     get_user: function() {
-   	 Sprint.Users = new Sprint.Collections.Users;
-        Sprint.Users.fetch({
+   	 Varavig.Users = new Varavig.Collections.Users;
+        Varavig.Users.fetch({
            success: function() {
-       	 		Sprint.User = Sprint.Users.at(0);
-       	 		$('#gravatar').gravatarImg(Sprint.User.get("email"),'?s=37&d=mm');
+       	 		Varavig.User = Varavig.Users.at(0);
+       	 		$('#gravatar').gravatarImg(Varavig.User.get("email"),'?s=37&d=mm');
            },
            error: function() {
                new Error({ message: "Error loading users." });

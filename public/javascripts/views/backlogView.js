@@ -1,5 +1,5 @@
 // This is the view for the backlog column
-Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
+Varavig.Views.BacklogView = Varavig.Views.AbstractPanelView.extend({
     	
     initialize: function() {
         this.render();
@@ -7,8 +7,8 @@ Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
 
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({
-        	collection: Sprint.Tasks.backlog() ,
-			total: this.total_points_left(Sprint.BACKLOG_COLUMN)
+        	collection: Varavig.Tasks.backlog() ,
+			total: this.total_points_left(Varavig.BACKLOG_COLUMN)
         	}));
         $('#items').html(this.el);
         this.jquery_task();
@@ -18,9 +18,9 @@ Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
 
     sort_receive: function(event, ui) {
         var task = new Task();
-        task = Sprint.Tasks.get(ui.item.context);
+        task = Varavig.Tasks.get(ui.item.context);
         task.set({"insprint": 0});
-        task.set({"incolumn": Sprint.BACKLOG_COLUMN});
+        task.set({"incolumn": Varavig.BACKLOG_COLUMN});
         task.save();
         this.render();
     },
@@ -30,7 +30,7 @@ Sprint.Views.BacklogView = Sprint.Views.AbstractPanelView.extend({
         var result = this.$('.sortable_tasks').sortable('toArray');
         var task = new Task();
         _.each(result, function(num) {
-            task = Sprint.Tasks.get(num);
+            task = Varavig.Tasks.get(num);
             if (task.get("position") != orden) {
                 task.set({"position": orden});
                 task.save();

@@ -1,27 +1,20 @@
-Varavig.Views.EditTask = Backbone.View.extend({	
+Varavig.Views.EditProject = Backbone.View.extend({
     events: {
         "submit form": "save"
     },
     
     initialize: function() {
-        //_.bindAll(this, 'render');
-		//this.model.bind('change', this.render);
 		this.render();
-		this.sprint = this.options.sprint;
     },
     
-    clean_task: function() {
-        $('#newtask').html("");
+    clean_project: function() {
+        $('#new_project').html("");
     },
 	
-	// Generate the attributes for a new Task item.
+	// Generate the attributes for a new Project
 	newAttributes: function() {
 	    return {
 		  title: this.$('[name=title]').val(),
-		  content: this.$('[name=content]').val(),
-          estimate: this.$('[name=estimate]').val(),
-	      position:   this.collection.nextOrder(),
-		  sprint: this.sprint.toJSON(),
 	      done:    false
 	    };
 	},
@@ -29,26 +22,20 @@ Varavig.Views.EditTask = Backbone.View.extend({
     editAttributes: function() {
 	    return {
 		  title: this.$('[name=title]').val(),
-		  content: this.$('[name=content]').val(),
-		  left: this.$('[name=left]').val(),
-          estimate: this.$('[name=estimate]').val(),
-		  sprint: this.sprint.toJSON()
 	    };
 	},
     
     save: function() {
-		this.clean_task();
+		this.clean_project();
         var msg = this.model.isNew() ? 'Successfully created!' : "Saved!";
         var attributes = this.editAttributes();
         if (this.model.isNew()) { attributes = this.newAttributes(); }
         this.model.save(attributes, {
            success: function(model, resp) {
-				//window.location.hash = '#';
+				window.location.hash = '#';
             },
-
             error: function(model,e) {
 				alert(e);
-            //    new App.Views.Error();
             }
         });
         
@@ -56,12 +43,10 @@ Varavig.Views.EditTask = Backbone.View.extend({
     },
 
     render: function() {
-    		$(this.el).html(_.template($('#task').html())({ model: this.model }));
-    		//this.$( "#dialog" ).dialog();
-	        $('#newtask').html(this.el);
+    		$(this.el).html(_.template($('#project').html())({ model: this.model }));
+	        $('#new_project').html(this.el);
 	        // use val to fill in title, for security reasons
 	        this.$('[name=title]').val(this.model.get('title'));
 	        this.delegateEvents();
     }
 });
-    

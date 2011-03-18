@@ -1,14 +1,255 @@
-04 mar 2011 13:28:49,480 INFO  ~ Starting /home/ro/workspace-portae/Varavig
-04 mar 2011 13:28:49,484 INFO  ~ Module siena is available (/home/ro/opt/play-1.1.1/modules/siena-1.5)
-04 mar 2011 13:28:49,484 INFO  ~ Module gae is available (/home/ro/opt/play-1.1.1/modules/gae-1.4)
-04 mar 2011 13:28:50,187 WARN  ~ 
-04 mar 2011 13:28:50,187 WARN  ~ Google App Engine module
-04 mar 2011 13:28:50,187 WARN  ~ ~~~~~~~~~~~~~~~~~~~~~~~
-04 mar 2011 13:28:50,187 WARN  ~ No Google App Engine environment found. Setting up a development environement
-04 mar 2011 13:28:50,198 WARN  ~ 
-04 mar 2011 13:28:50,198 WARN  ~ You're running Play! in DEV mode
-04 mar 2011 13:28:50,311 INFO  ~ Listening for HTTP on port 3000 (Waiting a first request to start) ...
-04 mar 2011 13:29:02,473 INFO  ~ Connected to jdbc:hsqldb:mem:playembed
-04 mar 2011 13:29:02,477 INFO  ~ Application 'Play lists running in GAE' is now started !
-04 mar 2011 13:29:03,251 INFO  ~ The backing store, /home/ro/workspace-portae/Varavig/tmp/datastore, does not exist. It will be created.
-04 mar 2011 13:29:33,302 INFO  ~ Time to persist datastore: 39 ms
+18 mar 2011 18:30:15,988 INFO  ~ Starting /Users/pablopr/proyectos/varavig
+18 mar 2011 18:30:15,994 INFO  ~ Module siena is available (/Users/pablopr/opt/play-1.1.1/modules/siena-1.5)
+18 mar 2011 18:30:15,994 INFO  ~ Module gae is available (/Users/pablopr/opt/play-1.1.1/modules/gae-1.4)
+18 mar 2011 18:30:17,165 WARN  ~ 
+18 mar 2011 18:30:17,166 WARN  ~ Google App Engine module
+18 mar 2011 18:30:17,166 WARN  ~ ~~~~~~~~~~~~~~~~~~~~~~~
+18 mar 2011 18:30:17,166 WARN  ~ No Google App Engine environment found. Setting up a development environement
+18 mar 2011 18:30:17,201 WARN  ~ 
+18 mar 2011 18:30:17,208 WARN  ~ You're running Play! in DEV mode
+18 mar 2011 18:30:17,343 INFO  ~ Listening for HTTP on port 3000 (Waiting a first request to start) ...
+18 mar 2011 18:30:23,190 ERROR ~ 
+
+@65nkbf1d8
+Internal Server Error (500) for request GET /
+
+Compilation error (In /app/controllers/Projects.java around line 91)
+The file /app/controllers/Projects.java could not be compiled. Error raised is : Project cannot be resolved to a type
+
+play.exceptions.CompilationException: Project cannot be resolved to a type
+	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
+	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:672)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:516)
+	at play.classloading.ApplicationCompiler.compile(ApplicationCompiler.java:278)
+	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:416)
+	at play.Play.start(Play.java:416)
+	at play.Play.detectChanges(Play.java:543)
+	at play.Invoker$Invocation.init(Invoker.java:100)
+	at Invocation.HTTP Request(Play!)
+18 mar 2011 18:31:20,561 ERROR ~ 
+
+@65nkbf1dc
+Internal Server Error (500) for request GET /
+
+Compilation error (In /app/models/Sprint.java around line 14)
+The file /app/models/Sprint.java could not be compiled. Error raised is : Project cannot be resolved to a type
+
+play.exceptions.CompilationException: Project cannot be resolved to a type
+	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
+	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:672)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:516)
+	at play.classloading.ApplicationCompiler.compile(ApplicationCompiler.java:278)
+	at play.classloading.ApplicationClasses$ApplicationClass.compile(ApplicationClasses.java:258)
+	at play.classloading.ApplicationClassloader.detectChanges(ApplicationClassloader.java:292)
+	at play.Play.detectChanges(Play.java:527)
+	at play.Invoker$Invocation.init(Invoker.java:100)
+	at Invocation.HTTP Request(Play!)
+18 mar 2011 18:34:58,532 ERROR ~ 
+
+@65nkbf1dd
+Internal Server Error (500) for request GET /
+
+Compilation error (In /app/controllers/Projects.java around line 30)
+The file /app/controllers/Projects.java could not be compiled. Error raised is : Project cannot be resolved
+
+play.exceptions.CompilationException: Project cannot be resolved
+	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
+	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:672)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:516)
+	at play.classloading.ApplicationCompiler.compile(ApplicationCompiler.java:278)
+	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:416)
+	at play.Play.start(Play.java:416)
+	at play.Play.detectChanges(Play.java:543)
+	at play.Invoker$Invocation.init(Invoker.java:100)
+	at Invocation.HTTP Request(Play!)
+18 mar 2011 18:35:15,949 ERROR ~ 
+
+@65nkbf1de
+Internal Server Error (500) for request GET /
+
+Compilation error (In /app/models/Projectt.java around line 22)
+The file /app/models/Projectt.java could not be compiled. Error raised is : Project cannot be resolved to a type
+
+play.exceptions.CompilationException: Project cannot be resolved to a type
+	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
+	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:672)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:516)
+	at play.classloading.ApplicationCompiler.compile(ApplicationCompiler.java:278)
+	at play.classloading.ApplicationClasses$ApplicationClass.compile(ApplicationClasses.java:258)
+	at play.classloading.ApplicationClassloader.detectChanges(ApplicationClassloader.java:292)
+	at play.Play.detectChanges(Play.java:527)
+	at play.Invoker$Invocation.init(Invoker.java:100)
+	at Invocation.HTTP Request(Play!)
+18 mar 2011 18:35:32,143 ERROR ~ 
+
+@65nkbf1df
+Internal Server Error (500) for request GET /
+
+Compilation error (In /app/notifiers/Notifier.java around line 8)
+The file /app/notifiers/Notifier.java could not be compiled. Error raised is : Project cannot be resolved to a type
+
+play.exceptions.CompilationException: Project cannot be resolved to a type
+	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
+	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:672)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:516)
+	at play.classloading.ApplicationCompiler.compile(ApplicationCompiler.java:278)
+	at play.classloading.ApplicationClasses$ApplicationClass.compile(ApplicationClasses.java:258)
+	at play.classloading.ApplicationClassloader.detectChanges(ApplicationClassloader.java:292)
+	at play.Play.detectChanges(Play.java:527)
+	at play.Invoker$Invocation.init(Invoker.java:100)
+	at Invocation.HTTP Request(Play!)
+18 mar 2011 18:35:48,988 ERROR ~ 
+
+@65nkbf1dg
+Internal Server Error (500) for request GET /
+
+Compilation error (In /app/models/Projectt.java around line 18)
+The file /app/models/Projectt.java could not be compiled. Error raised is : Project cannot be resolved to a type
+
+play.exceptions.CompilationException: Project cannot be resolved to a type
+	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
+	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:672)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:516)
+	at play.classloading.ApplicationCompiler.compile(ApplicationCompiler.java:278)
+	at play.classloading.ApplicationClasses$ApplicationClass.compile(ApplicationClasses.java:258)
+	at play.classloading.ApplicationClassloader.detectChanges(ApplicationClassloader.java:292)
+	at play.Play.detectChanges(Play.java:527)
+	at play.Invoker$Invocation.init(Invoker.java:100)
+	at Invocation.HTTP Request(Play!)
+18 mar 2011 18:36:04,976 ERROR ~ 
+
+@65nkbf1dh
+Internal Server Error (500) for request GET /
+
+Compilation error (In /app/controllers/Sprints.java around line 38)
+The file /app/controllers/Sprints.java could not be compiled. Error raised is : project.tasks cannot be resolved to a type
+
+play.exceptions.CompilationException: project.tasks cannot be resolved to a type
+	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
+	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:672)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:516)
+	at play.classloading.ApplicationCompiler.compile(ApplicationCompiler.java:278)
+	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:416)
+	at play.Play.start(Play.java:416)
+	at play.Play.detectChanges(Play.java:543)
+	at play.Invoker$Invocation.init(Invoker.java:100)
+	at Invocation.HTTP Request(Play!)
+18 mar 2011 18:38:18,789 ERROR ~ 
+
+@65nkbf1di
+Internal Server Error (500) for request GET /
+
+Compilation error (In /app/models/Projecto.java around line 17)
+The file /app/models/Projecto.java could not be compiled. Error raised is : Project cannot be resolved to a type
+
+play.exceptions.CompilationException: Project cannot be resolved to a type
+	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
+	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:672)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:516)
+	at play.classloading.ApplicationCompiler.compile(ApplicationCompiler.java:278)
+	at play.classloading.ApplicationClasses$ApplicationClass.compile(ApplicationClasses.java:258)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:138)
+	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:419)
+	at play.Play.start(Play.java:416)
+	at play.Play.detectChanges(Play.java:543)
+	at play.Invoker$Invocation.init(Invoker.java:100)
+	at Invocation.HTTP Request(Play!)
+18 mar 2011 18:38:18,791 ERROR ~ 
+
+@65nkbf1dk
+Error during the 500 response generation
+
+Oops: UnexpectedException
+An unexpected error occured caused by exception UnexpectedException: Unexpected Error
+
+play.exceptions.UnexpectedException: Unexpected Error
+	at play.vfs.VirtualFile.contentAsString(VirtualFile.java:180)
+	at play.exceptions.CompilationException.getSource(CompilationException.java:48)
+	at {play}/framework/templates/tags/500.html.(line:107)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:203)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:331)
+	at /app/views/errors/500.html.(line:9)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:203)
+	at play.server.PlayHandler.serve500(PlayHandler.java:617)
+	at Invocation.HTTP Request(Play!)
+Caused by: play.exceptions.UnexpectedException: Unexpected Error
+	at play.vfs.VirtualFile.inputstream(VirtualFile.java:111)
+	at play.vfs.VirtualFile.contentAsString(VirtualFile.java:178)
+	at play.exceptions.CompilationException.getSource(CompilationException.java:48)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:88)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at groovy.lang.MetaClassImpl.getProperty(MetaClassImpl.java:1603)
+	at groovy.lang.MetaClassImpl.getProperty(MetaClassImpl.java:3302)
+	at org.codehaus.groovy.runtime.InvokerHelper.getProperty(InvokerHelper.java:161)
+	at org.codehaus.groovy.runtime.callsite.PojoMetaClassGetPropertySite.getProperty(PojoMetaClassGetPropertySite.java:33)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callGetProperty(AbstractCallSite.java:237)
+	at Template_M1076287694$_run_closure1.doCall(500.html:127)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:88)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:272)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:143)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:151)
+	at Template_M1076287694$_run_closure1.doCall(500.html)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:88)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:272)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:276)
+	at groovy.lang.Closure.call(Closure.java:271)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:93)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$200(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:201)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:320)
+	at org.codehaus.groovy.runtime.dgm$695.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:143)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:155)
+	at Template_M1076287694.run(500.html:2)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:203)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:331)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:88)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:361)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:143)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:163)
+	at Template_1772673738$_run_closure1.doCall(500.html:15)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:88)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:272)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:143)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:151)
+	at Template_1772673738$_run_closure1.doCall(500.html)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:88)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:272)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:276)
+	at groovy.lang.Closure.call(Closure.java:271)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:93)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$200(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:201)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:320)
+	at org.codehaus.groovy.runtime.dgm$695.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:143)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:155)
+	at Template_1772673738.run(500.html:2)
+	... 3 more
+Caused by: java.io.FileNotFoundException: /Users/pablopr/proyectos/varavig/app/models/Projecto.java (No such file or directory)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(FileInputStream.java:106)
+	at play.vfs.VirtualFile.inputstream(VirtualFile.java:109)
+	... 76 more

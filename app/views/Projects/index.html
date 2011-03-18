@@ -1,16 +1,33 @@
 #{extends 'main.html' /}
-#{set title:'Your Sprint Panel' /}
+#{set title:'Your Project Manager Panel' /}
 
    	
+	<div class="container fix">
+	
+			<div id ="main_container">
+			<h1>Your Projects</h1>                
+			<div id="new_project_link"><h3><a href='#new'>Create New</a></h3></div>
+				<div id ="new_project"></div>
+								
+				<div id ="projects">
+				</div>
+				
+				<div id ="sprints">
+				</div>
+			</div>
+		
+	</div>
+	<div class="push"></div>
+	
+<script type="text/template" id="sprint_panel">
 		<a id="collapseBacklog"  class="collapsed fr"   href="javascript:void(0)">
 			<span id="sidebar"></span>
 		</a>
-	<div class="container fix">
 	
 		<div id="backlog" class="column" style="display:none;">
 			<div class="wrap first">
 			Product Backlog
-                <div id="newlink"><h3><a href='#new'>Create New</a></h3></div>
+                <div id="newlink"><h3><a href='#sprint/<%=sprint.id%>/new_task'>Create New</a></h3></div>
 				<div id ="newtask"></div>
 								
 				<div id ="items" class="scrollable">
@@ -37,10 +54,47 @@
 				<div id="items_finished" class="scrollable"></div>
 			</div>
 		</div>
-	</div>
-	<div class="push"></div>
-
+		
+	
+	</script>
 		  
+	<script type="text/template" id="project">
+<div title="new project">
+<form>	
+    <label for='title'>Title</label>
+    <input name='title' type='text' /> 	
+    <button>'Create' </button>
+</form>
+</div>
+	</script>
+
+	<script type="text/template" id="sprints_collection">
+	<!-- Column-->
+		    <div class="sprints">
+	    <% collection.each(function(sprint) { %>
+	      <div class="portlet" id="<%=sprint.id%>">
+			<div class="portlet-header">
+				<label id="sprint_title"><%= sprint.escape('title') %></label>| <a href="#sprint/<%=sprint.id%>" >see panel</a>
+				<button class="delete_sprint" id="<%=sprint.id%>">delete</button>&nbsp;
+			</div>
+		  </div>
+		<% }); %>
+	    </div>
+	</script>
+	
+<script type="text/template" id="projects_collection">
+<!-- Column-->
+	    <div class="projects">
+    <% collection.each(function(project) { %>
+      <div class="portlet" id="<%=project.id%>">
+		<div class="portlet-header">
+			<label id="project_title"><%= project.escape('title') %></label> | <a href="#project/<%=project.id%>" >see more</a>
+			<button class="delete_project" id="<%=project.id%>">delete</button>&nbsp;
+		</div>
+	  </div>
+	<% }); %>
+    </div>
+</script>
 	<script type="text/template" id="task">
 <div id="dialog" title="new task">
 <form>
@@ -108,6 +162,6 @@
 </script>
 <script type="text/javascript">
 	$(function() {
-		Sprint.init();
+		Varavig.init();
 	});
 </script>

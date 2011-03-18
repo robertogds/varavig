@@ -1,5 +1,5 @@
 // Controller for the backlog items column
-Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
+Varavig.Controllers.BacklogCtrl = Backbone.Controller.extend({
     routes: {
         "":              "index",
         "task/:id":      "edit_task",
@@ -7,16 +7,16 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
     },
 
     index: function() {
-        Sprint.Tasks.fetch({
+        Varavig.Tasks.fetch({
             success: function() {
-                new Sprint.Views.FinishedView;
-                new Sprint.Views.StartedView;
-                new Sprint.Views.NotStartedView;
-                new Sprint.Views.BacklogView;
+                new Varavig.Views.FinishedView;
+                new Varavig.Views.StartedView;
+                new Varavig.Views.NotStartedView;
+                new Varavig.Views.BacklogView;
 
             },
             error: function() {
-                new Error({ message: "Error loading documents." });
+                new Error({ message: "Error loading tasks." });
             }
         });
     },
@@ -25,10 +25,10 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
         var task = new Task({ id: id });
         task.fetch({
             success: function(model, resp) {
-                new Sprint.Views.EditTask({ model: task });
+                new Varavig.Views.EditTask({ model: task });
             },
             error: function() {
-                new Error({ message: 'Could not find that document.' });
+                new Error({ message: 'Could not find that task.' });
                 window.location.hash = '#';
             }
         });
@@ -36,9 +36,9 @@ Sprint.Controllers.BacklogCtrl = Backbone.Controller.extend({
 
     new_task: function() {
         var task = new Task();
-        task.position = Sprint.Tasks.nextOrder();
+        task.position = Varavig.Tasks.nextOrder();
         task.done = 0;
-        new Sprint.Views.EditTask({ model: task, collection: Sprint.Tasks });
+        new Varavig.Views.EditTask({ model: task, collection: Varavig.Tasks });
 
     }
 

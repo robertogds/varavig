@@ -1,5 +1,5 @@
-// This is the view for the started column
-Sprint.Views.StartedView = Sprint.Views.AbstractPanelView.extend({
+// This is the view for the started column.
+Varavig.Views.StartedView = Varavig.Views.AbstractPanelView.extend({
 
     initialize: function() {
         this.render();
@@ -7,8 +7,8 @@ Sprint.Views.StartedView = Sprint.Views.AbstractPanelView.extend({
 
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({ 
-        	collection: Sprint.Tasks.started() ,
-			total: this.total_points_left(Sprint.STARTED_COLUMN)
+        	collection: Varavig.Tasks.started() ,
+			total: this.total_points_left(Varavig.STARTED_COLUMN)
 			}));
 	    $('#items_started').html(this.el);
         this.jquery_task();
@@ -20,11 +20,13 @@ Sprint.Views.StartedView = Sprint.Views.AbstractPanelView.extend({
 
     sort_receive: function(event,ui) {
 	    var task = new Task();
-	    task = Sprint.Tasks.get(ui.item.context);
+	    task = Varavig.Tasks.get(ui.item.context);
         task.set({"insprint": 1});
-        task.set({"incolumn": Sprint.STARTED_COLUMN});
-        task.set({"user": Sprint.User.get("email")});
-        var gravatar = $.gravatarSrc(Sprint.User.get("email"),'?s=23&d=mm');
+        task.set({"incolumn": Varavig.STARTED_COLUMN});
+		//assign task to current user 
+        task.set({"user": Varavig.User.get("email")});
+		//fetch gravatar from current user gravatar account
+        var gravatar = $.gravatarSrc(Varavig.User.get("email"),'?s=23&d=mm');
         task.set({"gravatar": gravatar});
 	    task.save();
 	    this.render();

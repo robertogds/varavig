@@ -6,6 +6,10 @@ var Task = Backbone.Model.extend({
 	if (!this.get("estimate")) {
         this.set({"estimate": this.ESTIMATION});
       }
+	if (!this.get("estimate")) {
+		this.set({"blocked": false});
+	}
+	
   },
 
   validateAttributes: function() {
@@ -18,9 +22,9 @@ var Task = Backbone.Model.extend({
     this.save({done: !this.get("done")});
   },
 
-	url : function() {
-		return this.id ? '/task/' + this.id : '/task';
-	},
+  url : function() {
+	 return this.id ? '/task/' + this.id : '/task';
+   },
 
   clear: function() {
     this.destroy();
