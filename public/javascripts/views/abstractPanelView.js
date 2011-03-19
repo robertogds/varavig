@@ -23,7 +23,7 @@ Varavig.Views.AbstractPanelView = Backbone.View.extend({
     delete_task: function(event){
         var task = new Task();
         task = Varavig.Tasks.get(event.currentTarget.id);
-        Sprint.Tasks.remove(task);
+        Varavig.Tasks.remove(task);
         task.destroy();
         this.render();
     },

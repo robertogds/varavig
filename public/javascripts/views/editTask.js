@@ -4,7 +4,7 @@ Varavig.Views.EditTask = Backbone.View.extend({
     },
     
     initialize: function() {
-        //_.bindAll(this, 'render');
+        _.bindAll(this, 'render');
 		//this.model.bind('change', this.render);
 		this.render();
 		this.sprint = this.options.sprint;
@@ -43,7 +43,8 @@ Varavig.Views.EditTask = Backbone.View.extend({
         if (this.model.isNew()) { attributes = this.newAttributes(); }
         this.model.save(attributes, {
            success: function(model, resp) {
-				//window.location.hash = '#';
+	//TODO como hacemos para que lleve a la url q corresponde?
+				window.location.hash = '#sprint';
             },
 
             error: function(model,e) {

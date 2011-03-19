@@ -25,6 +25,7 @@ public class Tasks extends Application {
 	}
 	    
     public static void show(Long id) {
+	    System.out.println("#SHOW TASK #" + id );
     	Task item = Task.findById(id);
     	renderJSON(item);
 	}
