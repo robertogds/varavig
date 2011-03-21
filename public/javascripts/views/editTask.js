@@ -4,10 +4,9 @@ Varavig.Views.EditTask = Backbone.View.extend({
     },
     
     initialize: function() {
-        _.bindAll(this, 'render');
+        //_.bindAll(this, 'render');
 		//this.model.bind('change', this.render);
 		this.render();
-		this.sprint = this.options.sprint;
     },
     
     clean_task: function() {
@@ -20,8 +19,7 @@ Varavig.Views.EditTask = Backbone.View.extend({
 		  title: this.$('[name=title]').val(),
 		  content: this.$('[name=content]').val(),
           estimate: this.$('[name=estimate]').val(),
-	      position:   this.collection.nextOrder(),
-		  sprint: this.sprint.toJSON(),
+	      //position:   this.collection.nextOrder(),
 	      done:    false
 	    };
 	},
@@ -32,7 +30,6 @@ Varavig.Views.EditTask = Backbone.View.extend({
 		  content: this.$('[name=content]').val(),
 		  left: this.$('[name=left]').val(),
           estimate: this.$('[name=estimate]').val(),
-		  sprint: this.sprint.toJSON()
 	    };
 	},
     
@@ -43,10 +40,9 @@ Varavig.Views.EditTask = Backbone.View.extend({
         if (this.model.isNew()) { attributes = this.newAttributes(); }
         this.model.save(attributes, {
            success: function(model, resp) {
-	//TODO como hacemos para que lleve a la url q corresponde?
-				window.location.hash = '#sprint';
+			//TODO como hacemos para que lleve a la url q corresponde? esto es lo mejor q consegui :(
+				history.back(1);
             },
-
             error: function(model,e) {
 				alert(e);
             //    new App.Views.Error();

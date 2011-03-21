@@ -27,7 +27,7 @@
 		<div id="backlog" class="column" style="display:none;">
 			<div class="wrap first">
 			Product Backlog
-                <div id="newlink"><h3><a href='#sprint/<%=sprint.id%>/new_task'>Create New</a></h3></div>
+                <div id="newlink"><h3><a href='#project/<%=sprint.get("project").id%>/sprint/<%=sprint.id%>/new_task'>Create New</a></h3></div>
 				<div id ="newtask"></div>
 								
 				<div id ="items" class="scrollable">
@@ -74,7 +74,7 @@
 	    <% collection.each(function(sprint) { %>
 	      <div class="portlet" id="<%=sprint.id%>">
 			<div class="portlet-header">
-				<label id="sprint_title"><%= sprint.escape('title') %></label>| <a href="#sprint/<%=sprint.id%>" >see panel</a>
+				<label id="sprint_title"><%= sprint.escape('title') %></label>| <a href="#project/<%=sprint.get("project").id%>/sprint/<%=sprint.id%>" >see panel</a>
 				<button class="delete_sprint" id="<%=sprint.id%>">delete</button>&nbsp;
 			</div>
 		  </div>

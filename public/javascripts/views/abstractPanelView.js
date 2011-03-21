@@ -8,9 +8,10 @@ Varavig.Views.AbstractPanelView = Backbone.View.extend({
 		"click .block_task": "block_task"
     },
 
+
 	block_task: function(event){
         var task = new Task();
-        task = Varavig.Tasks.get(event.currentTarget.id);
+        task = this.collection.get(event.currentTarget.id);
 		if (task.get("blocked")){
 			task.save({"blocked": false});
 		}
@@ -22,8 +23,8 @@ Varavig.Views.AbstractPanelView = Backbone.View.extend({
 
     delete_task: function(event){
         var task = new Task();
-        task = Varavig.Tasks.get(event.currentTarget.id);
-        Varavig.Tasks.remove(task);
+        task = this.collection.get(event.currentTarget.id);
+        this.collection.remove(task);
         task.destroy();
         this.render();
     },
@@ -35,7 +36,7 @@ Varavig.Views.AbstractPanelView = Backbone.View.extend({
 
     total_points_left: function(column){
 		var total = 0;
-		var tasks = Varavig.Tasks.filter(function(task) {
+		var tasks = this.collection.filter(function(task) {
 		  return task.get("incolumn") === column;
 		});
        for (i = 0, l = tasks.length; i < l; i++){
@@ -96,7 +97,7 @@ Varavig.Views.AbstractPanelView = Backbone.View.extend({
 
     submit_edit : function (value, settings){ 
     	var task = new Task();
-        task = Varavig.Tasks.get(settings.id);
+        task = this.collection.get(settings.id);
         switch (settings.name) {
 	        case 'content':
 	        	task.save({"content" : value });

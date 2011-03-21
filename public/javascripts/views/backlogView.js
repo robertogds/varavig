@@ -3,11 +3,12 @@ Varavig.Views.BacklogView = Varavig.Views.AbstractPanelView.extend({
     	
     initialize: function() {
         this.render();
+		this.task_list = this.collection;
     },
 
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({
-        	collection: Varavig.Tasks.backlog() ,
+        	collection: this.collection.backlog() ,
 			total: this.total_points_left(Varavig.BACKLOG_COLUMN)
         	}));
         $('#items').html(this.el);
@@ -18,8 +19,7 @@ Varavig.Views.BacklogView = Varavig.Views.AbstractPanelView.extend({
 
     sort_receive: function(event, ui) {
         var task = new Task();
-        task = Varavig.Tasks.get(ui.item.context);
-        task.set({"insprint": 0});
+        task = this.collection.get(ui.item.context);
         task.set({"incolumn": Varavig.BACKLOG_COLUMN});
         task.save();
         this.render();
@@ -30,7 +30,7 @@ Varavig.Views.BacklogView = Varavig.Views.AbstractPanelView.extend({
         var result = this.$('.sortable_tasks').sortable('toArray');
         var task = new Task();
         _.each(result, function(num) {
-            task = Varavig.Tasks.get(num);
+            task = this.collection.get(num);
             if (task.get("position") != orden) {
                 task.set({"position": orden});
                 task.save();

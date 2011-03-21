@@ -5,7 +5,6 @@ Varavig.Views.SprintListView = Backbone.View.extend({
     },
 
 	initialize: function() {
-		this.collection = this.options.collection;
         this.render();
     },
 	
@@ -14,8 +13,8 @@ Varavig.Views.SprintListView = Backbone.View.extend({
         	collection: this.collection
 			}));
 	    $('#sprints').html(this.el);
+	    //TODO what is this for?
         //this.delegateEvents();
-        
         return this;
     },
 

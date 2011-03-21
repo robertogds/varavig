@@ -4,6 +4,8 @@ Varavig.Views.EditProject = Backbone.View.extend({
     },
     
     initialize: function() {
+	    //_.bindAll(this, 'render');
+		//this.model.bind('all', this.render);
 		this.render();
     },
     
@@ -32,7 +34,8 @@ Varavig.Views.EditProject = Backbone.View.extend({
         if (this.model.isNew()) { attributes = this.newAttributes(); }
         this.model.save(attributes, {
            success: function(model, resp) {
-				window.location.hash = '#';
+				 window.location.hash = '#';
+				 //Backbone.history.saveLocation('#');
             },
             error: function(model,e) {
 				alert(e);

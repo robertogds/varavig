@@ -5,17 +5,28 @@ Varavig.Views.ProjectListView = Backbone.View.extend({
     },
 
     initialize: function() {
-        this.render();
+        //TODO esto no fnciona, pq?
+		//_.bindAll(this, 'render');
+		//this.model.bind('all', this.render);
+		this.render();
     },
 
     render: function() {
         $(this.el).html(_.template($('#projects_collection').html())({ 
-        	collection: Varavig.Projects
+        	collection: this.collection
 			}));
 	    $('#projects').html(this.el);
 	    this.jquery_editable();
         this.delegateEvents();
         return this;
+    },
+
+	delete_project: function(event){
+        var project = new Project();
+        project = this.collection.get(event.currentTarget.id);
+        this.collection.remove(project);
+        project.destroy();
+        this.render();
     },
 
 	jquery_editable: function() {
@@ -29,17 +40,9 @@ Varavig.Views.ProjectListView = Backbone.View.extend({
 
     },
 
-	delete_project: function(event){
-        var project = new Project();
-        project = Varavig.Projects.get(event.currentTarget.id);
-        Varavig.Projects.remove(project);
-        project.destroy();
-        this.render();
-    },
-
 	submit_edit : function (value, settings){ 
     	var project = new Project();
-        project = Varavig.Projects.get(settings.id);
+        project = this.collection.get(settings.id);
         switch (settings.name) {
 	        case 'title':
 	        	project.save({"title" : value });

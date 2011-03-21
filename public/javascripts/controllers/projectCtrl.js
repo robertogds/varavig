@@ -2,17 +2,19 @@
 Varavig.Controllers.ProjectCtrl = Backbone.Controller.extend({
 	
     routes: {
-        "":              		"index",
-        "new":           		"new_project",
-		"project/:id":   		"show_project",
-		"sprint/:id":    		"show_sprint",
-		"sprint/:id/new_task":  "new_task"
+        "":              									"index",
+        "new":           									"new_project",
+		"project/:id":   									"show_project",
+		"project/:project_id/sprint/:sprint_id":    		"show_sprint",
+		"project/:project_id/sprint/:id/new_task":  		"new_task"
     },
 
     index: function() {
-        Varavig.Projects.fetch({
+	   	// Create our global collection of **Projects**.
+	    var projects = new Varavig.Collections.Projects();
+        projects.fetch({
             success: function() {
-                new Varavig.Views.ProjectListView;
+                new Varavig.Views.ProjectListView({ model: new Project(), collection: projects });
             },
             error: function() {
                 new Error({ message: "Error loading projects." });
@@ -22,17 +24,17 @@ Varavig.Controllers.ProjectCtrl = Backbone.Controller.extend({
 
     new_project: function() {
         var project = new Project();
-        new Varavig.Views.EditProject({ model: project, collection: Varavig.Projects });
+        new Varavig.Views.EditProject({ model: project });
 
     },
 
 	show_project: function(id){
 		var project = new Project({ id: id });
-		
+		var self = this;
 		project.fetch({
             success: function(){
-				Varavig.Sprints = new Varavig.Collections.Sprints(project.get("sprints"));
-                new Varavig.Views.SprintListView({ collection: Varavig.Sprints});
+				self.sprints = new Varavig.Collections.Sprints(project.get("sprints"));
+                new Varavig.Views.SprintListView({ collection: self.sprints });
             },
             error: function() {
                 new Error({ message: "Error loading projects." });
@@ -40,16 +42,16 @@ Varavig.Controllers.ProjectCtrl = Backbone.Controller.extend({
         });	
 	},
 	
-	show_sprint: function(id){
-		var sprint = new Sprint({ id: id });		
+	show_sprint: function(project_id, sprint_id){
+		var sprint = new Sprint({ id: sprint_id });		
 		sprint.fetch({
            	success: function(){
-				Varavig.Tasks = new Varavig.Collections.Tasks(sprint.get("tasks"));
-				new Varavig.Views.SprintPanelView({ model: sprint });
-                new Varavig.Views.FinishedView;
-                new Varavig.Views.StartedView;
-                new Varavig.Views.NotStartedView;
-                new Varavig.Views.BacklogView;
+				var tasks = new Varavig.Collections.Tasks(sprint.get("tasks"));
+				new Varavig.Views.SprintPanelView({ model: sprint, collection: tasks });
+                new Varavig.Views.FinishedView({ collection: tasks });
+                new Varavig.Views.StartedView({ collection: tasks});
+                new Varavig.Views.NotStartedView({ collection: tasks });
+                new Varavig.Views.BacklogView({ collection: tasks});
             },
             error: function() {
                 new Error({ message: "Error loading tasks." });
@@ -58,15 +60,12 @@ Varavig.Controllers.ProjectCtrl = Backbone.Controller.extend({
 	    });
 	},
 	
-	new_task: function(id) {
-		var sprint = Varavig.Sprints.get(id);
-        var task = new Task();
-        task.position = Varavig.Tasks.nextOrder();
-        task.done = 0;
+	new_task: function(project_id, sprint_id) {
+		var sprint = new Sprint({ id: sprint_id });
+        var task = new Task({sprint: sprint});
 		
-        new Varavig.Views.EditTask({ model: task, collection: Varavig.Tasks , sprint: sprint});
+        new Varavig.Views.EditTask({ model: task });
 
-    }
-	
+    }	
 
 });

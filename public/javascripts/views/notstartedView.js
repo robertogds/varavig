@@ -7,7 +7,7 @@ Varavig.Views.NotStartedView = Varavig.Views.AbstractPanelView.extend({
 
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({ 
-        	collection: Varavig.Tasks.not_started(),
+        	collection: this.collection.not_started(),
 			total: this.total_points_left(Varavig.NOTSTARTED_COLUMN)
         	}));
         $('#items_nostart').html(this.el);
@@ -18,8 +18,7 @@ Varavig.Views.NotStartedView = Varavig.Views.AbstractPanelView.extend({
 
     sort_receive: function(event, ui) {
         var task = new Task();
-        task = Varavig.Tasks.get(ui.item.context);
-        task.set({"insprint":1});
+        task = this.collection.get(ui.item.context);
         task.set({"incolumn": Varavig.NOTSTARTED_COLUMN});
         task.save();
         this.render();

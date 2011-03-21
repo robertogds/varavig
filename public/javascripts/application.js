@@ -10,27 +10,18 @@ var Varavig = {
     Collections: {},
 
     init: function() {
-          // User
+	
+          // Create our global User varible
         Varavig.User = new User();
         this.get_user();
-
-        // Create our global collection of **Projects**.
-        Varavig.Projects = new Varavig.Collections.Projects();
-
-		// Create our  collection of **Sprints**.
-        Varavig.Sprints = null;
-
-        // Create our global collection of **Tasks**.
-        Varavig.Tasks = null;
     
     	// call the controller
-        //new Sprint.Controllers.BacklogCtrl();
 		new Varavig.Controllers.ProjectCtrl();
 		Backbone.history.start();
     },
     
     get_user: function() {
-   	 Varavig.Users = new Varavig.Collections.Users;
+   	    Varavig.Users = new Varavig.Collections.Users;
         Varavig.Users.fetch({
            success: function() {
        	 		Varavig.User = Varavig.Users.at(0);

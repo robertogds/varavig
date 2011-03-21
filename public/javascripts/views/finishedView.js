@@ -8,7 +8,7 @@ Varavig.Views.FinishedView = Varavig.Views.AbstractPanelView.extend({
     
     render: function() {
 		$(this.el).html(_.template($('#tasks_collection').html())({ 
-			collection: Varavig.Tasks.finished(),
+			collection: this.collection.finished(),
 			total: this.total_points_left(Varavig.FINISHED_COLUMN)
 			}));
         $('#items_finished').html(this.el);
@@ -20,8 +20,7 @@ Varavig.Views.FinishedView = Varavig.Views.AbstractPanelView.extend({
 
     sort_receive: function(event,ui) {
 	    var task = new Task();
-	    task = Varavig.Tasks.get(ui.item.context);
-        task.set({"insprint": 1});
+	    task = this.collection.get(ui.item.context);
         task.set({"incolumn": Varavig.FINISHED_COLUMN});
 		task.set({"left": 0}); 
 	    task.save();
