@@ -27,7 +27,7 @@ public class Projects extends Application {
     }
 	
 	public static void list() {
-	        Collection<Projectt> projects = Projectt.findByUser(GAE.getUser().getEmail());
+	        Collection<Projectt> projects = Projectt.findByMember(GAE.getUser().getEmail());
 	        renderJSON(projects);
 	}
     
@@ -36,9 +36,11 @@ public class Projects extends Application {
 		//TODO: debug instead of println!!
 		System.out.println("##" + json );
 		Projectt project = new Gson().fromJson(json, Projectt.class);
-		project.user = GAE.getUser().getEmail();
 		project.createdAt = new Date();
 		project.insert();
+		
+		//Create the ownership of the project by member
+		ProjectMember.create(Members.getCurrentMember().id,project.id);
 		
 		//We force the first sprint creation
 		Sprint sprint = new Sprint();
@@ -73,24 +75,42 @@ public class Projects extends Application {
     	renderJSON("{}");
     }
 
-	public static void email(Long id) {
+	public static void inviteColaborator(Long id, String email) {
+		System.out.println("#Projects.inviteColaborator#" + email );
 	    Projectt project = Projectt.findById(id);
 	    notFoundIfNull(project);
 	    checkOwner(project);
-	    Notifier.emailList(project);
-	    flash.success("An invitation to this project has been emailed to %s", project.user);
+		//Add colaborator to project before sending the email
+		addColaboratorToProject(email,project);
+		//Send email notification
+	    Notifier.sendInvitation(project, email, Members.getCurrentMember());
+	    flash.success("An invitation to this project has been emailed to %s", email);
 	    index();
 	}
 
 	// ~~~~~~ utils
-
+	static void addColaboratorToProject(String email, Projectt project){
+		Member colaborator = Members.create(email);
+		//Create the ownership of the project by member
+		ProjectMember.create(colaborator.id, project.id);		
+	}
+	
 	static String getUser() {
 	    return renderArgs.get("user", String.class);
 	}
 
 	static void checkOwner(Projectt project) {
-	    if(!getUser().equals(project.user)) {
-	        forbidden();
+		List<ProjectMember> projectMemberList = ProjectMember.findByProjectId(project.id);
+		Member member = Members.getCurrentMember();
+		Boolean isOwner = Boolean.FALSE;
+		for (ProjectMember projectMember: projectMemberList){
+			if (member.id == projectMember.memberId){
+				isOwner = Boolean.TRUE;
+				break;
+			}
+		}
+	    if(!isOwner ) {
+	         forbidden();
 	    }
 	}
     

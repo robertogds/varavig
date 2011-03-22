@@ -15,7 +15,7 @@ Varavig.Views.ProjectListView = Backbone.View.extend({
         $(this.el).html(_.template($('#projects_collection').html())({ 
         	collection: this.collection
 			}));
-	    $('#projects').html(this.el);
+	    $('#main_container').html(this.el);
 	    this.jquery_editable();
         this.delegateEvents();
         return this;
@@ -50,5 +50,6 @@ Varavig.Views.ProjectListView = Backbone.View.extend({
         } 
 		return(value);
 	}
+	
 
 });

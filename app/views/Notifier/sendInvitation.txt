@@ -1,0 +1,6 @@
+Hey there!
+
+You've been invited to this project: ${project.title}  
+
+
+You can view the project at Varavig: @@{Application.index()}

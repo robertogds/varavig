@@ -12,7 +12,7 @@ Varavig.Views.SprintListView = Backbone.View.extend({
         $(this.el).html(_.template($('#sprints_collection').html())({ 
         	collection: this.collection
 			}));
-	    $('#sprints').html(this.el);
+	    $('#main_container').html(this.el);
 	    //TODO what is this for?
         //this.delegateEvents();
         return this;

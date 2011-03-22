@@ -5,10 +5,10 @@ import models.*;
 
 public class Notifier extends Mailer {
 
-    public static void emailList(Projectt project) {
-        setFrom(project.user);
-        setSubject("Your list: %s", project.title);
-        addRecipient(project.user);
+    public static void sendInvitation(Projectt project, String email, Member currentMember) {
+        setFrom(currentMember.email);
+        setSubject("You've been invite to work on %s", project.title);
+        addRecipient(email);
         send(project);
     }
     

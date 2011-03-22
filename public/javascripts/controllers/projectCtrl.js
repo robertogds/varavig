@@ -6,7 +6,8 @@ Varavig.Controllers.ProjectCtrl = Backbone.Controller.extend({
         "new":           									"new_project",
 		"project/:id":   									"show_project",
 		"project/:project_id/sprint/:sprint_id":    		"show_sprint",
-		"project/:project_id/sprint/:id/new_task":  		"new_task"
+		"project/:project_id/sprint/:id/new_task":  		"new_task",
+		"invite/:id": 										"show_invitation_form"
     },
 
     index: function() {
@@ -66,6 +67,11 @@ Varavig.Controllers.ProjectCtrl = Backbone.Controller.extend({
 		
         new Varavig.Views.EditTask({ model: task });
 
-    }	
+    },
+
+	show_invitation_form: function(id) {
+		var project = new Project({ id: id });
+ 		new Varavig.Views.InviteView({ model: project });
+    }
 
 });

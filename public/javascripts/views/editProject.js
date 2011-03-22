@@ -8,11 +8,7 @@ Varavig.Views.EditProject = Backbone.View.extend({
 		//this.model.bind('all', this.render);
 		this.render();
     },
-    
-    clean_project: function() {
-        $('#new_project').html("");
-    },
-	
+
 	// Generate the attributes for a new Project
 	newAttributes: function() {
 	    return {
@@ -28,7 +24,6 @@ Varavig.Views.EditProject = Backbone.View.extend({
 	},
     
     save: function() {
-		this.clean_project();
         var msg = this.model.isNew() ? 'Successfully created!' : "Saved!";
         var attributes = this.editAttributes();
         if (this.model.isNew()) { attributes = this.newAttributes(); }
@@ -47,7 +42,7 @@ Varavig.Views.EditProject = Backbone.View.extend({
 
     render: function() {
     		$(this.el).html(_.template($('#project').html())({ model: this.model }));
-	        $('#new_project').html(this.el);
+	        $('#main_container').html(this.el);
 	        // use val to fill in title, for security reasons
 	        this.$('[name=title]').val(this.model.get('title'));
 	        this.delegateEvents();

@@ -5,15 +5,7 @@
 	<div class="container fix">
 	
 			<div id ="main_container">
-			<h1>Your Projects</h1>                
-			<div id="new_project_link"><h3><a href='#new'>Create New</a></h3></div>
-				<div id ="new_project"></div>
-								
-				<div id ="projects">
-				</div>
-				
-				<div id ="sprints">
-				</div>
+			
 			</div>
 		
 	</div>
@@ -59,17 +51,19 @@
 	</script>
 		  
 	<script type="text/template" id="project">
+	<h1>New Project</h1>
 <div title="new project">
 <form>	
     <label for='title'>Title</label>
     <input name='title' type='text' /> 	
-    <button>'Create' </button>
+    <button>Create</button>
 </form>
 </div>
 	</script>
 
 	<script type="text/template" id="sprints_collection">
 	<!-- Column-->
+				<h1>Sprints</h1>
 		    <div class="sprints">
 	    <% collection.each(function(sprint) { %>
 	      <div class="portlet" id="<%=sprint.id%>">
@@ -84,17 +78,32 @@
 	
 <script type="text/template" id="projects_collection">
 <!-- Column-->
+		<h1>Your Projects</h1>                
+		<div id="new_project_link"><h3><a href='#new'>Create New</a></h3></div>
 	    <div class="projects">
     <% collection.each(function(project) { %>
       <div class="portlet" id="<%=project.id%>">
 		<div class="portlet-header">
-			<label id="project_title"><%= project.escape('title') %></label> | <a href="#project/<%=project.id%>" >see more</a>
+			<label id="project_title"><%= project.escape('title') %></label> | <a href="#project/<%=project.id%>" >see more</a> | <a href="#invite/<%=project.id%>">Invite to project</a>
 			<button class="delete_project" id="<%=project.id%>">delete</button>&nbsp;
+		</div>
+		<div id="invite_form_div">
 		</div>
 	  </div>
 	<% }); %>
     </div>
 </script>
+
+<script type="text/template" id="invite_form">
+<form>	
+    <label for='email'>Colaborator email</label>
+    <input name='email' type='text' /> 	
+	<input name='project_id' type='hidden' value="<%=model.id%>"/> 
+    <button type="hidden"> Send </button>
+	<a href="#" class="send_invitation" >Send Invitation</a>
+</form
+</script>
+
 	<script type="text/template" id="task">
 <div id="dialog" title="new task">
 <form>
