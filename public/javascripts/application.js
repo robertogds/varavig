@@ -4,7 +4,7 @@ var Varavig = {
     NOTSTARTED_COLUMN :1,
     STARTED_COLUMN:2,
     FINISHED_COLUMN: 3,
-
+	COLUMNS: [{"name":"backlog", "title": "Backlog"},{"name":"not_started", "title": "Not Started Item"},{"name":"started", "title": "Started Tasks"},{"name":"finished", "title": "Finished Tasks"}],
     Views: {},
     Controllers: {},
     Collections: {},
@@ -12,47 +12,30 @@ var Varavig = {
     init: function() {
 	
           // Create our global User varible
-        Varavig.User = new User();
-        this.get_user();
-    
-    	// call the controller
-		new Varavig.Controllers.ProjectCtrl();
-		Backbone.history.start();
-    },
-    
-    get_user: function() {
-   	    Varavig.Users = new Varavig.Collections.Users;
-        Varavig.Users.fetch({
+        var users = new Varavig.Collections.Users;
+        users.fetch({
            success: function() {
-       	 		Varavig.User = Varavig.Users.at(0);
-       	 		$('#gravatar').gravatarImg(Varavig.User.get("email"),'?s=37&d=mm');
+       	 		var user = users.at(0);
+				var projects = new Varavig.Collections.Projects();
+			    projects.fetch({
+						success: function(){
+							// call the controller
+							new Varavig.Controllers.ProjectCtrl({user: user, projects: projects});
+							Backbone.history.start();
+			            },
+			            error: function() {
+			                new Error({ message: "Error loading projects." });
+			            }
+			     });
            },
            error: function() {
-               new Error({ message: "Error loading users." });
-               alert("Error cargando usuario");
+               var e = new Error({ message: "Error loading users." });
+               alert(e);
            }
         });
-        
-     }
+
+    }
     
 };
 
-
-//Hide backlog. We must  remove it from here.
-$('#collapseBacklog.expanded').live('click', function() {
-    $('.container .column').removeClass('four-columns').addClass('three-columns');
-
-    $('.container #backlog').hide();
-    $("#not_started .wrap").addClass('first');
-    $(this).addClass('collapsed').removeClass('expanded');
-});
-
-$('#collapseBacklog.collapsed').live('click', function() {
-    $('.container #backlog ').show();
-
-    $('.container .column').removeClass('three-columns').addClass('four-columns');
-
-    $(this).addClass('expanded').removeClass('collapsed');
-    $("#not_started .wrap").removeClass('first');
-});
 

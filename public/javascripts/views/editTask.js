@@ -54,7 +54,6 @@ Varavig.Views.EditTask = Backbone.View.extend({
 
     render: function() {
     		$(this.el).html(_.template($('#task').html())({ model: this.model }));
-    		//this.$( "#dialog" ).dialog();
 	        $('#newtask').html(this.el);
 	        // use val to fill in title, for security reasons
 	        this.$('[name=title]').val(this.model.get('title'));

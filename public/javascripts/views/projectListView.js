@@ -8,7 +8,6 @@ Varavig.Views.ProjectListView = Backbone.View.extend({
         //TODO esto no fnciona, pq?
 		//_.bindAll(this, 'render');
 		//this.model.bind('all', this.render);
-		this.render();
     },
 
     render: function() {
@@ -16,7 +15,7 @@ Varavig.Views.ProjectListView = Backbone.View.extend({
         	collection: this.collection
 			}));
 	    $('#main_container').html(this.el);
-	    this.jquery_editable();
+	    //this.jquery_editable();
         this.delegateEvents();
         return this;
     },

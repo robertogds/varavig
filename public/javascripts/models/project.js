@@ -1,10 +1,6 @@
 var Project = Backbone.Model.extend({
-   
  
   initialize: function() {
-	if (!this.get("user")) {
-        this.set({"user": Varavig.User.get("email") });
-      }
   },
 
   validateAttributes: function() {

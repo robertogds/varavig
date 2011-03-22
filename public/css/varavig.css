@@ -1,0 +1,10 @@
+#columns.three .column {
+	float:left;
+	width:33%;
+}
+
+.column .wrapper {
+	border:solid 1px red;
+	margin:0 10px;
+}
+

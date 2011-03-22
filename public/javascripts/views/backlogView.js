@@ -2,17 +2,17 @@
 Varavig.Views.BacklogView = Varavig.Views.AbstractPanelView.extend({
     	
     initialize: function() {
-        this.render();
-		this.task_list = this.collection;
     },
 
     render: function() {
         $(this.el).html(_.template($('#tasks_collection').html())({
-        	collection: this.collection.backlog() ,
-			total: this.total_points_left(Varavig.BACKLOG_COLUMN)
+        	collection: this.collection.backlog() 
         	}));
-        $('#items').html(this.el);
-        this.jquery_task();
+        $('#tasks_backlog').html(this.el);
+		$('#total_backlog').html(this.total_points_left(Varavig.BACKLOG_COLUMN));
+        //this.jquery_task();
+		this.sortable_tasks();
+		this.truncate_long_texts();
         this.delegateEvents();
         return this;
     },

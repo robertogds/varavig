@@ -1,0 +1,785 @@
+
+@body-bg: #fff;
+
+@color_A: #2F2933;	/* almost white --> Title, icons */
+@color_B: #3B3340;	/* yellow */
+
+@color_C: #FFFFED;	/* gray */
+@color_C2: #D5CECF;	/* gray lighter */
+@color_C3: #FFF;	/* gray darker */
+
+@color_D: #29D9C2; 	/* green light --> For buttons, links, ... */
+@color_D2: #01A2A6; /* green darker */
+
+@task_color_1: #26E84C;
+@task_color_2: #FFF729;
+@task_color_3: #36C5FF;
+@task_color_4: #CB56F1;
+@task_color_5: #F98006;
+
+@color_link: @color_D;
+
+@header_top:#75657F;
+@header_bottom:#95859E;
+
+@blocked_color: #FFBFBF;
+
+@sprite_url: url(../../img/themes/dark/sp.png);
+
+
+/*= General Functions */
+.rounded(@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+}
+.rounded_top(@radius: 5px) {
+    -webkit-border-radius: @radius @radius 0 0;
+    -moz-border-radius:@radius @radius 0 0;
+    border-radius: @radius @radius 0 0;
+}
+.rounded_right(@radius: 5px) {
+    -webkit-border-radius: 0 @radius @radius 0;
+    -moz-border-radius:0 @radius @radius 0;
+    border-radius: 0 @radius @radius 0;
+}
+.rounded_custom(@tl: 5px, @tr: 5px, @br: 5px, @bl: 5px) {
+    -webkit-border-radius: @tl @tr @br @bl;
+    -moz-border-radius:@tl @tr @br @bl;
+    border-radius: @tl @tr @br @bl;
+}
+.shadow(@position: 0px, @blur:3px, @shadow: #000) {
+    box-shadow:@position @position @blur @shadow;
+	-webkit-box-shadow:@position @position @blur @shadow;
+	-moz-box-shadow: @position @position @blur @shadow;
+}
+.gradient(@color_top: @header_top, @color_bottom: @header_bottom) {
+	background:@color_top;
+	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0,@color_bottom),color-stop(1, @color_top));
+	background-image: -moz-linear-gradient(center bottom,@color_bottom 0%,@color_top 100%);
+}
+.indent(@indent:-8000px) {
+	text-indent:@indent;
+	outline:none;
+}
+.opacity(@value:.50) {
+	-moz-opacity:@value; opacity:@value;
+}
+
+/*= General Styles */
+body { 
+	background: @body-bg; 
+	color: @color_A;
+	min-width:1000px;
+}
+a {
+	color:@color_link;
+}
+.bt {
+	.gradient(@color_D, @color_D2);
+	span {
+		color:@color_C3;
+	}
+	
+	&:hover {
+		.gradient(@color_D2, @color_D);
+	}
+}
+	
+.nav ul.sub {
+	width:auto;
+	position:relative;
+	
+	a, h1 {
+		background: @sprite_url no-repeat right 9px;
+		padding-right:22px;
+		color:@color_A;
+	}
+	&:hover {
+		background:@color_C3;
+	}
+	ul {
+		background-color:@color_C2;
+		
+		position:absolute;
+		z-index:9;
+		.rounded_custom(5px, 0, 5px, 5px);
+		.shadow();
+		
+		a {
+			background-image: none;
+			text-align:left;
+			padding-left:10px;
+			
+			&:hover {
+				background:@color_C3;
+			}
+		}
+		
+	}
+	li { text-align:left; }
+}	
+				
+/*= HEADER */
+#header {
+	padding:8px 3px 20px;
+
+	img#logo {
+		width:115px;
+		height:48px;
+		border-right:solid 1px @color_B;
+		margin:0 3px 0  20px;
+		padding-right:3px;
+		
+	}
+}	
+#currentProject {
+	h1 {
+		font-family:'Yanone Kaffeesatz',arial,serif;
+		font-size:26px;
+		padding-top:8px;
+		margin-bottom:6px;
+		background-position: right 20px;
+	}
+	ul.sub {
+		ul {
+			.rounded_custom(0, 5px, 5px, 5px);
+			
+			li, a {
+				min-width:80px;
+			}
+		}
+	}
+}
+#userPanel {
+	position:relative;
+	padding-top:2px;
+	margin-right:20px;
+	
+	p, ul.sub {
+		margin:0 42px 0 0;
+	}
+	p { padding-right:5px;}
+	ul.sub {
+		float:right;
+		
+		padding:0 0 0 6px;
+		margin-top:5px;
+		border:solid 1px @color_C3;
+		border-width:1px 1px 0 1px;
+		
+		&:hover {
+			border:solid 1px @color_C2;
+			border-width:1px 1px 0 1px;
+		}
+		ul {
+			
+			z-index:9;
+			right:42px;
+			
+			a {
+				padding-right:8px;
+				text-align:right;
+			}
+			
+			li {
+				width:140px;
+			}
+		}
+		li { text-align:right; }
+	}
+	img {
+		position:absolute;
+		top:3px;
+		right:3px;
+	}
+}
+.backlog_collapsed {
+	padding-left:20px;
+}
+.backlog_collapsed .column { width:33%; float:left;}
+/*.backlog_collapsed #backlog { width:7%; float:left;} */
+
+.column {
+	float:left;
+	width:25%;
+}
+
+.backlog_collapsed {
+	#open_backlog_link {
+		position:absolute;
+		left:0;
+		padding:5px 0;
+		.gradient(@color_D, @color_D2);
+		.rounded_right(); 
+		.shadow();
+		
+		span	{
+			float:left;
+			width:24px;
+			height:86px;
+			background: @sprite_url no-repeat 1px -362px;
+			.indent();
+		}
+		
+		&:hover {
+			.gradient(@color_D, @color_D);
+		}
+	}
+	#backlog {
+		display:none;
+	}
+}
+	
+
+.column {
+	.wrapper {
+		background-color:@color_C;
+		margin:0 10px;
+		padding-bottom:4px;
+		
+		.shadow();
+		.rounded();
+	}
+	.header {
+		background:@header_top;
+		color:@color_C3;
+		position:relative;
+		
+		.gradient();
+		
+		.rounded_top();
+		
+		h2 {
+			line-height:25px;
+			padding-left:7px;
+			margin:0;
+			font-size:14px;
+		}
+		.actions {
+			position:absolute;
+			top:0; right:5px;
+			height:25px;
+			line-height:25px;
+			.gradient();
+			
+			.total {
+				float:left;
+			}
+			a {
+				float:left;
+				height:22px;
+				margin:0 2px;
+				padding:6px 2px 0;
+				
+				&:hover {
+					.opacity();
+				}
+				
+				span {
+					float:left;
+					
+					height:15px;
+					width:22px;
+					background: @sprite_url no-repeat 0 -17px;
+					
+					.indent();
+				}
+			}
+			
+			.filter {
+				border-right:solid 1px @color_C3;
+				border-left:solid 1px @color_C3;
+				
+				span {
+					backgroud-position:0 -17px;
+				}
+			}
+			.expand_all, .collapse_all { margin-left:0; margin-right:0;}
+			.expand_all span { background-position:-12px -31px; width:10px; }
+			.collapse_all span { background-position:0 -31px; width:10px;}
+			.hide_backlog span { background-position:0 -317px; width:14px;}
+			.show_backlog { display:none; } 
+			.show_backlog span {  background-position:0 -302px; width:14px;}
+			
+			
+			.filter_panel {
+				position:absolute;
+				z-index:9;
+				top:20px;
+				right:0;
+				min-width:130px;
+				display:none;
+				
+				background:@color_C;
+				padding:3px 3px 3px 5px;
+				.rounded();
+				.shadow();
+				
+				strong { float:left; color:@color_A; line-height:14px;}
+				a {
+					display:block;
+					float:none;
+					clear:both;
+					height:auto;
+					padding:0;
+					
+					&.close { 
+						clear:none;
+						float:right;
+						width:13px;
+						height:13px;
+						.indent();
+						
+						background: @sprite_url no-repeat 0 -470px;
+						
+					}
+				}
+			}
+		}
+	}
+	.tasks_wrapper { overflow:auto; }
+	.tasks {
+		list-style-type:none;
+		margin:0;padding:0;
+		min-height:100px;
+
+		.title {
+			background-color:@color_C3;
+			border-bottom:solid 1px @color_C;
+			padding:2px 5px 3px 2px;
+			position:relative;
+			
+			.expand_task {
+				float:left;
+				margin:3px 2px 0 5px;
+				height:12px;
+				width:15px;
+				background: @sprite_url no-repeat -5px -213px;
+					
+				.indent();
+			}
+			.expand_task:hover { .opacity(); }
+			h3 { 
+				float:left; 
+				clear:none; 
+				margin:0;
+				font-family:arial,sans-serif;
+				white-space:nowrap;
+				overflow:hidden;
+				line-height:16px;
+				font-size:12px;
+				padding-top:2px;
+				width:100%;
+				
+				.data { margin-bottom:0;}
+			}
+			.title_info {
+				position:absolute;
+				top:3px;
+				right:0;
+				height:20px;
+				padding: 0 4px;
+				background-color:@color_C3;
+			}
+			.task_color {
+				float:right;
+				width:7px;
+				height:7px;
+				background: @sprite_url no-repeat -12px -49px;
+				margin:5px 5px 0 0;
+				
+			}
+			.no_gravatar {
+				float:right;
+				width:17px;
+				height:17px;
+				background: @sprite_url no-repeat -2px -81px;
+			}
+			.no_person {
+				float:right;
+				width:17px;
+				height:17px;
+				background: @sprite_url no-repeat -2px -61px;
+			}
+			.drag {
+				float:right;
+				width:17px;
+				height:17px;
+				margin-right:3px;
+				background: @sprite_url no-repeat -2px -284px;
+				cursor:move;
+				.indent();
+				display:none;
+			}
+			
+			img { float:right;}
+		}
+		.task {
+			&:hover .drag {
+				display:block;
+			}
+			
+			&.blocked {
+			
+				.title {
+					background-color: @blocked_color;
+					border-bottom-color:@blocked_color;
+					
+					.title_info {
+						background-color: @blocked_color;
+					}
+					.data {
+						border-color:@blocked_color;
+					}
+				}
+				.detail {
+					border:solid 2px @blocked_color;
+					border-top-width:0;
+					
+					.actions {
+						a.unblock_task { display:block;}
+						a.block_task { display:none;}
+					}
+					
+				}
+				
+				.blocked_reason {
+					position:relative;
+					span {
+						position:absolute;
+						top:3px;
+						left:2px;
+						width:20px;
+						height:20px;
+						background: @sprite_url no-repeat -2px -165px;
+						.indent();
+					}
+					.blocked_content {
+						margin:7px 7px 2px;
+						padding-left:18px;
+						padding-top:5px;
+						border-top: solid 1px @blocked_color;
+						color:@color_C3;
+					}
+				}
+			}
+			
+		}
+			
+		.expanded {
+			.title {
+				background-color: @color_C2;
+				border-bottom-color:@color_C2;
+				
+				h3 { 
+					white-space:normal;
+					
+					div {
+						margin:0 30px 0 22px;
+						
+						strong { 
+							display:block; 
+							margin-top:-2px;
+							padding-top:1px;
+							padding-bottom:1px;
+							
+						}
+					}
+				}
+				.expand_task {
+					background-position:-5px -226px;
+					margin:1px 2px 4px 5px;
+				}
+				
+				.task_color, img, .no_gravatar, .no_person {
+					display:none;
+				}
+				.title_info { background-color:@color_C2; }
+				.drag {.opacity(0.8); }
+			}
+			.detail { display:block;}
+
+			.data {
+				border: 1px dotted @color_C2;
+				margin-bottom: 10px;
+				padding: 3px 0 3px 3px;
+				width:100%;
+						
+				&:hover {
+					border: 1px dotted @color_C !important;
+				}
+			}
+			
+
+			.edit {
+				.data {
+					display:none;
+				}
+				
+				.field {
+					display:block;
+					width:100%;
+					padding:0 0 0 3px;
+					border:solid 1px @color_C;
+					background-color:@header_bottom;
+				}
+				.field_group {
+					display:block;
+				}
+			}
+			
+		}
+		
+		.field, .field_group {
+			display:none;
+		}		
+
+		.detail {
+			display:none;
+			background-color:@color_C2;
+			border-bottom:solid 1px @color_C3;
+			position:relative;
+			padding:0 5px 3px 0;
+			min-height:74px;
+			
+			
+			.description {
+				margin:0 95px 0 21px;
+				color:@color_C3;
+				
+				.data { margin-bottom:10px;}
+				.field { margin-bottom:10px; height:80px;}
+			}
+			.task_actions {
+				width:88px;
+				position:absolute;
+				top:0;
+				right:5px;
+			}
+			.person {
+				height:25px;
+				margin:0;
+				strong { float:right; margin-right:5px; font-weight:normal; line-height:17px;}
+				img { float:right;	}
+				.data { float:right;}
+			}
+			.percentage {
+				.total {
+					border:solid 1px @color_C;
+					margin:0 0 0 10px;
+					.rounded();
+				}
+				.complete {
+					height:8px;
+					background:@color_C;
+					.indent();
+				}
+				.data {
+					padding-left:0;
+					margin:2px 0 7px;
+				}
+				.field_group {
+					margin-bottom:3px;
+					span {
+						float:left;
+						margin:0 3px;
+						line-height:20px;
+					}
+				}
+				.field {
+					width:30px;
+					text-align:right;
+					padding:0 3px 0 0;
+				}
+			}
+			
+			.actions {
+				float:right;
+				.opacity(0);
+				a {
+					float:left;
+					width:19px;
+					height:20px;
+				
+					background: @sprite_url no-repeat 0 -98px;
+					.indent();
+					
+					&.pick_color { background-position:-1px -122px; }
+					&.block_task { background-position:-1px -145px; }
+					&.unblock_task { background-position:-1px -451px; display:none; }
+					&.delete_task { background-position:0 -188px; }
+					
+					&:hover { .opacity();	}
+				}
+				
+				.picker_panel {
+					background:@color_C;
+					padding:3px;
+					position:absolute;
+					width:80px;
+					.rounded();
+					.shadow();
+					strong { line-height:14px;}
+					a {
+						background-image:none;
+						float:left;
+						width:10px;
+						height:10px;
+						border:solid 1px #fff;
+						margin:2px;
+						.rounded();
+						
+						&.color1 { background-color:@task_color_1; clear:both;}
+						&.color2 { background-color:@task_color_2;}
+						&.color3 { background-color:@task_color_3;}
+						&.color4 { background-color:@task_color_4;}
+						&.color5 { background-color:@task_color_5;}
+						
+						&.close {
+							border-width:0;
+							background: @sprite_url no-repeat 0 -470px;
+							height:13px;
+							width:13px;
+							float:right;
+						}
+					}
+				}
+			}
+			.tags {
+				margin-right:90px;
+				em {
+					background: @sprite_url no-repeat 0 -243px;
+					width:25px;
+					height:15px;
+					float:left;
+					.indent();
+				}
+				
+				span {
+					float:left;
+					border-right:solid 1px @color_C;
+					margin-right:5px;
+					padding-right:5px;
+					line-height:13px;
+				}
+				
+				.add_tag {
+					float:left;
+					width:12px;
+					height:12px;
+					margin-top:1px;
+					background: @sprite_url no-repeat -5px -212px;
+					.indent();
+					
+					&:hover { .opacity();	}
+				}
+			}
+			.save_task {
+				position:absolute;
+				bottom:5px;
+				right:5px;
+				
+				
+			}
+		}
+		
+		.task:hover .detail .actions {
+			.opacity(.99);
+		}
+		
+		.color1 .task_color, .color1 .detail .pick_color { background-color:@task_color_1;}
+		.color2 .task_color, .color2 .detail .pick_color { background-color:@task_color_2;}
+		.color3 .task_color, .color3 .detail .pick_color { background-color:@task_color_3;}
+		.color4 .task_color, .color4 .detail .pick_color { background-color:@task_color_4;}
+		.color5 .task_color, .color5 .detail .pick_color { background-color:@task_color_5;}
+	}
+
+}
+
+
+.sort_placeholder {
+	background:@color_B;
+	border:dotted 1px @color_A;
+	line-height:40px; height:40px;
+}
+
+
+
+/*
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+
+ 
+.jspContainer {
+	overflow: hidden;
+	position: relative;
+}
+.jspPane {
+	position: absolute;
+}
+.jspVerticalBar {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 11px;
+	height: 100%;
+	background: @color_C;
+}
+.jspVerticalBar * {
+	margin: 0;
+	padding: 0;
+}
+.jspCap {
+	display: none;
+}
+
+.jspTrack {
+	background: @color_C2;
+	position: relative;
+	width:3px;
+	margin: 0 auto 0 4px;
+}
+.jspDrag {
+	background: @color_A;
+	position: relative;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+}
+.jspArrow {
+	background: #50506d;
+	text-indent: -20000px;
+	display: block;
+	cursor: pointer;
+}
+.jspArrow.jspDisabled {
+	cursor: default;
+	background: #80808d;
+}
+.jspVerticalBar .jspArrow {
+	height: 16px;
+	
+	background: @sprite_url no-repeat 2px -331px;
+}
+.jspVerticalBar .jspArrow.jspArrowDown {
+	background-position:2px -344px;
+}
+.jspHorizontalBar .jspArrow {
+	width: 16px;
+	float: left;
+	height: 100%;
+}
+.jspVerticalBar .jspArrow:focus {
+	outline: none;
+}
+.jspCorner {
+	background: #eeeef4;
+	float: left;
+	height: 100%;
+}
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+* html .jspCorner {	margin: 0 -3px 0 0; }

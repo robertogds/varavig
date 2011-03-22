@@ -1,10 +1,12 @@
 Varavig.Views.InviteView = Backbone.View.extend({
     events: {
-        "clic .send_invitation": "send_invitation"
+        "submit form": "send_invitation"
     },
     
     initialize: function() {
-		this.render();
+		_.bindAll(this, 'render');
+	    this.model.bind('change', this.render);
+        this.render();
     },
 
 	form_attributes: function() {
@@ -18,27 +20,21 @@ Varavig.Views.InviteView = Backbone.View.extend({
 	    alert("entramos");
         var attributes = this.form_attributes();
 
-		// var jqxhr = $.getJSON("/invite/" + attributes.get("email") + "/" + attributes.get("project_id"), function() {
-		//   alert("success");
-		// })
-		// .success(function() { alert("second success"); })
-		// .error(function() { alert("error"); })
-		// .complete(function() { alert("complete"); });
+		var send_invitation = function() {
+		            return $.ajax({
+						type: "POST",
+		                url: '/invite/' + attributes.get("email") + '/' + attributes.get("project_id"),
+		                data: {},
+		                contentType: "application/json; charset=utf-8",
+		                dataType: "json"
+		            });
+		        };
+
+        $.when(send_invitation()).then(function(data) {
+            alert("eeeo");
+		});
 
 		
-		$.ajax({
-		  type: "POST",
-		  url: "/invite/" + attributes.get("email") + "/" + attributes.get("project_id"),
-		  context: document.body,
-		  success: function(){
-		    alert("fue bien dicen");
-			window.location.hash = '#';
-		  }	,
-		            error: function(e) {
-				alert(e);
-		            //    new App.Views.Error();
-		            }
-		});  
 		alert("antes de salir");
 		return false;      
     },

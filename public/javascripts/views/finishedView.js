@@ -2,17 +2,17 @@
 Varavig.Views.FinishedView = Varavig.Views.AbstractPanelView.extend({
 
     initialize: function() {
-        this.render();
-    },
-    
+    },    
     
     render: function() {
 		$(this.el).html(_.template($('#tasks_collection').html())({ 
-			collection: this.collection.finished(),
-			total: this.total_points_left(Varavig.FINISHED_COLUMN)
+			collection: this.collection.finished()
 			}));
-        $('#items_finished').html(this.el);
-        this.jquery_task();
+        $('#tasks_finished').html(this.el);
+        $('#total_finished').html(this.total_points_left(Varavig.FINISHED_COLUMN));
+        //this.jquery_task();
+		this.sortable_tasks();
+		this.truncate_long_texts();
         this.delegateEvents();
         return this;
     },

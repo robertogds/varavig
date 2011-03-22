@@ -1,5 +1,10 @@
 // Controller for the projects
 Varavig.Controllers.ProjectCtrl = Backbone.Controller.extend({
+	_user: null,
+	_projects: null,
+	_index_view: null,
+	_user_area_view: null,
+	_sprints: null,
 	
     routes: {
         "":              									"index",
@@ -10,17 +15,21 @@ Varavig.Controllers.ProjectCtrl = Backbone.Controller.extend({
 		"invite/:id": 										"show_invitation_form"
     },
 
+     initialize: function(data) {
+         this._user = data.user;
+		 Varavig.User = this._user;
+         this._projects = data.projects;
+		 this._sprints =  new Varavig.Collections.Sprints();
+
+		//create user area view with projects and user into
+		 this._user_area_view = new Varavig.Views.UserAreaView({model: this._user, collection: this._projects});
+         this._index = new Varavig.Views.ProjectListView({collection: this._projects });
+
+     	return this;
+     },
+	
     index: function() {
-	   	// Create our global collection of **Projects**.
-	    var projects = new Varavig.Collections.Projects();
-        projects.fetch({
-            success: function() {
-                new Varavig.Views.ProjectListView({ model: new Project(), collection: projects });
-            },
-            error: function() {
-                new Error({ message: "Error loading projects." });
-            }
-        });
+	   	this._index.render();
     },
 
     new_project: function() {
@@ -30,35 +39,53 @@ Varavig.Controllers.ProjectCtrl = Backbone.Controller.extend({
     },
 
 	show_project: function(id){
-		var project = new Project({ id: id });
-		var self = this;
-		project.fetch({
-            success: function(){
-				self.sprints = new Varavig.Collections.Sprints(project.get("sprints"));
-                new Varavig.Views.SprintListView({ collection: self.sprints });
-            },
-            error: function() {
-                new Error({ message: "Error loading projects." });
-            }
-        });	
+		//TODO if project doesnt exist we should inform
+		var project = this._projects.get(id);
+		
+		//set current project in the user area
+		this._user_area_view.set_current_project(project);
+		
+		//If already define we avoid fetching data again
+        if (_.isUndefined(project._view)) {
+			var self = this;
+			project.fetch({
+	            success: function(){
+					var sprints = new Varavig.Collections.Sprints(project.get("sprints"));
+	                project._view = new Varavig.Views.SprintListView({ collection: sprints });
+					project._view.render();
+	            },
+	            error: function() {
+	                new Error({ message: "Error loading projects." });
+	            }
+	        });
+        } else {
+			project._view.render();
+		}
 	},
 	
 	show_sprint: function(project_id, sprint_id){
-		var sprint = new Sprint({ id: sprint_id });		
-		sprint.fetch({
-           	success: function(){
-				var tasks = new Varavig.Collections.Tasks(sprint.get("tasks"));
-				new Varavig.Views.SprintPanelView({ model: sprint, collection: tasks });
-                new Varavig.Views.FinishedView({ collection: tasks });
-                new Varavig.Views.StartedView({ collection: tasks});
-                new Varavig.Views.NotStartedView({ collection: tasks });
-                new Varavig.Views.BacklogView({ collection: tasks});
-            },
-            error: function() {
-                new Error({ message: "Error loading tasks." });
-            }	
+		var sprint = this._sprints.get(sprint_id);
+		if (_.isUndefined(sprint)) {
+			sprint = new Sprint({ id: sprint_id });	
+			this._sprints.add(sprint);
+		}
+		//If already define we avoid fetching data again
+        if (_.isUndefined(sprint._view)) {	
+			sprint.fetch({
+	           	success: function(){
+					var tasks = new Varavig.Collections.Tasks(sprint.get("tasks"));
+					sprint._view = new Varavig.Views.SprintPanelView({ model: sprint, collection: tasks});
+					sprint._view.render();
+	            },
+	            error: function() {
+	                new Error({ message: "Error loading tasks." });
+	            }	
                 
-	    });
+		    });
+		}
+		else{
+			sprint._view.render();
+		}
 	},
 	
 	new_task: function(project_id, sprint_id) {

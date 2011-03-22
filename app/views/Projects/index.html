@@ -1,53 +1,104 @@
 #{extends 'main.html' /}
 #{set title:'Your Project Manager Panel' /}
 
-   	
-	<div class="container fix">
-	
-			<div id ="main_container">
+	<div id ="main_container">
 			
-			</div>
-		
 	</div>
-	<div class="push"></div>
+		
+<script type="text/template" id="user_area_tmp">
+	<div id="currentProject" class="fl nav">	
+		<ul class="sub">
+			<li>
+			<% if(!current_project) { %>
+				<h1>Your Projects</h1>
+			<% } else { %>
+				<h1><%=current_project.get("title")%></h1>
+			<% }; %>
+				<ul class="v">
+					<% collection.each(function(project) { %>
+						<li><a href="#project/<%=project.id%>"><%=project.get("title")%></a></li>
+					<% }); %>
+				</ul>
+			</li>
+		</ul>
+
+	</div>
+
+	<div id="userPanel" class="fr nav">
+		<p>
+			welcome, <strong class="substring_12">${user}</strong>
+		</p>
+		<img id="gravatar" />
+		<ul class="sub">
+			<li><a href="#">options</a>
+				<ul class="v">
+					<li><a href="/">your projects</a></li>
+					<li><a href="@{Application.logout()}">exit</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</script>
 	
 <script type="text/template" id="sprint_panel">
-		<a id="collapseBacklog"  class="collapsed fr"   href="javascript:void(0)">
-			<span id="sidebar"></span>
-		</a>
-	
-		<div id="backlog" class="column" style="display:none;">
-			<div class="wrap first">
-			Product Backlog
-                <div id="newlink"><h3><a href='#project/<%=sprint.get("project").id%>/sprint/<%=sprint.id%>/new_task'>Create New</a></h3></div>
-				<div id ="newtask"></div>
-								
-				<div id ="items" class="scrollable">
+		<div id="columns" class="backlog_collapsed finished_collapsed">
+		
+		<% columns.each(function(column) { %>
+			<% if(column.get("name") == "backlog" || column.get("name") == "finished" ) { %>
+				<a href="javascript:void(0)" id="open_<%=column.get("name")%>_link" title="show <%=column.get("title")%>">
+					<span>
+						Open <%=column.get("title")%>
+					</span>
+				</a>
+			<% }; %>
+
+			<div id="<%=column.get("name")%>" class="column">
+				<div class="wrapper">
+					<div class="header">
+						<h2><%=column.get("title")%></h2>
+						<div class="actions">
+							<div class="columnActions">
+								<span class="total" id="total_<%=column.get("name")%>"></span>
+								<a href="javascript:void(0)" class="filter" title="filter">
+									<span>filter</span>
+								</a>
+								<a href="javascript:void(	0)" class="expand_all" title="expand all">
+									<span>expand all</span>
+								</a>
+								<a href="javascript:void(0)" class="collapse_all" title="collapse all">
+									<span>collapse all</span>
+								</a>
+								<% if(column.get("name") == "backlog"  || column.get("name") == "finished") { %>
+									<a href="javascript:void(0)" class="hide hide_<%=column.get("name")%>" title="hide <%=column.get("name")%>">
+										<span>hide <%=column.get("title")%></span>
+									</a>
+								<% }else{ %>
+									<div class="filter_panel">
+										<strong>Filter</strong>
+										<a href="javascript:void(0)" class="close">close</a>
+										<a href="javascript:void(0)">sort by person</a>
+										<a href="javascript:void(0)">sort by name</a>
+										<a href="javascript:void(0)">sort by date</a>
+									</div>
+								<% }; %>
+							</div>
+						</div>
+					</div>
+					
+					<% if(column.get("name") == "backlog") { %>
+						<div id="newlink"><h3><a href='#project/<%=sprint.get("project").id%>/sprint/<%=sprint.id%>/new_task'>Create New</a></h3></div>
+						<div id ="newtask"></div>
+						
+					<% }; %>
+					
+					<div id="tasks_<%=column.get("name")%>" class="tasks_wrapper"></div>
 				</div>
 			</div>
-		</div>
-		
-		<div id="not_started" class="column">
-			<div class="wrap first">
-				NOT STARTED ITEMS
-            <div id="items_nostart" class="scrollable"></div>
-			</div>
 
-		</div>
-		<div id="started" class="column">
-			<div class="wrap">
-				STARTED ITEMS
-                <div id="items_started" class="scrollable"></div>
-			</div>
-		</div>
-		<div id="finished" class="column">
-			<div class="wrap">
-				FINISHED ITEMS
-				<div id="items_finished" class="scrollable"></div>
-			</div>
+		<% }); %>		
+		
 		</div>
 		
-	
 	</script>
 		  
 	<script type="text/template" id="project">
@@ -99,9 +150,8 @@
     <label for='email'>Colaborator email</label>
     <input name='email' type='text' /> 	
 	<input name='project_id' type='hidden' value="<%=model.id%>"/> 
-    <button type="hidden"> Send </button>
-	<a href="#" class="send_invitation" >Send Invitation</a>
-</form
+    <button> Send invitation </button>
+</form>
 </script>
 
 	<script type="text/template" id="task">
@@ -139,35 +189,96 @@
 
 <script type="text/template" id="tasks_collection">
 <!-- Column-->
-	<div class="total">TOTAL:<%= total %></div>
-	    <div class="subcolumn sortable_tasks">
-		&nbsp;
+	<ul class="tasks">
     <% collection.each(function(task) { %>
-      <div class="portlet" id="<%=task.id%>">
-		
-		<div class="portlet-header">
-			<img class="gravatar" src="<%= task.get('gravatar') %>"></img>
-			<label id="title"><%= task.escape('title') %></label>
-		</div>
-		<div class="portlet-content">
-		  <p id="content"><%= task.escape('content') %></p>
-		  <div class="estimated">Estimated: <label id="estimate"><%= task.get('estimate') %></label></div>
-		  <div class="left">Left:  <label id="left"><%= task.get('left') %></label></div>
-		  <div class="assigned" id="user"><%= task.get('user') %></div>
-		  <div class="toolbar">
-		    <button class="delete_task" id="<%=task.id%>">delete</button>&nbsp;
-			<button class="block_task" id="<%=task.id%>">
-				<% if(!task.get('blocked')) { %>
-					block
-				<% }else{ %>
-					unblock
-				<% }; %>
-			</button>&nbsp;
-		   </div>
-		</div>
-	  </div>
-	<% }); %>
-    </div>
+		<li class="task color1 expanded <% if(task.get('blocked')) { %> blocked	<% }; %>" id="<%=task.id%>">
+			<div class="title">
+				<h3>
+					<a href="javascript:void(0)" class="expand_task" rel="Mostrar|Ocultar">expand</a>
+					<div class="">
+						<strong class="data" ><%= task.escape('title') %></strong>
+						<input type="text" name="title" class="field" value="Very long Task name that dosen't fit in a single line">
+					</div>
+				</h3>
+				<div class="title_info">
+					<% if(!task.get('user')) { %>
+							<span title="no_user" class="no_gravatar"></span>
+					<% }else{ %>
+							<span title="<%= task.get('user') %>" >
+								<img title="<%= task.get('user') %>" src="<%= task.get('gravatar') %>"/>
+							</span>
+					<% }; %>
+					
+					<span class="task_color"></span>
+					<span class="drag">drag</span>
+				</div>
+			</div>
+			<div class="detail">
+				<div class="description">
+					<p class="data">
+					<%= task.escape('content') %>
+					</p>
+					<textarea type="text" class="field" value="" name="content"><%= task.escape('content') %> 
+					</textarea>
+				</div>
+					
+				<div class="task_actions">
+					<p class="person">
+						<% if(!task.get('user')) { %>
+								<span title="no_user" class="no_gravatar"></span>
+						<% }else{ %>
+								<span class="data" title="<%= task.get('user') %>" >
+									<img title="<%= task.get('user') %>" src="<%= task.get('gravatar') %>" width="17"/>
+									<strong class="substring_7"><%= task.get('user') %></strong>
+								</span>
+						<% }; %>
+
+						<select class="field"  name="user">
+							<option value="jaime">pablopr@gmail.com</option>
+							<option value="jaime">pablopr@gmail.com</option>
+						</select>
+					</p>
+					<div class="percentage">
+						<div class="data">
+							<div class="total">
+								<div class="complete" style="width:25%">25%</div>
+							</div>
+						</div>
+						<div class="field_group">
+							<input class="field left_time" value="<%= task.get('left') %>"/>
+							<span> of </span>
+							<input class="field estimated_time" value="<%= task.get('estimate') %>"/>
+						</div>
+					</div>
+					<div class="actions">
+						<a href="javascript:void(0)" class="edit_task" alt="edit task" >edit</a>
+						<a href="javascript:void(0)" class="pick_color" alt="pick color to task">pick_color</a>
+						<a href="javascript:void(0)" class="block_task" alt="block task" id="<%=task.id%>">block</a>
+						<a href="javascript:void(0)" class="delete_task" alt="delete task" id="<%=task.id%>">delete</a>
+					</div>
+					<div class="editing_actions">
+						<a class="bt save_task" href="javascript:void(0)" title="save changes">
+							<span>save</span>
+						</a>
+						<a class="bt cancel_save_task" href="javascript:void(0)" title="cancel changes">
+							<span>cancel</span>
+						</a>
+					</div>
+				</div>
+				<div class="tags">
+					<em>tags:</em>
+					<span>tag num 1</span>
+					<span>tag n 2</span>
+					<span>tag 3</span>
+					<span>tag 4</span>
+					<span>tag 5</span>
+					<a href="javascript:void(0)" class="add_tag">add tag</a>
+				</div>
+				
+			</div>
+		</li>
+		<% }); %>
+		</ul>
 </script>
 <script type="text/javascript">
 	$(function() {
