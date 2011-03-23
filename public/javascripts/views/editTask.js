@@ -4,8 +4,6 @@ Varavig.Views.EditTask = Backbone.View.extend({
     },
     
     initialize: function() {
-        //_.bindAll(this, 'render');
-		//this.model.bind('change', this.render);
 		this.render();
     },
     
@@ -34,14 +32,16 @@ Varavig.Views.EditTask = Backbone.View.extend({
 	},
     
     save: function() {
-		this.clean_task();
+		//this.clean_task();
         var msg = this.model.isNew() ? 'Successfully created!' : "Saved!";
         var attributes = this.editAttributes();
         if (this.model.isNew()) { attributes = this.newAttributes(); }
+		var self = this;
         this.model.save(attributes, {
            success: function(model, resp) {
+			   self.collection.add(model);
 			//TODO como hacemos para que lleve a la url q corresponde? esto es lo mejor q consegui :(
-				history.back(1);
+			// history.back(1);
             },
             error: function(model,e) {
 				alert(e);

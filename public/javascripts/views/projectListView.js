@@ -5,9 +5,7 @@ Varavig.Views.ProjectListView = Backbone.View.extend({
     },
 
     initialize: function() {
-        //TODO esto no fnciona, pq?
-		//_.bindAll(this, 'render');
-		//this.model.bind('all', this.render);
+		this.collection.bind('all', _.bind(this.render, this));
     },
 
     render: function() {
@@ -15,7 +13,6 @@ Varavig.Views.ProjectListView = Backbone.View.extend({
         	collection: this.collection
 			}));
 	    $('#main_container').html(this.el);
-	    //this.jquery_editable();
         this.delegateEvents();
         return this;
     },
@@ -25,7 +22,6 @@ Varavig.Views.ProjectListView = Backbone.View.extend({
         project = this.collection.get(event.currentTarget.id);
         this.collection.remove(project);
         project.destroy();
-        this.render();
     },
 
 	jquery_editable: function() {

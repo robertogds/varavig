@@ -12,6 +12,38 @@ Varavig.Views.AbstractPanelView = Varavig.Views.AbstractView.extend({
 		"click .data": "edit_data",
 		"click .editing_actions a": "editing_actions"
     },
+	
+	block_task: function(event){
+        var task = new Task();
+        task = this.collection.get(event.currentTarget.id);
+		if (task.get("blocked")){
+			task.save({"blocked": false});
+		}
+		else{
+			task.save({"blocked": true});
+		}
+    },
+
+    delete_task: function(event){
+        var task = new Task();
+        task = this.collection.get(event.currentTarget.id);
+        this.collection.remove(task);
+        task.destroy();
+    },
+
+    edit_task: function(event){
+    	//Sprint.Controller.edit_task(event.currentTarget.id);
+        //window.location="#task/"+ event.currentTarget.id;
+    },
+
+    total_points_left: function(column){
+		var total = 0;
+		var tasks = this.collection.filter(function(task) {
+		  return task.get("incolumn") === column;
+		});
+		var total = tasks.reduce(function(m, n){ return m + n.get('left'); }, 0);
+		return total;
+	} ,
 
 	// EDIT 
 	edit_data:function(event){
@@ -136,40 +168,6 @@ Varavig.Views.AbstractPanelView = Varavig.Views.AbstractView.extend({
 		}
 		this.setScroll(par.parents('.tasks_wrapper'));
 	},
-	
-	block_task: function(event){
-        var task = new Task();
-        task = this.collection.get(event.currentTarget.id);
-		if (task.get("blocked")){
-			task.save({"blocked": false});
-		}
-		else{
-			task.save({"blocked": true});
-		}
-        this.render();
-    },
-
-    delete_task: function(event){
-        var task = new Task();
-        task = this.collection.get(event.currentTarget.id);
-        this.collection.remove(task);
-        task.destroy();
-        this.render();
-    },
-
-    edit_task: function(event){
-    	//Sprint.Controller.edit_task(event.currentTarget.id);
-        //window.location="#task/"+ event.currentTarget.id;
-    },
-
-    total_points_left: function(column){
-		var total = 0;
-		var tasks = this.collection.filter(function(task) {
-		  return task.get("incolumn") === column;
-		});
-		var total = tasks.reduce(function(m, n){ return m + n.get('left'); }, 0);
-		return total;
-	} ,
 	
 	sortable_tasks: function(){
 		this.$(".tasks").sortable({

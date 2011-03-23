@@ -4,8 +4,6 @@ Varavig.Views.EditProject = Backbone.View.extend({
     },
     
     initialize: function() {
-	    //_.bindAll(this, 'render');
-		//this.model.bind('all', this.render);
 		this.render();
     },
 
@@ -27,8 +25,10 @@ Varavig.Views.EditProject = Backbone.View.extend({
         var msg = this.model.isNew() ? 'Successfully created!' : "Saved!";
         var attributes = this.editAttributes();
         if (this.model.isNew()) { attributes = this.newAttributes(); }
+		var self = this;
         this.model.save(attributes, {
            success: function(model, resp) {
+				self.collection.add(model);
 				 window.location.hash = '#';
 				 //Backbone.history.saveLocation('#');
             },

@@ -5,6 +5,7 @@ Varavig.Controllers.ProjectCtrl = Backbone.Controller.extend({
 	_index_view: null,
 	_user_area_view: null,
 	_sprints: null,
+	_tasks: null,
 	
     routes: {
         "":              									"index",
@@ -34,7 +35,7 @@ Varavig.Controllers.ProjectCtrl = Backbone.Controller.extend({
 
     new_project: function() {
         var project = new Project();
-        new Varavig.Views.EditProject({ model: project });
+        new Varavig.Views.EditProject({ model: project, collection: this._projects });
 
     },
 
@@ -71,10 +72,11 @@ Varavig.Controllers.ProjectCtrl = Backbone.Controller.extend({
 		}
 		//If already define we avoid fetching data again
         if (_.isUndefined(sprint._view)) {	
+			var self = this;
 			sprint.fetch({
 	           	success: function(){
-					var tasks = new Varavig.Collections.Tasks(sprint.get("tasks"));
-					sprint._view = new Varavig.Views.SprintPanelView({ model: sprint, collection: tasks});
+					self._tasks = new Varavig.Collections.Tasks(sprint.get("tasks"));
+					sprint._view = new Varavig.Views.SprintPanelView({ model: sprint, collection: self._tasks});
 					sprint._view.render();
 	            },
 	            error: function() {
@@ -92,7 +94,7 @@ Varavig.Controllers.ProjectCtrl = Backbone.Controller.extend({
 		var sprint = new Sprint({ id: sprint_id });
         var task = new Task({sprint: sprint});
 		
-        new Varavig.Views.EditTask({ model: task });
+        new Varavig.Views.EditTask({ model: task, collection: this._tasks});
 
     },
 

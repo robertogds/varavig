@@ -4,9 +4,8 @@ Varavig.Views.UserAreaView = Backbone.View.extend({
 	
     initialize: function() {
         //TODO esto no funciona, pq?
-		_.bindAll(this, 'render');
-		this.model.bind('all', this.render);
-		
+		this.model.bind('all', _.bind(this.render, this));
+		this.collection.bind('all', _.bind(this.render, this));
 		this.render();
     },
 	
@@ -22,6 +21,7 @@ Varavig.Views.UserAreaView = Backbone.View.extend({
 			current_project: this._current_project
 		}));
 	    $('#user_area').html(this.el);
+		//TODO esto no deberia estar aqui
 		$('#gravatar').gravatarImg(this.model.get("email"),'?s=37&d=mm');
         this.delegateEvents();
         return this;

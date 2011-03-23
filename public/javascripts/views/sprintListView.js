@@ -5,6 +5,7 @@ Varavig.Views.SprintListView = Backbone.View.extend({
     },
 
 	initialize: function() {
+		this.collection.bind('all', _.bind(this.render, this));
     },
 	
     render: function() {
@@ -22,7 +23,6 @@ Varavig.Views.SprintListView = Backbone.View.extend({
         sprint = this.collection.get(event.currentTarget.id);
         this.collection.remove(sprint);
         sprint.destroy();
-        this.render();
     }
 
 });

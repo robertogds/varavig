@@ -23,6 +23,8 @@ Varavig.Views.SprintPanelView = Varavig.Views.AbstractView.extend({
         this._not_started_view = new Varavig.Views.NotStartedView({ collection: this.collection });
         this._backlog_view = new Varavig.Views.BacklogView({ collection: this.collection});
 		this._columns = new Varavig.Collections.Columns(Varavig.COLUMNS);
+		//IF task collection changes we must render again
+		this.collection.bind('all', _.bind(this.render, this));
     },
 
     render: function() {

@@ -55,6 +55,8 @@ public class Projects extends Application {
 
 	public static void destroy(Long id) {
         Projectt project = Projectt.findById(id);
+		//this will delete the reference to user projects
+		ProjectMember.deleteProject(id);
         project.delete();
         renderJSON("{}");
 	}

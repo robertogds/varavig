@@ -19,6 +19,14 @@ public class ProjectMember extends Model {
 		projectMember.insert();
 		return projectMember;
 	}
+	
+	/*this method must be call when a project is deleted*/
+	public static void deleteProject(Long id){
+		List<ProjectMember> projectMemberList =  ProjectMember.findByProjectId(id);
+		for(ProjectMember pm: projectMemberList){
+			pm.delete();
+		}
+	}
    
     public static Query<ProjectMember> all() {
         return Model.all(ProjectMember.class);
