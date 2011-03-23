@@ -191,7 +191,7 @@
 <!-- Column-->
 	<ul class="tasks">
     <% collection.each(function(task) { %>
-		<li class="task color1 expanded <% if(task.get('blocked')) { %> blocked	<% }; %>" id="<%=task.id%>">
+		<li class="task <%= task.get('color') %> expanded <% if(task.get('blocked')) { %> blocked	<% }; %>" id="<%=task.id%>">
 			<div class="title">
 				<h3>
 					<a href="javascript:void(0)" class="expand_task" rel="Mostrar|Ocultar">expand</a>
@@ -252,8 +252,16 @@
 					</div>
 					<div class="actions">
 						<a href="javascript:void(0)" class="edit_task" alt="edit task" >edit</a>
-						<a href="javascript:void(0)" class="pick_color" alt="pick color to task">pick_color</a>
-						<a href="javascript:void(0)" class="block_task" alt="block task" id="<%=task.id%>">block</a>
+						<a href="javascript:void(0)" class="pick_color" alt="pick color to task">pick_color</a>	
+						<div style="display:none" class='picker_panel subPanel'><strong>Color</strong>
+							<a href='javascript:void(0)' class='close'>close</a>
+						  	<a href='javascript:void(0)' class='color1' id="<%=task.id%>"></a>
+							<a href='javascript:void(0)' class='color2' id="<%=task.id%>"></a>
+							<a href='javascript:void(0)' class='color3' id="<%=task.id%>"></a>
+							<a href='javascript:void(0)' class='color4' id="<%=task.id%>"></a>
+							<a href='javascript:void(0)' class='color5' id="<%=task.id%>"></a>
+						</div>
+						<a href="javascript:void(0)" class="block_task" alt="block task"  id="<%=task.id%>">block</a>
 						<a href="javascript:void(0)" class="delete_task" alt="delete task" id="<%=task.id%>">delete</a>
 					</div>
 					<div class="editing_actions">
@@ -265,6 +273,7 @@
 						</a>
 					</div>
 				</div>
+				<!-- NO TAGS IN FIRST RELEASE
 				<div class="tags">
 					<em>tags:</em>
 					<span>tag num 1</span>
@@ -274,7 +283,7 @@
 					<span>tag 5</span>
 					<a href="javascript:void(0)" class="add_tag">add tag</a>
 				</div>
-				
+				 --!>
 			</div>
 		</li>
 		<% }); %>

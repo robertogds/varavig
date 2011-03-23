@@ -17,6 +17,7 @@ public class Task extends Model {
     public int position;
     public int incolumn;
     public boolean blocked;
+    public String color;
 
 	@Index("sprint_index")
 	public Sprint sprint;

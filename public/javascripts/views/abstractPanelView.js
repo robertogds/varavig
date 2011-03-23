@@ -7,8 +7,9 @@ Varavig.Views.AbstractPanelView = Varavig.Views.AbstractView.extend({
         "click .edit_task": "edit_task",
 		"click .block_task": "block_task",
 		"click .expand_task" : "expand_task",
-		"click .pick_color" : "pick_color",	
-		"click .picker_panel a" : "picker_panel",
+		"click .pick_color" : "show_picker_panel",	
+		"click .picker_panel .close": "close_picker_panel",
+		"click .picker_panel a " : "pick_color",
 		"click .data": "edit_data",
 		"click .editing_actions a": "editing_actions"
     },
@@ -89,64 +90,87 @@ Varavig.Views.AbstractPanelView = Varavig.Views.AbstractView.extend({
 	},
 
 	// color picker
-	pick_color: function(event){
+ 	show_picker_panel: function(event){
 		var link = $(event.currentTarget);
-		var par = link.parents('.actions');
-		
-		if (link.next('.picker_panel').size()) {
-			// picker panel already exists
-			panel = link.next('.picker_panel');
-			if (panel.is(':visible')) {
-				panel.fadeOut();
-			} else {
-				panel.fadeIn();
-			}
+		var panel = link.next('.picker_panel');
+		panel.css({
+					"bottom": link.height(),
+					"left": 0});
+		if (panel.is(':visible')) {
+			panel.fadeOut();
 		} else {
-			// picker panel dosen't exist
-			var pos = link.position();
-			
-			var colors = [ "color1", "color2", "color3", "color4", "color5" ];
-			var picker_panel_style = "top:"+pos.top+"; left:"+pos.left;
-
-			var picker_panel = "<div class='picker_panel subPanel'><strong>Color</strong>";
-			picker_panel += "<a href='javascript:void(0)' class='close'>close</a>";
-			for ( var i=0; i < colors.length; ++i ){
-			  picker_panel += "<a href='javascript:void(0)' class='" + colors[i] + "'></a>";
-			}
-			picker_panel += "</div>";
-			$(picker_panel).insertAfter(this);
-			
-			par.find('.picker_panel').css({
-										"bottom": link.height(),
-										"left": 0})
+			panel.fadeIn();
 		}
 		return false;
 	},
-
-	picker_panel: function(){
+	
+	close_picker_panel: function(event){
 		var link = $(event.currentTarget);
-			
-		if (link.hasClass('close')) {
-			link.parents('.picker_panel').fadeOut();
-		} else {
-			var color = link.attr('class');
-			var task = link.parents('li.task');
-			link.parents('.picker_panel').fadeOut();
-			
-			// remove class colorX and add new color class
-			var classes  = task.attr('class').split(/\s+/);
-			var pattern = /^color/;
-
-			for(var i = 0; i < classes.length; i++){
-			  var className = classes[i];
-			  if(className.match(pattern)){
-				task.removeClass(className);
-			  }
-			}
-			task.addClass(color);
-		}
+		link.parents('.picker_panel').fadeOut();
+		return false;
 	},
 	
+	pick_color: function(event){
+		var color = $(event.currentTarget).attr('class');
+		var task = new Task();
+        task = this.collection.get(event.currentTarget.id);
+		task.save({"color": color});
+		return false;
+	},
+	
+	calculate_percentaje: function(estimated, left){
+		var percentaje = 0;
+		if (left > 0 && estimated > 0 && estimated != left) {
+			if ( estimated < left) { alert("percentage field error. Left:" + left + " #est: " + estimated); }
+			percentaje = (estimated - left) * 100 / estimated ;
+		}
+		if (left == 0){
+			percentaje = 100;
+		}
+		return percentaje;
+	},
+
+    submit_edit : function (value, name, id){ 
+    	var task = new Task();
+        task = this.collection.get(id);
+        switch (name) {
+	        case 'content':
+	        	task.save({"content" : value });
+	           break;
+	        case 'title':
+	        	task.save({"title" : value });
+	           break;
+			case 'user':
+	        	task.save({"user" : value });
+	           break;
+	        case 'percentage':
+	        	task.save({"estimate" : value.estimate });
+				task.save({"left" : value.left });
+	           break;
+        } 
+		return false;
+	},
+	
+	updateDataValues: function (edit_area) {
+		var id = edit_area.parents(".task").attr("id");
+		if (edit_area.hasClass('percentage')) {
+			var left = parseInt(edit_area.find('.left_time').val());
+			var estimated = parseInt(edit_area.find('.estimated_time').val());
+			var percentaje = this.calculate_percentaje(estimated, left);
+			edit_area.find('.complete').css('width',percentaje+"%").html(percentaje+"%");
+			this.submit_edit({"estimate": estimated, "left": left},"percentage", id);
+
+		} else {
+			var value = edit_area.find('.field').val();
+			var name = edit_area.find('.field').attr("name");
+			edit_area.find('.data').html(value);
+			this.submit_edit(value, name, id);
+		}
+
+		return false;
+	},
+	
+	/* JQUERY FUNCTIONS NOT USING BACKBONE */
 	// toogle task panels
 	expand_task: function(event){
 		event.preventDefault();
@@ -179,58 +203,6 @@ Varavig.Views.AbstractPanelView = Varavig.Views.AbstractView.extend({
 			forceHelperSize: true,
 			forcePlaceholderSize: true,
 		});
-	},
-	
-	updateDataValues: function (edit_area) {
-		var id = edit_area.parents(".task").attr("id");
-		if (edit_area.hasClass('percentage')) {
-			var left = parseInt(edit_area.find('.left_time').val());
-			var estimated = parseInt(edit_area.find('.estimated_time').val());
-			var percentaje = this.calculate_percentaje(estimated, left);
-			edit_area.find('.complete').css('width',percentaje+"%").html(percentaje+"%");
-			this.submit_edit({"estimate": estimated, "left": left},"percentage", id);
-
-		} else {
-			var value = edit_area.find('.field').val();
-			var name = edit_area.find('.field').attr("name");
-			edit_area.find('.data').html(value);
-			this.submit_edit(value, name, id);
-		}
-
-		return false;
-	},
-    
-	calculate_percentaje: function(estimated, left){
-		var percentaje = 0;
-		if (left > 0 && estimated > 0 && estimated != left) {
-			if ( estimated < left) { alert("percentage field error. Left:" + left + " #est: " + estimated); }
-			percentaje = (estimated - left) * 100 / estimated ;
-		}
-		if (left == 0){
-			percentaje = 100;
-		}
-		return percentaje;
-	},
-
-    submit_edit : function (value, name, id){ 
-    	var task = new Task();
-        task = this.collection.get(id);
-        switch (name) {
-	        case 'content':
-	        	task.save({"content" : value });
-	           break;
-	        case 'title':
-	        	task.save({"title" : value });
-	           break;
-			case 'user':
-	        	task.save({"user" : value });
-	           break;
-	        case 'percentage':
-	        	task.save({"estimate" : value.estimate });
-				task.save({"left" : value.left });
-	           break;
-        } 
-		return false;
 	}
     
 });
