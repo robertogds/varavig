@@ -37,6 +37,7 @@ Varavig.Views.AbstractPanelView = Varavig.Views.AbstractView.extend({
         //window.location="#task/"+ event.currentTarget.id;
     },
 
+	//return the sum of the points left to do in the tasks of a given column
     total_points_left: function(column){
 		var total = 0;
 		var tasks = this.collection.filter(function(task) {
@@ -119,15 +120,7 @@ Varavig.Views.AbstractPanelView = Varavig.Views.AbstractView.extend({
 	},
 	
 	calculate_percentaje: function(estimated, left){
-		var percentaje = 0;
-		if (left > 0 && estimated > 0 && estimated != left) {
-			if ( estimated < left) { alert("percentage field error. Left:" + left + " #est: " + estimated); }
-			percentaje = (estimated - left) * 100 / estimated ;
-		}
-		if (left == 0){
-			percentaje = 100;
-		}
-		return percentaje;
+		return this.collection.calculate_percentaje(estimated, left);
 	},
 
     submit_edit : function (value, name, id){ 
@@ -146,6 +139,7 @@ Varavig.Views.AbstractPanelView = Varavig.Views.AbstractView.extend({
 	        case 'percentage':
 	        	task.save({"estimate" : value.estimate });
 				task.save({"left" : value.left });
+				task.set({"percentaje": value.percentaje});
 	           break;
         } 
 		return false;
@@ -157,8 +151,7 @@ Varavig.Views.AbstractPanelView = Varavig.Views.AbstractView.extend({
 			var left = parseInt(edit_area.find('.left_time').val());
 			var estimated = parseInt(edit_area.find('.estimated_time').val());
 			var percentaje = this.calculate_percentaje(estimated, left);
-			edit_area.find('.complete').css('width',percentaje+"%").html(percentaje+"%");
-			this.submit_edit({"estimate": estimated, "left": left},"percentage", id);
+			this.submit_edit({"estimate": estimated, "left": left, "percentaje": percentaje},"percentage", id);
 
 		} else {
 			var value = edit_area.find('.field').val();

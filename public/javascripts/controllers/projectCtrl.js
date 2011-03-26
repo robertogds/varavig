@@ -76,13 +76,14 @@ Varavig.Controllers.ProjectCtrl = Backbone.Controller.extend({
 			sprint.fetch({
 	           	success: function(){
 					self._tasks = new Varavig.Collections.Tasks(sprint.get("tasks"));
+					//We need to calculate the percentaje before rendering tasks
+					self._tasks.parse_percentaje();
 					sprint._view = new Varavig.Views.SprintPanelView({ model: sprint, collection: self._tasks});
 					sprint._view.render();
 	            },
 	            error: function() {
 	                new Error({ message: "Error loading tasks." });
 	            }	
-                
 		    });
 		}
 		else{

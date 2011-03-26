@@ -18,6 +18,7 @@ Varavig.Views.SprintPanelView = Varavig.Views.AbstractView.extend({
 	},
 	
     initialize: function() {
+		//instantiate the panels views
         this._finished_view = new Varavig.Views.FinishedView({ collection: this.collection });
         this._started_view = new Varavig.Views.StartedView({ collection: this.collection});
         this._not_started_view = new Varavig.Views.NotStartedView({ collection: this.collection });
@@ -33,11 +34,9 @@ Varavig.Views.SprintPanelView = Varavig.Views.AbstractView.extend({
 			columns: this._columns
         }));
         $('#main_container').html(this.el);
+		//Render panel views 
 		this.render_panels();
 		/* jquery by jaime, move to better place!*/
-		//this.setColumnHeight();
-		//q es esto?
-		//$('input').placeholder();
 		this.setColumnHeight();
 		var self = this;
 		$(window).resize(function() {
@@ -120,6 +119,7 @@ Varavig.Views.SprintPanelView = Varavig.Views.AbstractView.extend({
 	
 	open_backlog_link: function(event){
 		$(event.currentTarget).hide();
+		//this._columns.find_by_name('backlog').at(0).set({"class": ""});
 		$("#columns").removeClass('backlog_collapsed');
 		return false;
 	},
@@ -129,6 +129,7 @@ Varavig.Views.SprintPanelView = Varavig.Views.AbstractView.extend({
 		t = $(event.currentTarget);
 		var par = t.parents('#columns');
 		par.addClass('backlog_collapsed');
+		//this._columns.find_by_name('backlog').first().set({"class": 'backlog_collapsed'});
 		$('#open_backlog_link').show();
 		return false;
 	}

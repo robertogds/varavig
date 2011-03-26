@@ -1,16 +1,12 @@
 // User Stories Collection
   // ---------------
   Varavig.Collections.Tasks = Backbone.Collection.extend({
-
-    // Reference to this collection's model.
+		
+	// Reference to this collection's model.
     model: Task,
-    
-    // Filter down the list of all todo items that are finished.
-    //finished: function() {
-    //  var tasks_array = this.filter(function(task){ return task.get('left') === 0; });
-	//  return new Sprint.Collections.Tasks(tasks_array);
-    //},
-    
+
+	url :'/task',
+
     finished: function() {
   	  return this.tasks_in_column(Varavig.FINISHED_COLUMN);
     },
@@ -46,24 +42,38 @@
       return this.without.apply(this, this.done());
     },
 
-    // We keep the Todos in sequential order, despite being saved by unordered
-    // GUID in the database. This generates the next order number for new items.
+    //This generates the next order number for new items.
     nextOrder: function() {
       if (!this.length) return 1;
       return this.last().get('position') + 1;
     },
-    parse: function(response) {
-        //_.each(response, function(item) {
-        //  item.title = "PARSE ITEM" + item.title;
-        //})
-    return response;
-    },
-
-	url :'/task',
 
     // Todos are sorted by their original insertion order.
     comparator: function(task) {
       return task.get('position');
-    }
+    },
+
+	parse_percentaje: function() {
+		//we calculate the done task percentaje before render de tasks collection
+		var self = this;
+        this.forEach(function(task) {
+         	task.set({"percentaje": self.calculate_percentaje(task.get("estimate"), task.get("left"))}) ;
+        })
+    	return this;
+    },
+
+	//calculate percentaje of task already done
+	calculate_percentaje: function(estimated, left){
+		var percentaje = 0;
+		if (left > 0 && estimated > 0 && estimated != left) {
+			if ( estimated < left) { alert("percentage field error. Left:" + left + " #est: " + estimated); }
+			percentaje = (estimated - left) * 100 / estimated ;
+		}
+		if (left == 0){
+			percentaje = 100;
+		}
+		return percentaje;
+	}
+	
 
   });
