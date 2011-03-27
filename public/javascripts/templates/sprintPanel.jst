@@ -1,0 +1,60 @@
+<div id="sprint_panel">
+		<div id="columns" class="backlog_collapsed finished_collapsed">
+		
+		<% columns.each(function(column) { %>
+			<% if(column.get("name") == "backlog" || column.get("name") == "finished" ) { %>
+				<a href="javascript:void(0)" id="open_<%=column.get("name")%>_link" title="show <%=column.get("title")%>">
+					<span>
+						Open <%=column.get("title")%>
+					</span>
+				</a>
+			<% }; %>
+
+			<div id="<%=column.get("name")%>" class="column">
+				<div class="wrapper">
+					<div class="header">
+						<h2><%=column.get("title")%></h2>
+						<div class="actions">
+							<div class="columnActions">
+								<span class="total" id="total_<%=column.get("name")%>"></span>
+								<a href="javascript:void(0)" class="filter" title="filter">
+									<span>filter</span>
+								</a>
+								<a href="javascript:void(	0)" class="expand_all" title="expand all">
+									<span>expand all</span>
+								</a>
+								<a href="javascript:void(0)" class="collapse_all" title="collapse all">
+									<span>collapse all</span>
+								</a>
+								<% if(column.get("name") == "backlog"  || column.get("name") == "finished") { %>
+									<a href="javascript:void(0)" class="hide hide_<%=column.get("name")%>" title="hide <%=column.get("name")%>">
+										<span>hide <%=column.get("title")%></span>
+									</a>
+								<% }else{ %>
+									<div class="filter_panel">
+										<strong>Filter</strong>
+										<a href="javascript:void(0)" class="close">close</a>
+										<a href="javascript:void(0)">sort by person</a>
+										<a href="javascript:void(0)">sort by name</a>
+										<a href="javascript:void(0)">sort by date</a>
+									</div>
+								<% }; %>
+							</div>
+						</div>
+					</div>
+					
+					<% if(column.get("name") == "backlog") { %>
+						<div id="newlink"><h3><a href='#project/<%=sprint.get("project").id%>/sprint/<%=sprint.id%>/new_task'>Create New</a></h3></div>
+						<div id ="newtask"></div>
+						
+					<% }; %>
+					
+					<div id="tasks_<%=column.get("name")%>" class="tasks_wrapper"></div>
+				</div>
+			</div>
+
+		<% }); %>		
+		
+		</div>
+		
+	</div>

@@ -18,6 +18,7 @@ Varavig.Views.BacklogView = Varavig.Views.AbstractPanelView.extend({
     },
 
     sort_receive: function(event, ui) {
+		alert("receive");
         var task = new Task();
         task = this.collection.get(ui.item.context);
         task.set({"incolumn": Varavig.BACKLOG_COLUMN});
@@ -26,6 +27,7 @@ Varavig.Views.BacklogView = Varavig.Views.AbstractPanelView.extend({
     },
 
     sort_stop: function() {
+		alert("stop");
         var orden = 1;
         var result = this.$('.sortable_tasks').sortable('toArray');
         var task = new Task();
