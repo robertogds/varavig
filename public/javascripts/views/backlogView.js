@@ -27,11 +27,13 @@ Varavig.Views.BacklogView = Varavig.Views.AbstractPanelView.extend({
     },
 
     sort_stop: function() {
-		alert("stop");
+		alert("stop en backlog");
         var orden = 1;
-        var result = this.$('.sortable_tasks').sortable('toArray');
+        var result = this.$('.tasks').sortable('toArray');
         var task = new Task();
+        alert("Entra");
         _.each(result, function(num) {
+            alert(num);
             task = this.collection.get(num);
             if (task.get("position") != orden) {
                 task.set({"position": orden});
