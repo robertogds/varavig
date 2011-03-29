@@ -3,7 +3,6 @@ Varavig.Views.UserAreaView = Backbone.View.extend({
 	_current_project:  null,
 	
     initialize: function() {
-        //TODO esto no funciona, pq?
 		this.model.bind('all', _.bind(this.render, this));
 		this.collection.bind('all', _.bind(this.render, this));
 		this.render();

@@ -194,7 +194,7 @@ Varavig.Views.AbstractPanelView = Varavig.Views.AbstractView.extend({
 			distance: 10,
 			opacity: 0.6,
 			forceHelperSize: true,
-			forcePlaceholderSize: true,
+			forcePlaceholderSize: true
 		});
 	}
     
