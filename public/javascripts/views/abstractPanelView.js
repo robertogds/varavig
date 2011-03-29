@@ -1,7 +1,7 @@
 // This is the view for the backlog column
 Varavig.Views.AbstractPanelView = Varavig.Views.AbstractView.extend({
     events: {
-        "sortstop .sortable_tasks":  "sort_stop",
+        "sortstop .tasks":  "sort_stop",
         "sortreceive": "sort_receive",
         "click .delete_task": "delete_task",
         "click .edit_task": "edit_task",
