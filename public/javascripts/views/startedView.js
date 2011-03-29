@@ -19,7 +19,6 @@ Varavig.Views.StartedView = Varavig.Views.AbstractPanelView.extend({
         return this;
     },
 
-
     sort_receive: function(event,ui) {
 	    var task = new Task();
 	    task = this.collection.get(ui.item.context);
@@ -30,7 +29,6 @@ Varavig.Views.StartedView = Varavig.Views.AbstractPanelView.extend({
         var gravatar = $.gravatarSrc(Varavig.User.get("email"),'?s=23&d=mm');
         task.set({"gravatar": gravatar});
 	    task.save();
-	    this.render();
     },
 
     sort_stop: function() {

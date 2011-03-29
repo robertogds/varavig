@@ -41,11 +41,11 @@
 </script>
 	
 <script type="text/template" id="sprint_panel">
-		<div id="columns" class="backlog_collapsed finished_collapsed">
+		<div id="columns" class="<%=display_backlog%> <%=display_finished%>">
 		
 		<% columns.each(function(column) { %>
 			<% if(column.get("name") == "backlog" || column.get("name") == "finished" ) { %>
-				<a href="javascript:void(0)" id="open_<%=column.get("name")%>_link" title="show <%=column.get("title")%>">
+				<a href="javascript:void(0)" id="open_<%=column.get("name")%>_link" title="show <%=column.get("title")%>" style="display:none;">
 					<span>
 						Open <%=column.get("title")%>
 					</span>

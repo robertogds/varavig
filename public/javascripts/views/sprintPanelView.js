@@ -5,6 +5,8 @@ Varavig.Views.SprintPanelView = Varavig.Views.AbstractView.extend({
 	_not_started_view: null,
 	_backlog_view: null,
 	_columns: null,
+	_display_backlog: "backlog_collapsed",
+	_display_finished: "finished_collapsed",
 	
 	events: {
 		"click .expand_all": "expand_all",
@@ -31,7 +33,9 @@ Varavig.Views.SprintPanelView = Varavig.Views.AbstractView.extend({
     render: function() {
         $(this.el).html(_.template($('#sprint_panel').html())({
         	sprint: this.model,
-			columns: this._columns
+			columns: this._columns,
+			display_backlog: this._display_backlog,
+			display_finished: this._display_finished
         }));
         $('#main_container').html(this.el);
 		//Render panel views 
@@ -43,6 +47,10 @@ Varavig.Views.SprintPanelView = Varavig.Views.AbstractView.extend({
 			self.setColumnHeight();
 		});
 		/* end */
+	    
+		//Save location hash to sprint panel view url
+	    Backbone.history.saveLocation('#project/'+ this.model.get('project').id + '/sprint/'+ this.model.id);
+	    
         this.delegateEvents();
         return this;
     },
@@ -71,19 +79,29 @@ Varavig.Views.SprintPanelView = Varavig.Views.AbstractView.extend({
 		$(event.currentTarget).parents('.filter_panel').fadeOut();
 	},
 	
+	open_backlog_link: function(event){
+		$(event.currentTarget).hide();
+		this._display_backlog = "";
+		this.render();
+		return false;
+	},
+	
+	hide_backlog: function(event){
+		this._display_backlog = "backlog_collapsed";
+		this.render();
+		return false;
+	},
+	
 	open_finished_link: function(event){
 		$(event.currentTarget).hide();
-		$("#columns").removeClass('finished_collapsed');
+		this._display_finished = "";
+		this.render();
 		return false;
 	},
 	
 	hide_finished: function(event){
-		event.preventDefault();
-		t = $(event.currentTarget);
-		var par = t.parents('#columns');
-		
-		par.addClass('finished_collapsed');
-		$('#open_finished_link').show();
+		this._display_finished = "finished_collapsed";
+		this.render();
 		return false;
 	},
 	
@@ -115,23 +133,8 @@ Varavig.Views.SprintPanelView = Varavig.Views.AbstractView.extend({
 			.find('.detail').hide();
 		this.setScroll(task.parents('.tasks_wrapper'));
 		return false;
-	},
-	
-	open_backlog_link: function(event){
-		$(event.currentTarget).hide();
-		//this._columns.find_by_name('backlog').at(0).set({"class": ""});
-		$("#columns").removeClass('backlog_collapsed');
-		return false;
-	},
-	
-	hide_backlog: function(event){
-		event.preventDefault();
-		t = $(event.currentTarget);
-		var par = t.parents('#columns');
-		par.addClass('backlog_collapsed');
-		//this._columns.find_by_name('backlog').first().set({"class": 'backlog_collapsed'});
-		$('#open_backlog_link').show();
-		return false;
 	}
+	
+
 
 });

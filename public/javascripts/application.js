@@ -4,7 +4,7 @@ var Varavig = {
     NOTSTARTED_COLUMN :1,
     STARTED_COLUMN:2,
     FINISHED_COLUMN: 3,
-	COLUMNS: [{"name":"backlog", "title": "Backlog", "class": "backlog_collapsed"},{"name":"not_started", "title": "Not Started Item"},{"name":"started", "title": "Started Tasks"},{"name":"finished", "title": "Finished Tasks"}],
+	COLUMNS: [{"name":"backlog", "title": "Backlog"},{"name":"not_started", "title": "Not Started Item"},{"name":"started", "title": "Started Tasks"},{"name":"finished", "title": "Finished Tasks"}],
     Views: {},
     Controllers: {},
     Collections: {},

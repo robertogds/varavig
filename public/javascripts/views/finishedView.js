@@ -10,7 +10,6 @@ Varavig.Views.FinishedView = Varavig.Views.AbstractPanelView.extend({
 			}));
         $('#tasks_finished').html(this.el);
         $('#total_finished').html(this.total_points_left(Varavig.FINISHED_COLUMN));
-        //this.jquery_task();
 		this.sortable_tasks();
 		this.truncate_long_texts();
         this.delegateEvents();
@@ -24,7 +23,6 @@ Varavig.Views.FinishedView = Varavig.Views.AbstractPanelView.extend({
         task.set({"incolumn": Varavig.FINISHED_COLUMN});
 		task.set({"left": 0}); 
 	    task.save();
-		this.render();
     },
 
     sort_stop: function() {

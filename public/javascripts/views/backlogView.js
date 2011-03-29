@@ -10,7 +10,7 @@ Varavig.Views.BacklogView = Varavig.Views.AbstractPanelView.extend({
         	}));
         $('#tasks_backlog').html(this.el);
 		$('#total_backlog').html(this.total_points_left(Varavig.BACKLOG_COLUMN));
-        //this.jquery_task();
+		
 		this.sortable_tasks();
 		this.truncate_long_texts();
         this.delegateEvents();
@@ -18,16 +18,13 @@ Varavig.Views.BacklogView = Varavig.Views.AbstractPanelView.extend({
     },
 
     sort_receive: function(event, ui) {
-		alert("receive");
         var task = new Task();
         task = this.collection.get(ui.item.context);
         task.set({"incolumn": Varavig.BACKLOG_COLUMN});
         task.save();
-        this.render();
     },
 
     sort_stop: function() {
-		alert("stop en backlog");
         var orden = 1;
         var result = this.$('.tasks').sortable('toArray');
         var task = new Task();

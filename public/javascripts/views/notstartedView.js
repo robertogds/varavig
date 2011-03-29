@@ -10,7 +10,6 @@ Varavig.Views.NotStartedView = Varavig.Views.AbstractPanelView.extend({
         	}));
         $('#tasks_not_started').html(this.el);
         $('#total_not_started').html(this.total_points_left(Varavig.NOTSTARTED_COLUMN));
-        //this.jquery_task();
 		this.sortable_tasks();
 		this.truncate_long_texts();
         this.delegateEvents();
@@ -22,7 +21,6 @@ Varavig.Views.NotStartedView = Varavig.Views.AbstractPanelView.extend({
         task = this.collection.get(ui.item.context);
         task.set({"incolumn": Varavig.NOTSTARTED_COLUMN});
         task.save();
-        this.render();
     },
 
     sort_stop: function() {
