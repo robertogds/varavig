@@ -1,7 +1,9 @@
 // This is the view for the started column.
 Varavig.Views.ProjectListView = Backbone.View.extend({
 	events: {
-        "click .delete_project": "delete_project"
+        "click .delete_project": "delete_project",
+		"click .invite_link": 	"show_invitation_form",
+		"click .cancel_invite": "hide_invitation_form"
     },
 
     initialize: function() {
@@ -24,17 +26,6 @@ Varavig.Views.ProjectListView = Backbone.View.extend({
         project.destroy();
     },
 
-	jquery_editable: function() {
-        this.$("#project_title").editable(this.submit_edit, { 
-            indicator : "Saving...",
-            tooltip   : "Click to edit...",
-            name : "title",
-            id   : this.$(".portlet").attr("id"),
-            type : "text"
-        });
-
-    },
-
 	submit_edit : function (value, settings){ 
     	var project = new Project();
         project = this.collection.get(settings.id);
@@ -44,7 +35,19 @@ Varavig.Views.ProjectListView = Backbone.View.extend({
 	           break;
         } 
 		return(value);
-	}
+	},
 	
-
+    show_invitation_form: function (event){
+		var link = $(event.currentTarget);
+		var form = link.parents('.project').find('.invite');
+		form.show();
+	},
+	
+	hide_invitation_form: function (event){
+		var link = $(event.currentTarget);
+		var form = link.parents('.project').find('.invite');
+		form.hide();
+	}
+    
+   
 });

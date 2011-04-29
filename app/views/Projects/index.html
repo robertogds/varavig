@@ -133,25 +133,23 @@
 		<div id="new_project_link"><h3><a href='#new'>Create New</a></h3></div>
 	    <div class="projects">
     <% collection.each(function(project) { %>
-      <div class="portlet" id="<%=project.id%>">
+      <div class="portlet project" id="<%=project.id%>">
 		<div class="portlet-header">
-			<label id="project_title"><%= project.escape('title') %></label> | <a href="#project/<%=project.id%>" >see more</a> | <a href="#invite/<%=project.id%>">Invite to project</a>
+			<label id="project_title"><%= project.escape('title') %></label> | <a href="#project/<%=project.id%>" >see more</a> | <a href="#" class="invite_link">Invite to project</a>
 			<button class="delete_project" id="<%=project.id%>">delete</button>&nbsp;
 		</div>
-		<div id="invite_form_div">
-		</div>
+		<div class="invite" style="display:none;">
+				<form>	
+			    	<label for='email'>Colaborator email</label>
+ 			   		<input name='email' type='text' /> 	
+					<input name='project_id' type='hidden' value="<%=project.id%>"/> 
+ 			   		<button> Send invitation </button>
+					 <a class="cancel_invite" >Cancel</a>
+				</form>
+			</div>
 	  </div>
 	<% }); %>
     </div>
-</script>
-
-<script type="text/template" id="invite_form">
-<form>	
-    <label for='email'>Colaborator email</label>
-    <input name='email' type='text' /> 	
-	<input name='project_id' type='hidden' value="<%=model.id%>"/> 
-    <button> Send invitation </button>
-</form>
 </script>
 
 	<script type="text/template" id="task">

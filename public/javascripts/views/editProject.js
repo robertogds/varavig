@@ -17,7 +17,7 @@ Varavig.Views.EditProject = Backbone.View.extend({
 
     editAttributes: function() {
 	    return {
-		  title: this.$('[name=title]').val(),
+		  title: this.$('[name=title]').val()
 	    };
 	},
     

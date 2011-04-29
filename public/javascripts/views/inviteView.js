@@ -18,24 +18,20 @@ Varavig.Views.InviteView = Backbone.View.extend({
     
     send_invitation: function() {
 	    alert("entramos");
+
         var attributes = this.form_attributes();
-
-		var send_invitation = function() {
-		            return $.ajax({
-						type: "POST",
-		                url: '/invite/' + attributes.get("email") + '/' + attributes.get("project_id"),
-		                data: {},
-		                contentType: "application/json; charset=utf-8",
-		                dataType: "json"
-		            });
-		        };
-
-        $.when(send_invitation()).then(function(data) {
-            alert("eeeo");
-		});
-
-		
-		alert("antes de salir");
+		var self = this;
+        this.model.save(attributes, {
+           success: function(model, resp) {
+				self.collection.add(model);
+				 window.location.hash = '#';
+				 //Backbone.history.saveLocation('#');
+            },
+            error: function(model,e) {
+				alert(e);
+            }
+        });
+        
 		return false;      
     },
 
@@ -44,4 +40,6 @@ Varavig.Views.InviteView = Backbone.View.extend({
 	        $('#invite_form_div').html(this.el);
 	        this.delegateEvents();
     }
+    
+
 });
